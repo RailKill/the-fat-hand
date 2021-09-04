@@ -60,7 +60,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
 visible = false
 radius = 1.5
 
-[node name="Punch" type="KinematicBody" parent="HandControl"]
+[node name="Punch" type="KinematicBody" parent="HandControl" groups=[
+"attack",
+]]
 collision_layer = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="HandControl/Punch"]

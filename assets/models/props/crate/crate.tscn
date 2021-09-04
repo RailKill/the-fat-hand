@@ -5,7 +5,9 @@
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.27, 1.25093, 1.25617 )
 
-[node name="Crate" type="RigidBody"]
+[node name="Crate" type="RigidBody" groups=[
+"wood",
+]]
 collision_mask = 3
 linear_damp = 1.0
 
