@@ -97,3 +97,5 @@ transform = Transform( 12, 0, 0, 0, 10, 0, 0, 0, 10, 123.763, 5.43515, -140.414 
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.5408, 2, 36.694 )
+
+[connection signal="expired" from="Countdown" to="Player" method="die"]
