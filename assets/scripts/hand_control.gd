@@ -7,6 +7,8 @@ export var max_radius = 5
 # Speed in which the hand can spin.
 export var sensitivity = 0.05
 
+# Physics object representing the fat hand punch.
+onready var punch = $Punch
 # Rotary target which the hand's IK is tracking towards.
 onready var target = $Target
 
@@ -19,6 +21,10 @@ func _input(event):
 		translation.x = clamp(side, -max_radius, max_radius)
 		translation.z = clamp(straight, -max_radius, max_radius)
 		fix_yaw()
+		
+		# The punch KinematicBody already follows the position of this control
+		# so this move is stationary but is still needed to trigger collision.
+		punch.move_and_slide(Vector3.ZERO, Vector3.UP)
 
 
 # Normalize the degrees as a positive float. For example, 365 degrees will be
