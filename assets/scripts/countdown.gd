@@ -3,6 +3,10 @@ extends Control
 # when it reaches 0.
 
 
+# Emitted when the countdown timer expires.
+signal expired
+
+
 # Starting time of the countdown in seconds.
 export var start_time = 15
 
@@ -21,11 +25,6 @@ func _ready():
 	timer.connect("timeout", self, "tick")
 
 
-# Called when the countdown timer expires.
-func expire():
-	timer.stop()
-
-
 # Start the countdown.
 func start():
 	timer.start()
@@ -38,7 +37,8 @@ func tick():
 	print(current_time)
 	
 	if current_time <= 0:
-		expire()
+		timer.stop()
+		emit_signal("expired")
 
 
 # Updates the label text to the current time.
