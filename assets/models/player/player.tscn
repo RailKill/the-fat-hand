@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/models/player/fatdino.glb" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/player.gd" type="Script" id=2]
+[ext_resource path="res://assets/scripts/hand_control.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 1.2
@@ -16,6 +17,13 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0
 [node name="EyesDead" parent="Model" index="0"]
 visible = false
 
+[node name="SkeletonIK" type="SkeletonIK" parent="Model/ArmBones/Skeleton2" index="1"]
+process_priority = 1
+root_bone = "Arm.R"
+tip_bone = "Hand.R"
+override_tip_basis = false
+target_node = NodePath("../../../../HandControl/Target")
+
 [node name="EyesPain" parent="Model" index="4"]
 visible = false
 
@@ -26,5 +34,23 @@ shape = SubResource( 1 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 18.2976, 7.24747 )
 fov = 90.0
+
+[node name="Compass" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75091, 0 )
+
+[node name="HandControl" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0 )
+script = ExtResource( 3 )
+
+[node name="Target" type="Spatial" parent="HandControl"]
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
+
+[node name="CSGBox" type="CSGBox" parent="HandControl/Target"]
+transform = Transform( 1, 0, 0, 0, 0.501839, 0, 0, 0, 1, 0, 0, 0 )
+depth = 6.95986
+
+[node name="CSGSphere" type="CSGSphere" parent="HandControl/Target"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+radius = 1.5
 
 [editable path="Model"]

@@ -39,8 +39,14 @@ func _physics_process(delta):
 		# Face model towards direction of movement.
 		model.rotation.y = lerp_angle(model.rotation.y, 
 				atan2(velocity.x, velocity.z), delta * rotation_speed)
+		
+		# TODO: Fix hand roll based on player model rotation.
 	
 	velocity = move_and_slide(velocity, Vector3.UP)
+
+
+func _ready():
+	$Model/ArmBones/Skeleton2/SkeletonIK.start()
 
 
 # Move player according to input. Returns true if direction was pressed.
