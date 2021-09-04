@@ -4,17 +4,42 @@
 [ext_resource path="res://assets/scripts/player.gd" type="Script" id=2]
 [ext_resource path="res://assets/scripts/hand_control.gd" type="Script" id=3]
 
+[sub_resource type="SphereShape" id=2]
+radius = 2.5
+
 [sub_resource type="CapsuleShape" id=1]
 radius = 1.2
 height = 3.4
-
-[sub_resource type="SphereShape" id=2]
-radius = 2.5
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource( 2 )
+
+[node name="HandControl" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0 )
+script = ExtResource( 3 )
+
+[node name="Target" type="Spatial" parent="HandControl"]
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
+
+[node name="CSGBox" type="CSGBox" parent="HandControl/Target"]
+transform = Transform( 1, 0, 0, 0, 0.501839, 0, 0, 0, 1, 0, 0, 0 )
+visible = false
+depth = 6.95986
+
+[node name="CSGSphere" type="CSGSphere" parent="HandControl/Target"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+visible = false
+radius = 1.5
+
+[node name="Punch" type="KinematicBody" parent="HandControl" groups=[
+"attack",
+]]
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="HandControl/Punch"]
+shape = SubResource( 2 )
 
 [node name="Model" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
@@ -42,30 +67,5 @@ shape = SubResource( 1 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 18.2976, 7.24747 )
 fov = 90.0
-
-[node name="HandControl" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0 )
-script = ExtResource( 3 )
-
-[node name="Target" type="Spatial" parent="HandControl"]
-transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
-
-[node name="CSGBox" type="CSGBox" parent="HandControl/Target"]
-transform = Transform( 1, 0, 0, 0, 0.501839, 0, 0, 0, 1, 0, 0, 0 )
-visible = false
-depth = 6.95986
-
-[node name="CSGSphere" type="CSGSphere" parent="HandControl/Target"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
-visible = false
-radius = 1.5
-
-[node name="Punch" type="KinematicBody" parent="HandControl" groups=[
-"attack",
-]]
-collision_layer = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="HandControl/Punch"]
-shape = SubResource( 2 )
 
 [editable path="Model"]
