@@ -12,10 +12,10 @@ collision_mask = 3
 linear_damp = 1.0
 
 [node name="crate" parent="." instance=ExtResource( 1 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 4.99705, 0, -2.58406 )
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 4.99705, -1.3542, -2.49887 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000981808, 1.25807, -0.088438 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000981808, -0.0961268, -0.0032455 )
 shape = SubResource( 1 )
 
 [editable path="crate"]
