@@ -26,6 +26,8 @@ var velocity = Vector3.ZERO
 
 # Player camera.
 onready var camera = $Camera
+# Controller of the fat hand.
+onready var hand = $HandControl
 # Player model.
 onready var model = $Model
 
@@ -39,14 +41,17 @@ func _physics_process(delta):
 		# Face model towards direction of movement.
 		model.rotation.y = lerp_angle(model.rotation.y, 
 				atan2(velocity.x, velocity.z), delta * rotation_speed)
-		
-		# TODO: Fix hand roll based on player model rotation.
+		# Fix hand roll based on player model rotation.
+		hand.fix_roll(model.rotation_degrees.y)
 	
 	velocity = move_and_slide(velocity, Vector3.UP)
 
 
 func _ready():
+	# Start inverse kinematics for the fat hand.
 	$Model/ArmBones/Skeleton2/SkeletonIK.start()
+	# Needed to call this on ready to fix the hand rotation right away.
+	hand.fix_roll(model.rotation_degrees.y)
 
 
 # Move player according to input. Returns true if direction was pressed.
