@@ -1,0 +1,35 @@
+[gd_scene format=2]
+
+[node name="LevelToilet" type="Spatial"]
+
+[node name="Floor" type="CSGCombiner" parent="."]
+
+[node name="CSGBox" type="CSGBox" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5477, 0, 0 )
+width = 159.358
+depth = 40.0
+
+[node name="CSGBox2" type="CSGBox" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.3958, 0, 34.5484 )
+width = 25.2684
+depth = 29.1972
+
+[node name="CSGBox3" type="CSGBox" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 133.095, 0, -81 )
+width = 60.0
+depth = 202.0
+
+[node name="Bathroom" type="CSGCombiner" parent="."]
+
+[node name="CSGBox" type="CSGBox" parent="Bathroom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 133.064, 29.6039, -152.456 )
+width = 60.0
+height = 60.0
+depth = 60.0
+
+[node name="CSGBox2" type="CSGBox" parent="Bathroom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 133.064, 29.6039, -152.456 )
+operation = 2
+width = 55.0
+height = 72.2112
+depth = 55.0
