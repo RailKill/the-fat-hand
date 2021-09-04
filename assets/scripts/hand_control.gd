@@ -4,8 +4,13 @@ extends Spatial
 
 # Maximum radial reach of the hand.
 export var max_radius = 5
+# Rate at which the hand power decays every frame.
+export var power_decay = 10
 # Speed in which the hand can spin.
 export var sensitivity = 0.05
+
+# Amount of power in the hand right now.
+var power = 0
 
 # Physics object representing the fat hand punch.
 onready var punch = $Punch
@@ -22,9 +27,18 @@ func _input(event):
 		translation.z = clamp(straight, -max_radius, max_radius)
 		fix_yaw()
 		
+		# Sets the power of the punch.
+		power = Vector2(event.relative.x, event.relative.y).length()
+		
 		# The punch KinematicBody already follows the position of this control
 		# so this move is stationary but is still needed to trigger collision.
 		punch.move_and_slide(Vector3.ZERO, Vector3.UP)
+
+
+func _physics_process(_delta):
+	# Power decay.
+	if power > 0:
+		power = max(0, power - power_decay)
 
 
 # Normalize the degrees as a positive float. For example, 365 degrees will be

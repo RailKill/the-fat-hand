@@ -11,7 +11,7 @@ const DIRECTIONS = {
 }
 
 # Movement speed.
-export var move_speed = 15
+export var move_speed = 45
 # Rotation speed.
 export var rotation_speed = 15
 

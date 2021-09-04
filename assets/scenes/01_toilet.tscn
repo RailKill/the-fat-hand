@@ -1,46 +1,76 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/models/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/models/props/crate/crate.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/ui/countdown.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/models/props/door/door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/models/props/door/glass.material" type="Material" id=5]
 
 [node name="LevelToilet" type="Spatial"]
+
+[node name="Countdown" parent="." instance=ExtResource( 3 )]
 
 [node name="Floor" type="CSGCombiner" parent="."]
 use_collision = true
 
 [node name="CSGBox" type="CSGBox" parent="Floor"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5477, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5477, 0, 3.59478 )
 width = 159.358
-depth = 40.0
+depth = 32.4332
 
 [node name="CSGBox2" type="CSGBox" parent="Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.3958, 0, 34.5484 )
 width = 25.2684
-depth = 29.1972
+depth = 30.4275
 
 [node name="CSGBox3" type="CSGBox" parent="Floor"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 133.095, 0, -81 )
-width = 60.0
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.134, 0, -81 )
+width = 41.8235
 depth = 202.0
 
 [node name="Bathroom" type="CSGCombiner" parent="."]
 
 [node name="CSGBox" type="CSGBox" parent="Bathroom"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 133.064, 29.6039, -152.456 )
-width = 60.0
-height = 60.0
-depth = 60.0
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.257, 9.70463, -160.367 )
+width = 40.4934
+height = 20.0
+depth = 40.0
 
 [node name="CSGBox2" type="CSGBox" parent="Bathroom"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 133.064, 29.6039, -152.456 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.257, 9.70463, -160.367 )
 operation = 2
-width = 55.0
-height = 72.2112
-depth = 55.0
+width = 37.204
+height = 24.1123
+depth = 36.3442
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.5408, 2, 36.694 )
+[node name="CSGBox3" type="CSGBox" parent="Bathroom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.895, 6.11824, -140.058 )
+operation = 2
+width = 6.02129
+height = 10.3373
+depth = 5.41348
+
+[node name="Walls" type="CSGCombiner" parent="."]
+use_collision = true
+collision_layer = 0
+collision_mask = 3
+
+[node name="CSGBox" type="CSGBox" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -56.9832, 9.35148, 17.8373 )
+height = 20.0
+depth = 65.4273
+
+[node name="CSGBox2" type="CSGBox" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.9013, 9.35148, 34.9866 )
+height = 20.0
+depth = 31.3112
+material = ExtResource( 5 )
+
+[node name="CSGBox3" type="CSGBox" parent="Walls"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -43.4998, 9.35148, 50.1735 )
+height = 20.0
+depth = 28.904
+material = ExtResource( 5 )
 
 [node name="Crate6" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40.7569, 2.5, 26.2868 )
@@ -62,4 +92,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.98943, -1.42135 )
 [node name="Crate5" parent="BunchOfCrates" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.98943, 1.39877 )
 
-[node name="Countdown" parent="." instance=ExtResource( 3 )]
+[node name="Door" parent="." instance=ExtResource( 4 )]
+transform = Transform( 12, 0, 0, 0, 10, 0, 0, 0, 10, 123.763, 5.43515, -140.414 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.5408, 2, 36.694 )
