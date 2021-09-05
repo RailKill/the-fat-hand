@@ -11,6 +11,8 @@ export var sensitivity = 0.05
 
 # Amount of power in the hand right now.
 var power = 0
+# If true, do not read input events.
+var disabled = false
 
 # Physics object representing the fat hand punch.
 onready var punch = $Punch
@@ -20,7 +22,7 @@ onready var target = $Target
 
 func _input(event):
 	# Move the hand control based on mouse input with a limited radius.
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and not disabled:
 		var side = translation.x + event.relative.x * sensitivity
 		var straight = translation.z + event.relative.y * sensitivity
 		translation.x = clamp(side, -max_radius, max_radius)

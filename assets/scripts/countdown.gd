@@ -29,6 +29,10 @@ func _ready():
 func start():
 	timer.start()
 
+# Stop the countdown.
+func stop():
+	timer.stop()
+
 
 # Called every timer tick (per second).
 func tick():
