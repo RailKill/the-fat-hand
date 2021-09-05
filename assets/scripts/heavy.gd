@@ -1,14 +1,29 @@
 extends RigidBody
+# Heavy object that must be damaged by attacks before it becomes a rigidbody.
 
 
 # Amount of hit points this entity has.
-export var hp = 100
-# The area to detect for attacks.
-onready var area = $Area
+export(int) var hp = 100
+export(AudioStream) var hit_sound
+
+# The Area to detect for attacks.
+var area
+# AudioStreamPlayer3D which plays a sound when damaged.
+var hit_player
 
 
 func _ready():
+	collision_layer = 0
+	collision_mask = 3
+	area = Area.new()
 	area.connect("body_entered", self, "_on_body_entered")
+	area.add_child($CollisionShape.duplicate())
+	add_child(area)
+	
+	hit_player = AudioStreamPlayer3D.new()
+	hit_player.stream = hit_sound
+	hit_player.unit_size = 3
+	add_child(hit_player)
 
 
 # Called when an attack enters the damage area.
@@ -27,7 +42,7 @@ func is_destroyed():
 # Take the given amount of damage and become rigid if destroyed.
 func take_damage(amount):
 	hp -= amount
-	$AudioStreamPlayer3D.play()
+	hit_player.play()
 	
 	if is_destroyed():
 		mode = RigidBody.MODE_RIGID
