@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/models/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/models/props/crate/crate.tscn" type="PackedScene" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://assets/models/props/lounge/lounge_sofa.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/models/props/lounge/carpet.material" type="Material" id=15]
 [ext_resource path="res://assets/models/human/human.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/scripts/level.gd" type="Script" id=17]
+[ext_resource path="res://assets/sounds/Countdown to Myocardial Infarction.ogg" type="AudioStream" id=18]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.87451, 0.862745, 0.843137, 1 )
@@ -27,6 +29,8 @@ albedo_color = Color( 0.203922, 0.270588, 0.380392, 1 )
 extents = Vector3( 12, 12, 12 )
 
 [node name="LevelToilet" type="Spatial"]
+script = ExtResource( 17 )
+level_music = ExtResource( 18 )
 
 [node name="Countdown" parent="." instance=ExtResource( 3 )]
 
