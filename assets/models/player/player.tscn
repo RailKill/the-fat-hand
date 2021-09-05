@@ -79,14 +79,11 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0
 [node name="EyesDead" parent="Model" index="0"]
 visible = false
 
-[node name="Skeleton" parent="Model/DinoBones" index="0"]
-bones/8/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2") ]
-
 [node name="BoneAttachment" parent="Model/DinoBones/Skeleton" index="0"]
-transform = Transform( 1, -0.000344138, -0.000205312, -0.000204472, 0.00244182, -0.999997, 0.00034464, 0.999997, 0.00244179, 0.00527762, 4.27934, 0.0694477 )
+transform = Transform( 1, -0.000223647, -0.000133244, -0.00013289, 0.00158641, -0.999999, 0.000223861, 0.999999, 0.00158643, 0.00419991, 4.28054, 0.0857026 )
 
 [node name="BoneAttachment2" parent="Model/DinoBones/Skeleton" index="1"]
-transform = Transform( 1, -0.000344138, -0.000205312, -0.000204472, 0.00244182, -0.999997, 0.00034464, 0.999997, 0.00244179, 0.00527762, 4.27934, 0.0694477 )
+transform = Transform( 1, -0.000223647, -0.000133244, -0.00013289, 0.00158641, -0.999999, 0.000223861, 0.999999, 0.00158643, 0.00419991, 4.28054, 0.0857026 )
 
 [node name="EyesPain" parent="Model/DinoBones/Skeleton/BoneAttachment2" index="0"]
 visible = false

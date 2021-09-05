@@ -10,6 +10,7 @@ export(String) var next_level
 func exit():
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://assets/scenes/00_menu.tscn")
+	get_node("/root/Global").reset_cinematics()
 
 
 # Proceeds to next level if there is one, else exit.

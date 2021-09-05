@@ -8,23 +8,30 @@ export(NodePath) var countdown_path
 export(NodePath) var player_path
 # Plays player pain animation if true.
 export(bool) var play_pain = false
+# The number of this level. Used for cinematic tracking per level.
+export(int) var level_number
 
 onready var player = get_node(player_path)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# warning-ignore:return_value_discarded
-	connect("animation_finished", self, "done")
-	
-	$Cinemacam.current = true
-	player.is_controllable = false
-	play("Begin")
-	
-	# TODO: Terrible coding, had to rush. Generalize this in future.
-	if play_pain:
-		player.animation_tree["parameters/PainOneShot/active"] = true
-		player.toggle_pain_eyes(true)
+	var global = get_node("/root/Global")
+	if not global.cinematic_played[level_number]:
+		# warning-ignore:return_value_discarded
+		connect("animation_finished", self, "done")
+		
+		$Cinemacam.current = true
+		player.is_controllable = false
+		play("Begin")
+		global.play(level_number)
+		
+		# TODO: Terrible coding, had to rush. Generalize this in future.
+		if play_pain:
+			player.animation_tree["parameters/PainOneShot/active"] = true
+			player.toggle_pain_eyes(true)
+	else:
+		done("Begin")
 
 
 func done(_name):
