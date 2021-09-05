@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/models/props/food/donutSprinkles.glb" type="PackedScene" id=1]
+
+[sub_resource type="CylinderShape" id=1]
+radius = 1.4
+height = 1.14
+
+[node name="BigDonut" type="RigidBody" groups=[
+"ingredient",
+]]
+
+[node name="donutSprinkles" parent="." instance=ExtResource( 1 )]
+transform = Transform( 12, 0, 0, 0, 12, 0, 0, 0, 12, 0, -0.52633, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0436695, 0 )
+shape = SubResource( 1 )

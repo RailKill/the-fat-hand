@@ -18,16 +18,28 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://assets/scripts/player.gd"
+}, {
+"base": "ZoneVictory",
+"class": "ZoneConsume",
+"language": "GDScript",
+"path": "res://assets/scripts/zone_consume.gd"
+}, {
+"base": "Area",
+"class": "ZoneVictory",
+"language": "GDScript",
+"path": "res://assets/scripts/zone_victory.gd"
 } ]
 _global_script_class_icons={
 "GitAPI": "",
-"Player": ""
+"Player": "",
+"ZoneConsume": "",
+"ZoneVictory": ""
 }
 
 [application]
 
 config/name="The Fat Hand"
-run/main_scene="res://assets/scenes/01_toilet.tscn"
+run/main_scene="res://assets/scenes/02_kitchen.tscn"
 config/icon="res://icon.png"
 
 [gdnative]

@@ -16,13 +16,13 @@
 [ext_resource path="res://assets/models/props/lounge/lounge_sofa.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/models/props/lounge/carpet.material" type="Material" id=15]
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.87451, 0.862745, 0.843137, 1 )
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.203922, 0.270588, 0.380392, 1 )
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape" id=3]
 extents = Vector3( 12, 12, 12 )
 
 [node name="LevelToilet" type="Spatial"]
@@ -51,7 +51,7 @@ depth = 161.494
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.134, 0, -161.284 )
 width = 41.8235
 depth = 38.1427
-material = SubResource( 2 )
+material = SubResource( 1 )
 
 [node name="Arrow" type="CSGCombiner" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.429, 0, -62.9315 )
@@ -90,7 +90,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.257, 9.70463, -160.367 )
 width = 40.4934
 height = 20.0
 depth = 40.0
-material = SubResource( 3 )
+material = SubResource( 2 )
 
 [node name="CSGBox2" type="CSGBox" parent="Bathroom"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.257, 9.70463, -160.367 )
@@ -278,8 +278,9 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource( 6 )
 countdown_path = NodePath("../Countdown")
+next_scene = "res://assets/scenes/02_kitchen.tscn"
 
 [node name="CollisionShape" type="CollisionShape" parent="ZoneVictory"]
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [connection signal="expired" from="Countdown" to="Player" method="die"]
