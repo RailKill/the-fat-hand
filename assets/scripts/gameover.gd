@@ -8,9 +8,14 @@ export(String) var next_level
 
 # Return to main menu.
 func exit():
-	# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://assets/scenes/00_menu.tscn")
-	get_node("/root/Global").reset_cinematics()
+	# If already in main menu, and is not on web, then quit the game.
+	if get_tree().current_scene.name == "LevelMenu" and \
+			not OS.has_feature("web"):
+		get_tree().quit()
+	else:
+		# warning-ignore:return_value_discarded
+		get_tree().change_scene("res://assets/scenes/00_menu.tscn")
+		get_node("/root/Global").reset_cinematics()
 
 
 # Proceeds to next level if there is one, else exit.
