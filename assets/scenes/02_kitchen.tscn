@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/models/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/models/props/door/metalDark.material" type="Material" id=2]
@@ -20,6 +20,8 @@
 [ext_resource path="res://assets/sounds/error_003.ogg" type="AudioStream" id=18]
 [ext_resource path="res://assets/sounds/confirmation_001.ogg" type="AudioStream" id=19]
 [ext_resource path="res://assets/scripts/greenify.gd" type="Script" id=20]
+[ext_resource path="res://assets/scripts/level.gd" type="Script" id=21]
+[ext_resource path="res://assets/sounds/8bit Bossa.ogg" type="AudioStream" id=22]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -53,6 +55,8 @@ rim_tint = 0.5
 extents = Vector3( 8.79249, 8, 7.73496 )
 
 [node name="LevelKitchen" type="Spatial"]
+script = ExtResource( 21 )
+level_music = ExtResource( 22 )
 
 [node name="Countdown" parent="." instance=ExtResource( 17 )]
 start_time = 30
@@ -272,6 +276,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.379972, -13.7568 )
 shape = SubResource( 8 )
 
 [connection signal="expired" from="Countdown" to="Player" method="die"]
-[connection signal="consumed_good" from="ZoneConsume" to="Oven/CSGCylinder" method="on"]
 [connection signal="consumed_good" from="ZoneConsume" to="Oven/CSGCylinder2" method="on"]
 [connection signal="consumed_good" from="ZoneConsume" to="Oven/CSGCylinder3" method="on"]
+[connection signal="consumed_good" from="ZoneConsume" to="Oven/CSGCylinder" method="on"]
