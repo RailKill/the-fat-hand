@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/models/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/models/props/crate/crate.tscn" type="PackedScene" id=2]
@@ -6,14 +6,28 @@
 [ext_resource path="res://assets/models/props/door/door.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/models/props/door/glass.material" type="Material" id=5]
 [ext_resource path="res://assets/scripts/zone_victory.gd" type="Script" id=6]
+[ext_resource path="res://assets/models/props/crate/big_crate.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/models/props/bathroom/bathroom_sink.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/models/props/bathroom/toilet.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/models/props/bathroom/bathroom_mirror.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/models/props/lounge/lounge_chair.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/models/props/potted_plant/potted_plant.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/models/props/trashcan/trashcan.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/models/props/lounge/lounge_sofa.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/models/props/lounge/carpet.material" type="Material" id=15]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.87451, 0.862745, 0.843137, 1 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.203922, 0.270588, 0.380392, 1 )
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 10, 10, 10 )
+extents = Vector3( 12, 12, 12 )
 
 [node name="LevelToilet" type="Spatial"]
 
 [node name="Countdown" parent="." instance=ExtResource( 3 )]
-start_time = 3
 
 [node name="Floor" type="CSGCombiner" parent="."]
 use_collision = true
@@ -29,9 +43,42 @@ width = 25.2684
 depth = 30.4275
 
 [node name="CSGBox3" type="CSGBox" parent="Floor"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.134, 0, -81 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.134, 0, -60.9523 )
 width = 41.8235
-depth = 202.0
+depth = 161.494
+
+[node name="CSGBox4" type="CSGBox" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.134, 0, -161.284 )
+width = 41.8235
+depth = 38.1427
+material = SubResource( 2 )
+
+[node name="Arrow" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.429, 0, -62.9315 )
+
+[node name="CSGBox" type="CSGBox" parent="Arrow"]
+transform = Transform( 0.498566, 0, -0.372949, 0, 0.622622, 0, 0.372949, 0, 0.498566, -4.10136, 0.660131, 15.0106 )
+width = 4.18665
+depth = 21.6204
+material = ExtResource( 15 )
+
+[node name="CSGBox2" type="CSGBox" parent="Arrow"]
+transform = Transform( 0.490647, 0, 0.383307, 0, 0.622622, 0, -0.383307, 0, 0.490647, 3.24722, 0.660131, 14.9889 )
+width = 4.18665
+depth = 21.6204
+material = ExtResource( 15 )
+
+[node name="CSGBox3" type="CSGBox" parent="Arrow"]
+transform = Transform( 0.498566, 0, -0.372949, 0, 0.622622, 0, 0.372949, 0, 0.498566, -4.10136, 0.660131, 4.06545 )
+width = 4.18665
+depth = 21.6204
+material = ExtResource( 15 )
+
+[node name="CSGBox4" type="CSGBox" parent="Arrow"]
+transform = Transform( 0.490647, 0, 0.383307, 0, 0.622622, 0, -0.383307, 0, 0.490647, 3.24722, 0.660131, 4.04377 )
+width = 4.18665
+depth = 21.6204
+material = ExtResource( 15 )
 
 [node name="Bathroom" type="CSGCombiner" parent="."]
 
@@ -40,6 +87,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.257, 9.70463, -160.367 )
 width = 40.4934
 height = 20.0
 depth = 40.0
+material = SubResource( 3 )
 
 [node name="CSGBox2" type="CSGBox" parent="Bathroom"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.257, 9.70463, -160.367 )
@@ -55,6 +103,15 @@ width = 6.02129
 height = 10.3373
 depth = 5.41348
 
+[node name="BathroomMirror" parent="Bathroom" instance=ExtResource( 10 )]
+transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 112.489, 6.55022, -178.149 )
+
+[node name="BathroomSink" parent="Bathroom" instance=ExtResource( 8 )]
+transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 112.097, 0.987676, -174.248 )
+
+[node name="toilet" parent="Bathroom" instance=ExtResource( 9 )]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 123.089, 0.987676, -178.326 )
+
 [node name="Walls" type="CSGCombiner" parent="."]
 use_collision = true
 collision_layer = 0
@@ -65,10 +122,25 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -56.9832, 9.35148, 17.8373 )
 height = 20.0
 depth = 65.4273
 
-[node name="CSGBox2" type="CSGBox" parent="Walls"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.9013, 9.35148, 34.9866 )
+[node name="CSGBox4" type="CSGBox" parent="Walls"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 23.0593, 9.35148, -13.7098 )
 height = 20.0
-depth = 31.3112
+depth = 158.466
+
+[node name="CSGBox5" type="CSGBox" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 102.11, 9.35148, -96.6641 )
+height = 20.0
+depth = 167.884
+
+[node name="CSGBox6" type="CSGBox" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 144.192, 9.35148, -80.3264 )
+height = 20.0
+depth = 200.651
+
+[node name="CSGBox2" type="CSGBox" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.9013, 9.35148, 35.3204 )
+height = 20.0
+depth = 30.5645
 material = ExtResource( 5 )
 
 [node name="CSGBox3" type="CSGBox" parent="Walls"]
@@ -77,25 +149,89 @@ height = 20.0
 depth = 28.904
 material = ExtResource( 5 )
 
-[node name="Crate6" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40.7569, 2.5, 26.2868 )
+[node name="CSGBox7" type="CSGBox" parent="Walls"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57.0146, 9.35148, 20.9936 )
+height = 20.0
+depth = 175.477
+material = ExtResource( 5 )
 
 [node name="BunchOfCrates" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.61, 2.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.61, 2.5, 4.09566 )
 
 [node name="Crate" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.997737, 0, -0.0672317, 0, 1, 0, 0.0672317, 0, 0.997737, 0, 0, 0 )
+
+[node name="Crate18" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.526333, 0, -0.850279, 0, 1, 0, 0.850279, 0, 0.526333, -24.7339, 0, -3.42057 )
+
+[node name="Crate19" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.931177, 0, -0.364568, 0, 1, 0, 0.364568, 0, 0.931177, 22.5072, 0, -3.42057 )
+
+[node name="Crate6" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.94014, 0, 0.34079, 0, 1, 0, -0.34079, 0, 0.94014, -0.0554547, 0, 5.46422 )
+
+[node name="Crate7" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.996127, 0, -0.0879207, 0, 1, 0, 0.0879207, 0, 0.996127, -0.189181, 0, -5.82963 )
+
+[node name="Crate8" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0554547, 2.94505, -4.53786 )
+
+[node name="Crate9" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0554547, 2.94505, 4.28194 )
+
+[node name="Crate10" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.996166, 0, 0.0874861, 0, 1, 0, -0.0874861, 0, 0.996166, 0.366915, 5.77737, 2.66595 )
+
+[node name="Crate11" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.994256, 0, -0.107028, 0, 1, 0, 0.107028, 0, 0.994256, -0.0554547, 5.77737, -0.338286 )
+
+[node name="Crate12" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.993097, 0, 0.117295, 0, 1, 0, -0.117295, 0, 0.993097, -0.0554547, 5.77737, -3.55099 )
+
+[node name="Crate13" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.750238, 0, 0.661168, 0, 1, 0, -0.661168, 0, 0.750238, -3.47804, 0.216592, 11.669 )
+
+[node name="Crate14" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.97159, 0, 0.236669, 0, 1, 0, -0.236669, 0, 0.97159, -3.47804, 3.46142, 11.669 )
+
+[node name="Crate16" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.303185, 0, 0.952932, 0, 1, 0, -0.952932, 0, 0.303185, -3.47804, 6.83422, 11.669 )
+
+[node name="Crate15" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.97159, 0, 0.236669, 0, 1, 0, -0.236669, 0, 0.97159, -9.59775, 1.74785, 9.58025 )
 
 [node name="Crate2" parent="BunchOfCrates" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.67915 )
 
 [node name="Crate3" parent="BunchOfCrates" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.85981 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0248365, 0, -2.85981 )
 
 [node name="Crate4" parent="BunchOfCrates" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.98943, -1.42135 )
+transform = Transform( 0.985891, 0, -0.167388, 0, 1, 0, 0.167388, 0, 0.985891, -0.547066, 2.98943, -1.51423 )
 
 [node name="Crate5" parent="BunchOfCrates" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.98943, 1.39877 )
+transform = Transform( 0.998097, 0, 0.0616583, 0, 1, 0, -0.0616583, 0, 0.998097, -0.453094, 2.98943, 1.39877 )
+
+[node name="Crate17" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -46.3669, 0, 22.1911 )
+
+[node name="BigCrates" type="Spatial" parent="."]
+transform = Transform( 0.738608, 0, 0.674135, 0, 1, 0, -0.674135, 0, 0.738608, -39.5262, 4.123, 3.92182 )
+
+[node name="BigCrate" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0722008, -0.424712, 0.0658989 )
+
+[node name="BigCrate2" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.675551, 0, -0.737312, 0, 1, 0, 0.737312, 0, 0.675551, 3.9508, -0.424712, 15.2014 )
+
+[node name="BigCrate3" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.987745, 0, -0.156072, 0, 1, 0, 0.156072, 0, 0.987745, 39.0609, -0.424712, 21.1493 )
+
+[node name="BigCrate5" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.919024, 0, 0.394198, 0, 1, 0, -0.394198, 0, 0.919024, 34.8717, -0.424712, 14.9542 )
+
+[node name="BigCrate4" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.744008, 0, -0.668169, 0, 1, 0, 0.668169, 0, 0.744008, 39.0609, 4.12372, 21.1493 )
 
 [node name="Door" parent="." instance=ExtResource( 4 )]
 transform = Transform( 12, 0, 0, 0, 10, 0, 0, 0, 10, 123.763, 5.43515, -140.414 )
@@ -104,7 +240,7 @@ transform = Transform( 12, 0, 0, 0, 10, 0, 0, 0, 10, 123.763, 5.43515, -140.414 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.5408, 2, 36.694 )
 
 [node name="ZoneVictory" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40.8654, 10.0809, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.719, 10.0809, -160.666 )
 collision_layer = 0
 collision_mask = 2
 script = ExtResource( 6 )
@@ -112,5 +248,29 @@ countdown_path = NodePath("../Countdown")
 
 [node name="CollisionShape" type="CollisionShape" parent="ZoneVictory"]
 shape = SubResource( 1 )
+
+[node name="LoungeStuff" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 73.2956, 0, -12.1724 )
+
+[node name="LoungeChair" parent="LoungeStuff" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3105, 3.77594, 2.3054 )
+
+[node name="LoungeSofa" parent="LoungeStuff" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.95935, 3.05, 2.51667 )
+
+[node name="LoungeSofa2" parent="LoungeStuff" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40831, 3.05, 2.51667 )
+
+[node name="LoungeSofa3" parent="LoungeStuff" instance=ExtResource( 14 )]
+transform = Transform( -0.0130547, 0, -0.999915, 0, 1, 0, 0.999915, 0, -0.0130547, 11.0055, 3.05, 13.146 )
+
+[node name="PottedPlant" parent="LoungeStuff" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6652, 2.24232, 2.05672 )
+
+[node name="PottedPlant2" parent="LoungeStuff" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.9903, 2.24232, 2.05672 )
+
+[node name="Trashcan" parent="LoungeStuff" instance=ExtResource( 13 )]
+transform = Transform( 0.97886, 0, -0.20453, 0, 1, 0, 0.20453, 0, 0.97886, 8.66344, 2.79887, 2.89875 )
 
 [connection signal="expired" from="Countdown" to="Player" method="die"]
