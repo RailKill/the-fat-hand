@@ -11,6 +11,11 @@ var cinematic_played = {1: false, 2: false}
 onready var music_player = $AudioStreamPlayer
 
 
+func _input(event):
+	if event.is_action_pressed("ui_fullscreen"):
+		OS.window_fullscreen = !OS.window_fullscreen
+
+
 func play(number):
 	cinematic_played[number] = true
 
