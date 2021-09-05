@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/8bit Bossa.ogg-a59d22c6282231cb163b1baa3d1e00d2.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/8bit Bossa.ogg"
+dest_files=[ "res://.import/8bit Bossa.ogg-a59d22c6282231cb163b1baa3d1e00d2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
