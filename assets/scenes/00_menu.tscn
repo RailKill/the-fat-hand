@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/models/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scenes/lever.tscn" type="PackedScene" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://assets/scenes/floor_button.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=6]
 [ext_resource path="res://assets/sounds/Silly.ogg" type="AudioStream" id=7]
+[ext_resource path="res://assets/scripts/pizza_spawner.gd" type="Script" id=8]
+[ext_resource path="res://assets/models/props/crate/crate.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/models/props/crate/big_crate.tscn" type="PackedScene" id=10]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -23,6 +26,9 @@ ambient_light_color = Color( 0.556863, 0.470588, 0.470588, 1 )
 [node name="LevelMenu" type="Spatial"]
 script = ExtResource( 6 )
 level_music = ExtResource( 7 )
+
+[node name="BigCrate" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3167, 3.0362, -31.6547 )
 
 [node name="Floor" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.06668, 0, -16.0152 )
@@ -83,5 +89,12 @@ shadow_enabled = true
 
 [node name="FloorButton" parent="." instance=ExtResource( 5 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 26.126, 1.06292, -31.8948 )
+
+[node name="PizzaSpawner" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6559, 6.30707, -0.335064 )
+script = ExtResource( 8 )
+
+[node name="Crate" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8009, 2.97532, 0.854548 )
 
 [editable path="Lever"]
