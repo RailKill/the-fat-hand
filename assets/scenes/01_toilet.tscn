@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/models/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/models/props/crate/crate.tscn" type="PackedScene" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://assets/models/human/human.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=17]
 [ext_resource path="res://assets/sounds/Countdown to Myocardial Infarction.ogg" type="AudioStream" id=18]
+[ext_resource path="res://assets/scripts/cinematic.gd" type="Script" id=19]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.87451, 0.862745, 0.843137, 1 )
@@ -27,6 +28,94 @@ albedo_color = Color( 0.203922, 0.270588, 0.380392, 1 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 12, 12, 12 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "Begin"
+length = 5.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Cinematic/Cinemacam:translation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"points": PoolRealArray( -39.3274, -0.25, 0, 0.25, 0, -40.1796, -0.25, 0, 0.25, 0, -40.1796, -0.25, 0, 0.25, 0, -43.4933, -0.25, 0, 0.25, 0, -4.28409, -0.25, 0, 0.25, 0, 90.3328, -0.25, 0, 0.25, 0, 113.844, -0.25, 0, 0.25, 0, 123.998, -0.25, 0, 0.25, 0, 123.998, -0.25, 0, 0.25, 0, 126.657, -0.25, 0, 0.25, 0, 126.589, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 2.8, 3.3, 3.8, 4, 4.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Cinematic/Cinemacam:translation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"points": PoolRealArray( 6.46642, -0.25, 0, 0.25, 0, 6.46642, -0.25, 0, 0.25, 0, 6.46642, -0.25, 0, 0.25, 0, 28.7569, -0.25, 0, 0.25, 0, 25.7192, -0.25, 0, 0.25, 0, 11.035, -0.25, 0, 0.25, 0, 16.71, -0.25, 0, 0.25, 0, 36.9153, -0.25, 0, 0.25, 0, 36.9153, -0.25, 0, 0.25, 0, 8.53637, -0.25, 0, 0.25, 0, 7.55644, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 2.8, 3.3, 3.8, 4, 4.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Cinematic/Cinemacam:translation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/keys = {
+"points": PoolRealArray( 26.4946, -0.25, 0, 0.25, 0, 31.9366, -0.25, 0, 0.25, 0, 31.9366, -0.25, 0, 0.25, 0, -11.4074, -0.25, 0, 0.25, 0, -1.51537, -0.25, 0, 0.25, 0, 3.68486, -0.25, 0, 0.25, 0, 3.68486, -0.25, 0, 0.25, 0, -113.667, -0.25, 0, 0.25, 0, -145.549, -0.25, 0, 0.25, 0, -170.635, -0.25, 0, 0.25, 0, -171.754, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 2.8, 3.3, 3.8, 4, 4.5 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Cinematic/Cinemacam:rotation_degrees:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -38.1507, -0.25, 0, 0.25, 0, -50.3527, -0.25, 0, 0.25, 0, -12.8966, -0.25, 0, 0.25, 0, -27.5309, -0.25, 0, 0.25, 0, -29.1566, -0.25, 0, 0.25, 0, -65.514, -0.25, 0, 0.25, 0, -39.8233, -0.25, 0, 0.25, 0, -39.8233, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 3, 3.3, 3.8, 4, 4.5 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Cinematic/Cinemacam:rotation_degrees:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 158.601, -0.25, 0, 0.25, 0, 136.424, -0.25, 0, 0.25, 0, 136.424, -0.25, 0, 0.25, 0, -157.704, -0.25, 0, 0.25, 0, -116.046, -0.25, 0, 0.25, 0, -94.3225, -0.25, 0, 0.25, 0, -22.8182, -0.25, 0, 0.25, 0, -2.55864, -0.25, 0, 0.25, 0, -3.47026, -0.25, 0, 0.25, 0, 17.9213, -0.25, 0, 0.25, 0, 26.7044, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 3, 3.3, 3.8, 4, 4.5 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Cinematic/Cinemacam:rotation_degrees:z")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0.88669, -0.25, 0, 0.25, 0, 8.53677, -0.25, 0, 0.25, 0, 11.2114, -0.25, 0, 0.25, 0, 2.96124, -0.25, 0, 0.25, 0, -0.596602, -0.25, 0, 0.25, 0, 3.07054, -0.25, 0, 0.25, 0, 0.1717, -0.25, 0, 0.25, 0, 0.1717, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 3, 3.3, 3.8, 4, 4.5 )
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Cinematic/Cinemacam:translation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 2.8, 3.3, 3.8, 4, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -39.27, 6.466, 26.495 ), Vector3( -40.18, 6.466, 31.937 ), Vector3( -40.18, 6.466, 31.937 ), Vector3( -43.493, 28.757, -11.407 ), Vector3( -4.284, 25.719, -1.515 ), Vector3( 90.333, 11.035, 3.685 ), Vector3( 113.844, 16.71, 3.685 ), Vector3( 123.998, 36.915, -113.667 ), Vector3( 123.998, 36.915, -145.549 ), Vector3( 126.657, 8.536, -170.635 ), Vector3( 126.589, 7.556, -171.754 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Cinematic/Cinemacam:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = false
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 2.9, 3.3, 3.8, 4, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 158.601, 0 ), Vector3( 0, 136.424, 0 ), Vector3( 0, 136.424, 0 ), Vector3( -38.151, -157.704, 0.887 ), Vector3( -50.353, -116.046, 8.537 ), Vector3( -12.897, -94.323, 11.211 ), Vector3( -27.5309, -22.8182, 2.96124 ), Vector3( -29.157, -2.559, -0.597 ), Vector3( -65.514, -3.47, 3.071 ), Vector3( -39.823, 17.921, 0.172 ), Vector3( -39.823, 26.704, 0.172 ) ]
+}
 
 [node name="LevelToilet" type="Spatial"]
 script = ExtResource( 17 )
@@ -369,5 +458,16 @@ always_idle = true
 [node name="Human9" parent="NPCs/IdleBoys" instance=ExtResource( 16 )]
 transform = Transform( 0.995908, 0, 0.0903719, 0, 1, 0, -0.0903719, 0, 0.995908, 126.372, 5.12664, -120.426 )
 always_idle = true
+
+[node name="Cinematic" type="AnimationPlayer" parent="."]
+anims/Begin = SubResource( 4 )
+script = ExtResource( 19 )
+countdown_path = NodePath("../Countdown")
+player_path = NodePath("../Player")
+play_pain = true
+
+[node name="Cinemacam" type="Camera" parent="Cinematic"]
+transform = Transform( 0.947778, -0.205921, 0.243543, 0.00230155, 0.76802, 0.640422, -0.318922, -0.606417, 0.728387, 126.643, 8.34, -170.859 )
+fov = 60.0
 
 [connection signal="expired" from="Countdown" to="Player" method="die"]
