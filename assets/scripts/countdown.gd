@@ -38,7 +38,6 @@ func stop():
 func tick():
 	current_time -= timer.wait_time
 	update_time()
-	print(current_time)
 	
 	if current_time <= 0:
 		timer.stop()
