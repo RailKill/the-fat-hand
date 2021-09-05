@@ -1,3 +1,4 @@
+class_name Player
 extends KinematicBody
 # Player controller.
 
@@ -25,8 +26,8 @@ var gravity_vector: Vector3 = \
 # Strength of the gravity.
 var gravity_magnitude = \
 		ProjectSettings.get_setting("physics/3d/default_gravity")
-# Boolean to mark if the player is still alive.
-var is_alive = true
+# Boolean to mark if the player can still be controlled.
+var is_controllable = true
 # Current velocity of the player character.
 var velocity = Vector3.ZERO
 
@@ -39,7 +40,7 @@ onready var model = $Model
 
 
 func _physics_process(delta):
-	if (is_alive):
+	if (is_controllable):
 		# Simulate gravity.
 		velocity += gravity_vector * gravity_magnitude * delta
 		
@@ -61,9 +62,9 @@ func _ready():
 	hand.fix_roll(model.rotation_degrees.y)
 
 
-# Player death.
+# Handle player death and spawn a corpse.
 func die():
-	is_alive = false
+	disable()
 	var corpse = dead_player.instance()
 	corpse.translation = translation
 	corpse.get_node("Model").rotation = model.rotation
@@ -74,6 +75,12 @@ func die():
 	$CollisionShape.disabled = true
 	$HandControl/Punch/CollisionShape.disabled = true
 	visible = false
+
+
+# Stops player control.
+func disable():
+	is_controllable = false
+	hand.disabled = true
 
 
 # Move player according to input. Returns true if direction was pressed.
