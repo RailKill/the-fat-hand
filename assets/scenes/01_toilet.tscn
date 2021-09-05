@@ -81,6 +81,9 @@ depth = 21.6204
 material = ExtResource( 15 )
 
 [node name="Bathroom" type="CSGCombiner" parent="."]
+use_collision = true
+collision_layer = 0
+collision_mask = 3
 
 [node name="CSGBox" type="CSGBox" parent="Bathroom"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.257, 9.70463, -160.367 )
@@ -239,6 +242,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 73.2956, 0, -12.1724 )
 [node name="LoungeChair" parent="LoungeStuff" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3105, 3.77594, 2.3054 )
 
+[node name="LoungeChair2" parent="LoungeStuff" instance=ExtResource( 11 )]
+transform = Transform( 0.274245, 0, 0.96166, 0, 1, 0, -0.96166, 0, 0.274245, 26.3212, 3.77594, 17.0024 )
+
+[node name="LoungeChair3" parent="LoungeStuff" instance=ExtResource( 11 )]
+transform = Transform( -0.377582, 0, 0.925976, 0, 1, 0, -0.925976, 0, -0.377582, 26.3212, 3.77594, 25.5481 )
+
 [node name="LoungeSofa" parent="LoungeStuff" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.95935, 3.05, 2.51667 )
 
@@ -246,7 +255,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.95935, 3.05, 2.51667 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40831, 3.05, 2.51667 )
 
 [node name="LoungeSofa3" parent="LoungeStuff" instance=ExtResource( 14 )]
-transform = Transform( -0.0130547, 0, -0.999915, 0, 1, 0, 0.999915, 0, -0.0130547, 11.0055, 3.05, 13.146 )
+transform = Transform( -0.0130547, 0, -0.999915, 0, 1, 0, 0.999915, 0, -0.0130547, 11.0055, 3.05, 10.5512 )
 
 [node name="PottedPlant" parent="LoungeStuff" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6652, 2.24232, 2.05672 )
