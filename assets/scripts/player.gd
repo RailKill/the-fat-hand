@@ -64,6 +64,10 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity, Vector3.UP)
 		animation_tree["parameters/Movement/add_amount"] = \
 				velocity.length() / move_speed
+	
+	# A way for the player to kill themselves.
+	if Input.is_action_just_pressed("ui_cancel"):
+		die()
 
 
 # Handle player death and spawn a corpse.
