@@ -28,6 +28,8 @@ var gravity_magnitude = \
 		ProjectSettings.get_setting("physics/3d/default_gravity")
 # Boolean to mark if the player can still be controlled.
 var is_controllable = true
+# Boolean to mark if the player is dead.
+var is_dead = false
 # Current velocity of the player character.
 var velocity = Vector3.ZERO
 
@@ -72,17 +74,19 @@ func _physics_process(delta):
 
 # Handle player death and spawn a corpse.
 func die():
-	disable()
-	var corpse = dead_player.instance()
-	corpse.translation = translation
-	corpse.get_node("Model").rotation = model.rotation
-	corpse.translate(Vector3.UP * 2)
-	corpse.apply_impulse(Vector3(0.5, 1, 0), velocity)
-	get_parent().call_deferred("add_child", corpse)
-	get_parent().call_deferred("add_child", game_over.instance())
-	$CollisionShape.disabled = true
-	$HandControl/Punch/CollisionShape.disabled = true
-	visible = false
+	if not is_dead:
+		is_dead = true
+		disable()
+		var corpse = dead_player.instance()
+		corpse.translation = translation
+		corpse.get_node("Model").rotation = model.rotation
+		corpse.translate(Vector3.UP * 2)
+		corpse.apply_impulse(Vector3(0.5, 1, 0), velocity)
+		get_parent().call_deferred("add_child", corpse)
+		get_parent().call_deferred("add_child", game_over.instance())
+		$CollisionShape.disabled = true
+		$HandControl/Punch/CollisionShape.disabled = true
+		visible = false
 
 
 # Stops player control.
