@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/models/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/models/props/crate/crate.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/models/props/trashcan/trashcan.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/models/props/lounge/lounge_sofa.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/models/props/lounge/carpet.material" type="Material" id=15]
+[ext_resource path="res://assets/models/human/human.tscn" type="PackedScene" id=16]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.87451, 0.862745, 0.843137, 1 )
@@ -224,6 +225,27 @@ transform = Transform( 0.738608, 0, 0.674135, 0, 1, 0, -0.674135, 0, 0.738608, -
 [node name="BigCrate" parent="BigCrates" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0722008, -0.424712, 0.0658989 )
 
+[node name="BigCrate6" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 131.552, -0.424712, 74.0427 )
+
+[node name="BigCrate10" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.422603, 0, 0.906315, 0, 1, 0, -0.906315, 0, 0.422603, 136.301, -0.424712, 78.3776 )
+
+[node name="BigCrate7" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.738126, 0, -0.674664, 0, 1, 0, 0.674664, 0, 0.738126, 148.543, -0.424712, 89.5511 )
+
+[node name="BigCrate11" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.999501, 0, -0.0316028, 0, 1, 0, 0.0316028, 0, 0.999501, 152.6, -0.424712, 93.2538 )
+
+[node name="BigCrate12" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.706972, 0, 0.707243, 0, 1, 0, -0.707243, 0, 0.706972, 156.347, -0.424712, 96.6734 )
+
+[node name="BigCrate8" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.847502, 0, -0.530792, 0, 1, 0, 0.530792, 0, 0.847502, 140.347, -0.424712, 82.0697 )
+
+[node name="BigCrate9" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.274631, 0, 0.96155, 0, 1, 0, -0.96155, 0, 0.274631, 144.743, -0.424712, 86.0828 )
+
 [node name="BigCrate2" parent="BigCrates" instance=ExtResource( 7 )]
 transform = Transform( 0.675551, 0, -0.737312, 0, 1, 0, 0.737312, 0, 0.675551, 3.9508, -0.424712, 15.2014 )
 
@@ -282,5 +304,66 @@ next_scene = "res://assets/scenes/02_kitchen.tscn"
 
 [node name="CollisionShape" type="CollisionShape" parent="ZoneVictory"]
 shape = SubResource( 3 )
+
+[node name="NPCs" type="Spatial" parent="."]
+
+[node name="Human" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 70.1308, 5.12664, 6.29282 )
+
+[node name="Human4" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 124.584, 5.12664, -166.745 )
+
+[node name="Human2" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 0.0311491, 0, 0.999515, 0, 1, 0, -0.999515, 0, 0.0311491, 79.0568, 5.12664, -2.28276 )
+
+[node name="Human3" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 0.0311491, 0, 0.999515, 0, 1, 0, -0.999515, 0, 0.0311491, 122.992, 5.12664, -2.28276 )
+
+[node name="Human5" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 0.830683, 0, 0.556745, 0, 1, 0, -0.556745, 0, 0.830683, 122.992, 5.12664, -78.6519 )
+
+[node name="Human6" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 0.988639, 0, -0.150312, 0, 1, 0, 0.150312, 0, 0.988639, 128.905, 5.12664, -78.6519 )
+
+[node name="Human7" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 0.0311491, 0, 0.999515, 0, 1, 0, -0.999515, 0, 0.0311491, 135.048, 5.12664, -78.6519 )
+
+[node name="Human8" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( -0.981551, 0, -0.191203, 0, 1, 0, 0.191203, 0, -0.981551, 117.647, 5.12664, -78.6519 )
+
+[node name="Human9" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 0.874213, 0, -0.485542, 0, 1, 0, 0.485542, 0, 0.874213, 111.677, 5.12664, -78.6519 )
+
+[node name="Human10" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( -0.998553, 0, 0.0537825, 0, 1, 0, -0.0537825, 0, -0.998553, 139.227, 5.12664, -78.6519 )
+
+[node name="Human11" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( -0.743717, 0, -0.668495, 0, 1, 0, 0.668495, 0, -0.743717, 106.846, 5.12664, -78.6519 )
+
+[node name="IdleBoys" type="Spatial" parent="NPCs"]
+
+[node name="Human4" parent="NPCs/IdleBoys" instance=ExtResource( 16 )]
+transform = Transform( 0.959981, 0, 0.280064, 0, 1, 0, -0.280064, 0, 0.959981, 126.372, 5.12664, -136.513 )
+always_idle = true
+
+[node name="Human5" parent="NPCs/IdleBoys" instance=ExtResource( 16 )]
+transform = Transform( 0.996323, 0, 0.0856778, 0, 1, 0, -0.0856778, 0, 0.996323, 123.121, 5.12664, -132.493 )
+always_idle = true
+
+[node name="Human6" parent="NPCs/IdleBoys" instance=ExtResource( 16 )]
+transform = Transform( 0.983502, 0, -0.180897, 0, 1, 0, 0.180897, 0, 0.983502, 119.564, 5.12664, -136.061 )
+always_idle = true
+
+[node name="Human7" parent="NPCs/IdleBoys" instance=ExtResource( 16 )]
+transform = Transform( 0.980282, 0, 0.197606, 0, 1, 0, -0.197606, 0, 0.980282, 126.372, 5.12664, -128.093 )
+always_idle = true
+
+[node name="Human8" parent="NPCs/IdleBoys" instance=ExtResource( 16 )]
+transform = Transform( 0.986248, 0, -0.165271, 0, 1, 0, 0.165271, 0, 0.986248, 126.372, 5.12664, -124.407 )
+always_idle = true
+
+[node name="Human9" parent="NPCs/IdleBoys" instance=ExtResource( 16 )]
+transform = Transform( 0.995908, 0, 0.0903719, 0, 1, 0, -0.0903719, 0, 0.995908, 126.372, 5.12664, -120.426 )
+always_idle = true
 
 [connection signal="expired" from="Countdown" to="Player" method="die"]
