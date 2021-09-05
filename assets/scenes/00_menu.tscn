@@ -6,15 +6,15 @@
 [ext_resource path="res://assets/models/props/food/greyLight.material" type="Material" id=4]
 [ext_resource path="res://assets/scenes/floor_button.tscn" type="PackedScene" id=5]
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
 albedo_color = Color( 0.686275, 0.768627, 0.772549, 0.0431373 )
 
-[sub_resource type="ProceduralSky" id=1]
+[sub_resource type="ProceduralSky" id=2]
 
-[sub_resource type="Environment" id=2]
+[sub_resource type="Environment" id=3]
 background_mode = 3
-background_sky = SubResource( 1 )
+background_sky = SubResource( 2 )
 background_color = Color( 0.529412, 0.505882, 0.505882, 1 )
 ambient_light_color = Color( 0.556863, 0.470588, 0.470588, 1 )
 
@@ -55,7 +55,7 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.87729
 width = 1.31406
 height = 14.6376
 depth = 55.3539
-material = SubResource( 3 )
+material = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
@@ -70,7 +70,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.94419, 4.092, 0 )
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.79142, 2.76579, -17.1967 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
+environment = SubResource( 3 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.828237, -5.44857e-08, -0.560379, 0.463204, 0.562803, 0.684613, 0.315383, -0.826591, 0.466134, 0, 22.5711, -7.43353 )

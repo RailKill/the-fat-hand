@@ -13,14 +13,23 @@ collision_mask = 3
 [node name="Model" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2.68077, 0 )
 
-[node name="EyesCylinder" parent="Model" index="1"]
+[node name="Skeleton" parent="Model/DinoBones" index="0"]
+bones/8/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2") ]
+
+[node name="BoneAttachment" parent="Model/DinoBones/Skeleton" index="0"]
+transform = Transform( 1, 1.42109e-14, 1.50996e-07, 1.50996e-07, 1.3411e-07, -1, -1.42109e-14, 1, 1.63913e-07, 1.04673e-13, 4.28462, 0.152516 )
+
+[node name="EyesCylinder" parent="Model/DinoBones/Skeleton/BoneAttachment" index="0"]
 visible = false
 
-[node name="ArmBones" parent="Model" index="3"]
+[node name="BoneAttachment2" parent="Model/DinoBones/Skeleton" index="1"]
+transform = Transform( 1, 1.42109e-14, 1.50996e-07, 1.50996e-07, 1.3411e-07, -1, -1.42109e-14, 1, 1.63913e-07, 1.04673e-13, 4.28462, 0.152516 )
+
+[node name="EyesPain" parent="Model/DinoBones/Skeleton/BoneAttachment2" index="0"]
+visible = false
+
+[node name="ArmBones" parent="Model" index="2"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -0.648289, 2.95691, 0.0525877 )
-
-[node name="EyesPain" parent="Model" index="4"]
-visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.0199475, -0.134552 )

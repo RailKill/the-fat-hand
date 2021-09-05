@@ -31,12 +31,21 @@ var is_controllable = true
 # Current velocity of the player character.
 var velocity = Vector3.ZERO
 
+# Animation tree which controls the player's animation.
+onready var animation_tree = $AnimationTree
 # Player camera.
 onready var camera = $Camera
 # Controller of the fat hand.
 onready var hand = $HandControl
 # Player model.
 onready var model = $Model
+
+
+func _ready():
+	# Start inverse kinematics for the fat hand.
+	$Model/ArmBones/Skeleton2/SkeletonIK.start()
+	# Needed to call this on ready to fix the hand rotation right away.
+	hand.fix_roll(model.rotation_degrees.y)
 
 
 func _physics_process(delta):
@@ -53,13 +62,8 @@ func _physics_process(delta):
 			hand.fix_roll(model.rotation_degrees.y)
 		
 		velocity = move_and_slide(velocity, Vector3.UP)
-
-
-func _ready():
-	# Start inverse kinematics for the fat hand.
-	$Model/ArmBones/Skeleton2/SkeletonIK.start()
-	# Needed to call this on ready to fix the hand rotation right away.
-	hand.fix_roll(model.rotation_degrees.y)
+		animation_tree["parameters/Movement/add_amount"] = \
+				velocity.length() / move_speed
 
 
 # Handle player death and spawn a corpse.
