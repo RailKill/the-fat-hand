@@ -9,6 +9,7 @@
 [node name="LevelToilet" type="Spatial"]
 
 [node name="Countdown" parent="." instance=ExtResource( 3 )]
+start_time = 3
 
 [node name="Floor" type="CSGCombiner" parent="."]
 use_collision = true
