@@ -7,6 +7,8 @@
 extents = Vector3( 0.43, 0.28, 0.229628 )
 
 [node name="RadioTable" type="StaticBody"]
+collision_layer = 0
+collision_mask = 2
 
 [node name="table" parent="." instance=ExtResource( 1 )]
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, -4.24336, -1.75039, 2.2808 )
