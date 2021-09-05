@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/models/props/food/tomato.glb" type="PackedScene" id=1]
+
+[sub_resource type="SphereShape" id=1]
+radius = 1.95321
+
+[node name="BigTomato" type="RigidBody" groups=[
+"ingredient",
+"pizza",
+]]
+mass = 3.0
+linear_damp = 1.0
+
+[node name="tomato" parent="." instance=ExtResource( 1 )]
+transform = Transform( 25, 0, 0, 0, 25, 0, 0, 0, 25, 0, -1.45777, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0982748, 0 )
+shape = SubResource( 1 )

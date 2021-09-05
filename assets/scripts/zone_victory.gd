@@ -1,3 +1,4 @@
+class_name ZoneVictory
 extends Area
 
 
