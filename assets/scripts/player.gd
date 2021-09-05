@@ -17,6 +17,8 @@ export var rotation_speed = 15
 
 # Dead player asset to be spawned.
 var dead_player = preload("res://assets/models/player/dead_player.tscn")
+# Game over screen to be shown.
+var game_over = preload("res://assets/ui/gameover.tscn")
 # Direction in which the gravity acts in the game world.
 var gravity_vector: Vector3 = \
 		ProjectSettings.get_setting("physics/3d/default_gravity_vector")
@@ -68,6 +70,7 @@ func die():
 	corpse.translate(Vector3.UP * 2)
 	corpse.apply_impulse(Vector3(0.5, 1, 0), velocity)
 	get_parent().call_deferred("add_child", corpse)
+	get_parent().call_deferred("add_child", game_over.instance())
 	$CollisionShape.disabled = true
 	$HandControl/Punch/CollisionShape.disabled = true
 	visible = false
