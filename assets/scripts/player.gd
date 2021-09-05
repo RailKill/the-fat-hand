@@ -104,3 +104,9 @@ func move():
 	velocity.y = vertical
 	
 	return is_moving
+
+
+# Toggles between pain eyes or default eyes.
+func toggle_pain_eyes(show):
+	$Model/DinoBones/Skeleton/BoneAttachment/EyesCylinder.visible = !show
+	$Model/DinoBones/Skeleton/BoneAttachment2/EyesPain.visible = show
