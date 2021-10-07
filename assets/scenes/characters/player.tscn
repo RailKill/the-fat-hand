@@ -1,0 +1,117 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/models/railkill/player/fatdino.glb" type="PackedScene" id=1]
+[ext_resource path="res://assets/scripts/characters/player.gd" type="Script" id=2]
+[ext_resource path="res://assets/scripts/characters/hand_controller.gd" type="Script" id=3]
+
+[sub_resource type="SphereShape" id=1]
+radius = 2.5
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 1.2
+height = 3.4
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "idle-loop"
+
+[sub_resource type="AnimationNodeAdd2" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "pain"
+
+[sub_resource type="AnimationNodeOneShot" id=6]
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "run-loop"
+
+[sub_resource type="AnimationNodeTimeScale" id=9]
+
+[sub_resource type="AnimationNodeBlendTree" id=8]
+graph_offset = Vector2( 39.6166, 105.342 )
+nodes/Idle/node = SubResource( 3 )
+nodes/Idle/position = Vector2( 240, 60 )
+nodes/Movement/node = SubResource( 4 )
+nodes/Movement/position = Vector2( 472, 95 )
+nodes/Pain/node = SubResource( 5 )
+nodes/Pain/position = Vector2( 360, 340 )
+nodes/PainOneShot/node = SubResource( 6 )
+nodes/PainOneShot/position = Vector2( 720, 220 )
+nodes/Run/node = SubResource( 7 )
+nodes/Run/position = Vector2( 220, 180 )
+nodes/TimeScale/node = SubResource( 9 )
+nodes/TimeScale/position = Vector2( 560, 300 )
+nodes/output/position = Vector2( 940, 100 )
+node_connections = [ "TimeScale", 0, "Pain", "output", 0, "PainOneShot", "Movement", 0, "Idle", "Movement", 1, "Run", "PainOneShot", 0, "Movement", "PainOneShot", 1, "TimeScale" ]
+
+[node name="Player" type="KinematicBody"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource( 2 )
+
+[node name="HandControl" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0 )
+script = ExtResource( 3 )
+
+[node name="Target" type="Spatial" parent="HandControl"]
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
+
+[node name="CSGBox" type="CSGBox" parent="HandControl/Target"]
+transform = Transform( 1, 0, 0, 0, 0.501839, 0, 0, 0, 1, 0, 0, 0 )
+visible = false
+depth = 6.95986
+
+[node name="CSGSphere" type="CSGSphere" parent="HandControl/Target"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+visible = false
+radius = 1.5
+
+[node name="Punch" type="KinematicBody" parent="HandControl" groups=[
+"attack",
+]]
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="HandControl/Punch"]
+shape = SubResource( 1 )
+
+[node name="Model" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+
+[node name="EyesDead" parent="Model" index="0"]
+visible = false
+
+[node name="BoneAttachment" parent="Model/DinoBones/Skeleton" index="0"]
+transform = Transform( 1, -0.000223647, -0.000133244, -0.00013289, 0.00158641, -0.999999, 0.000223861, 0.999999, 0.00158643, 0.00419991, 4.28054, 0.0857026 )
+
+[node name="BoneAttachment2" parent="Model/DinoBones/Skeleton" index="1"]
+transform = Transform( 1, -0.000223647, -0.000133244, -0.00013289, 0.00158641, -0.999999, 0.000223861, 0.999999, 0.00158643, 0.00419991, 4.28054, 0.0857026 )
+
+[node name="EyesPain" parent="Model/DinoBones/Skeleton/BoneAttachment2" index="0"]
+visible = false
+
+[node name="ArmBones" parent="Model" index="2"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -0.648289, 2.95691, 0.0525877 )
+
+[node name="SkeletonIK" type="SkeletonIK" parent="Model/ArmBones/Skeleton2" index="1"]
+process_priority = 1
+root_bone = "Arm.R"
+tip_bone = "Hand.R"
+override_tip_basis = false
+target_node = NodePath("../../../../HandControl/Target")
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.89499, 0.197144 )
+shape = SubResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 18.2976, 7.24747 )
+fov = 90.0
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 8 )
+anim_player = NodePath("../Model/AnimationPlayer")
+active = true
+parameters/Movement/add_amount = 0.0
+parameters/PainOneShot/active = false
+parameters/TimeScale/scale = 2.0
+
+[editable path="Model"]
