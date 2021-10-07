@@ -14,15 +14,15 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://git_api.gdns"
 }, {
-"base": "Spatial",
+"base": "Reference",
 "class": "Level",
 "language": "GDScript",
-"path": "res://assets/scripts/level.gd"
+"path": "res://assets/scripts/levels/level.gd"
 }, {
 "base": "KinematicBody",
 "class": "Player",
 "language": "GDScript",
-"path": "res://assets/scripts/player.gd"
+"path": "res://assets/scripts/characters/player.gd"
 }, {
 "base": "ZoneVictory",
 "class": "ZoneConsume",
@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="The Fat Hand"
-run/main_scene="res://assets/scenes/00_menu.tscn"
+run/main_scene="res://assets/scenes/levels/00_menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

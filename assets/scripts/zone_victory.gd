@@ -9,7 +9,7 @@ export(NodePath) var countdown_path
 export(String) var next_scene
 
 # Victory screen interface.
-var ui = preload("res://assets/ui/victory.tscn")
+var ui = preload("res://assets/scenes/ui/victory.tscn")
 
 # The countdown node.
 onready var countdown = get_node(countdown_path)

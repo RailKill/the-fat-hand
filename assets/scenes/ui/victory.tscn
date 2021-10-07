@@ -1,0 +1,181 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/scripts/ui/gameover.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/kenney_future.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/images/ui/wing.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/ui/continue_default.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/ui/confirmation_02.ogg" type="AudioStream" id=5]
+[ext_resource path="res://assets/images/ui/continue_focused.png" type="Texture" id=6]
+[ext_resource path="res://assets/images/ui/continue_pressed.png" type="Texture" id=7]
+[ext_resource path="res://assets/images/ui/quit_focused.png" type="Texture" id=8]
+[ext_resource path="res://assets/images/ui/quit_pressed.png" type="Texture" id=9]
+[ext_resource path="res://assets/images/ui/quit_default.png" type="Texture" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+size = 96
+outline_size = 2
+outline_color = Color( 0.145098, 0.811765, 0.529412, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0.698875, 0.988464, 0.981359, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+direction = Vector3( 0, 100, 0 )
+spread = 90.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 150.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+color_ramp = SubResource( 3 )
+
+[node name="Victory" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.749146
+margin_top = -0.749161
+margin_right = 0.749146
+margin_bottom = -0.749146
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WingRight" type="TextureRect" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 49.395
+margin_top = -133.0
+margin_right = 305.395
+margin_bottom = 123.0
+rect_scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WingLeft" type="TextureRect" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -33.113
+margin_top = -133.0
+margin_right = 222.887
+margin_bottom = 123.0
+rect_scale = Vector2( -0.6, 0.6 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -78.8422
+margin_top = -99.5569
+margin_right = 116.158
+margin_bottom = 8.44312
+custom_fonts/font = SubResource( 1 )
+text = "^.^"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Next" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 48.0
+margin_top = 48.0
+margin_right = 88.0
+margin_bottom = 88.0
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextButton" type="TextureButton" parent="Next"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -52.0
+margin_top = 48.0
+margin_right = -11.9999
+margin_bottom = 88.0
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuitButton" type="TextureButton" parent="Quit"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 523.375, -2.11893 )
+amount = 50
+lifetime = 5.0
+randomness = 0.47
+process_material = SubResource( 4 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -5.0
+autoplay = true
+
+[connection signal="pressed" from="Next/NextButton" to="." method="next"]
+[connection signal="pressed" from="Quit/QuitButton" to="." method="exit"]
