@@ -23,7 +23,7 @@ jobs:
           mkdir -v -p build/windows
           godot -v --export "Windows Desktop" build/windows/${EXPORT_NAME}.exe
       - name: Run Automated Tests
-        run: godot addons/WAT/cli.tscn -run=all
+        run: godot addons/WAT/cli.tscn run=all
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -47,7 +47,7 @@ jobs:
           mkdir -v -p build/web
           godot -v --export "HTML5" build/web/index.html
       - name: Run Automated Tests
-        run: godot addons/WAT/cli.tscn -run=all
+        run: godot addons/WAT/cli.tscn run=all
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
