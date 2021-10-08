@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Control",
+"class": "GameOver",
+"language": "GDScript",
+"path": "res://assets/scripts/ui/gameover.gd"
+}, {
 "base": "",
 "class": "GitAPI",
 "language": "NativeScript",
@@ -45,6 +50,7 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/zone_victory.gd"
 } ]
 _global_script_class_icons={
+"GameOver": "",
 "GitAPI": "",
 "Level": "",
 "Player": "",
