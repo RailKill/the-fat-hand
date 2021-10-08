@@ -1,3 +1,4 @@
+class_name GameOver
 extends Control
 # Handles scene changes when the game is over.
 

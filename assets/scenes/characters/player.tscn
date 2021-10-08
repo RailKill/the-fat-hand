@@ -24,9 +24,9 @@ animation = "pain"
 [sub_resource type="AnimationNodeAnimation" id=7]
 animation = "run-loop"
 
-[sub_resource type="AnimationNodeTimeScale" id=9]
+[sub_resource type="AnimationNodeTimeScale" id=8]
 
-[sub_resource type="AnimationNodeBlendTree" id=8]
+[sub_resource type="AnimationNodeBlendTree" id=9]
 graph_offset = Vector2( 39.6166, 105.342 )
 nodes/Idle/node = SubResource( 3 )
 nodes/Idle/position = Vector2( 240, 60 )
@@ -38,10 +38,10 @@ nodes/PainOneShot/node = SubResource( 6 )
 nodes/PainOneShot/position = Vector2( 720, 220 )
 nodes/Run/node = SubResource( 7 )
 nodes/Run/position = Vector2( 220, 180 )
-nodes/TimeScale/node = SubResource( 9 )
+nodes/TimeScale/node = SubResource( 8 )
 nodes/TimeScale/position = Vector2( 560, 300 )
 nodes/output/position = Vector2( 940, 100 )
-node_connections = [ "TimeScale", 0, "Pain", "output", 0, "PainOneShot", "Movement", 0, "Idle", "Movement", 1, "Run", "PainOneShot", 0, "Movement", "PainOneShot", 1, "TimeScale" ]
+node_connections = [ "output", 0, "PainOneShot", "Movement", 0, "Idle", "Movement", 1, "Run", "TimeScale", 0, "Pain", "PainOneShot", 0, "Movement", "PainOneShot", 1, "TimeScale" ]
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 2
@@ -79,11 +79,14 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0
 [node name="EyesDead" parent="Model" index="0"]
 visible = false
 
+[node name="Skeleton" parent="Model/DinoBones" index="0"]
+bones/8/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2") ]
+
 [node name="BoneAttachment" parent="Model/DinoBones/Skeleton" index="0"]
-transform = Transform( 1, -0.000223647, -0.000133244, -0.00013289, 0.00158641, -0.999999, 0.000223861, 0.999999, 0.00158643, 0.00419991, 4.28054, 0.0857026 )
+transform = Transform( 1, -0.000144448, -8.59511e-05, -8.58029e-05, 0.00102445, -1, 0.000144539, 0.999999, 0.00102447, 0.00350434, 4.28124, 0.0963724 )
 
 [node name="BoneAttachment2" parent="Model/DinoBones/Skeleton" index="1"]
-transform = Transform( 1, -0.000223647, -0.000133244, -0.00013289, 0.00158641, -0.999999, 0.000223861, 0.999999, 0.00158643, 0.00419991, 4.28054, 0.0857026 )
+transform = Transform( 1, -0.000144448, -8.59511e-05, -8.58029e-05, 0.00102445, -1, 0.000144539, 0.999999, 0.00102447, 0.00350434, 4.28124, 0.0963724 )
 
 [node name="EyesPain" parent="Model/DinoBones/Skeleton/BoneAttachment2" index="0"]
 visible = false
@@ -107,7 +110,7 @@ transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 18.2976,
 fov = 90.0
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 8 )
+tree_root = SubResource( 9 )
 anim_player = NodePath("../Model/AnimationPlayer")
 active = true
 parameters/Movement/add_amount = 0.0

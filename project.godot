@@ -9,10 +9,15 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Control",
+"class": "GameOver",
+"language": "GDScript",
+"path": "res://assets/scripts/ui/gameover.gd"
+}, {
 "base": "",
 "class": "GitAPI",
 "language": "NativeScript",
-"path": "res://git_api.gdns"
+"path": "res://addons/godot-git-plugin/git_api.gdns"
 }, {
 "base": "Reference",
 "class": "Level",
@@ -23,6 +28,16 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://assets/scripts/characters/player.gd"
+}, {
+"base": "Reference",
+"class": "WAT",
+"language": "GDScript",
+"path": "res://addons/WAT/namespace.gd"
+}, {
+"base": "Node",
+"class": "WATTest",
+"language": "GDScript",
+"path": "res://addons/WAT/test/test.gd"
 }, {
 "base": "ZoneVictory",
 "class": "ZoneConsume",
@@ -35,12 +50,27 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/zone_victory.gd"
 } ]
 _global_script_class_icons={
+"GameOver": "",
 "GitAPI": "",
 "Level": "",
 "Player": "",
+"WAT": "",
+"WATTest": "",
 "ZoneConsume": "",
 "ZoneVictory": ""
 }
+
+[WAT]
+
+Test_Directory="res://tests"
+Results_Directory="res://tests"
+Test_Metadata_Directory="res://tests"
+Tags=PoolStringArray(  )
+Window_Size=Vector2( 1280, 720 )
+Minimize_Window_When_Running_Tests=false
+Port=6008
+Display=8
+Cache_Tests=true
 
 [application]
 
@@ -52,9 +82,13 @@ config/icon="res://icon.png"
 
 Global="*res://assets/scenes/global.tscn"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/WAT/plugin.cfg" )
+
 [gdnative]
 
-singletons=[ "res://git_api.gdnlib" ]
+singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
 
 [input]
 
