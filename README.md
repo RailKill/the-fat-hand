@@ -5,16 +5,17 @@ Initially made for [Mini Jam 88: Rush](https://itch.io/jam/mini-jam-88-rush), a 
 You play as a dinosaur born with a very large hand who has issues with basic tasks and it is up to you to help solve 
 them delicately or recklessly, one cute little punch at a time.
 
-This game project is licensed under GPLv3 which you can find in the ```LICENSE``` file located in the root of the 
-repository. Only the third-party art assets attributed and listed below in this ```README.md``` are under the 
-[CC0 public domain license](https://creativecommons.org/publicdomain/zero/1.0/).
+This game project is licensed under [GPLv3](https://github.com/RailKill/the-fat-hand/blob/main/LICENSE) which you can find in the 
+```LICENSE``` file located in the root of the repository. Only the third-party art assets attributed and listed below in this ```README.md``` 
+are under the [CC0 public domain license](https://creativecommons.org/publicdomain/zero/1.0/).
+
+**Latest Web Build:** https://railkill.github.io/the-fat-hand
 
 **itch.io Release Page:** https://railkill.itch.io/the-fat-hand
 
 
-## Font
-#### Kenney Future from Kenney Fonts
-https://www.kenney.nl/assets/kenney-fonts
+## Fonts
+#### [Kenney Future from Kenney Fonts](https://www.kenney.nl/assets/kenney-fonts)
 
 
 ## Models
