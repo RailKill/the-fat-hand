@@ -45,7 +45,7 @@ onready var model = $Model
 
 func _ready():
 	# Start inverse kinematics for the fat hand.
-	$Model/ArmBones/Skeleton2/SkeletonIK.start()
+	$Model/DinoBones/Skeleton/SkeletonIK.start()
 	# Needed to call this on ready to fix the hand rotation right away.
 	hand.fix_roll(model.rotation_degrees.y)
 
