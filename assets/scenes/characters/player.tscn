@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/models/railkill/player/fatdino.glb" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/characters/player.gd" type="Script" id=2]
@@ -12,36 +12,49 @@ radius = 1.2
 height = 3.4
 
 [sub_resource type="AnimationNodeAnimation" id=3]
-animation = "idle-loop"
+animation = "biggify"
 
 [sub_resource type="AnimationNodeAdd2" id=4]
+filter_enabled = true
+filters = [ "DinoBones/Skeleton:Arm.R" ]
 
 [sub_resource type="AnimationNodeAnimation" id=5]
-animation = "pain"
+animation = "idle-loop"
 
-[sub_resource type="AnimationNodeOneShot" id=6]
+[sub_resource type="AnimationNodeAdd2" id=6]
+filter_enabled = true
+filters = [ "DinoBones/Skeleton:Leg.Upper.L", "DinoBones/Skeleton:Leg.Upper.R" ]
 
 [sub_resource type="AnimationNodeAnimation" id=7]
+animation = "pain"
+
+[sub_resource type="AnimationNodeOneShot" id=8]
+
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "run-loop"
 
-[sub_resource type="AnimationNodeTimeScale" id=8]
+[sub_resource type="AnimationNodeTimeScale" id=10]
 
-[sub_resource type="AnimationNodeBlendTree" id=9]
-graph_offset = Vector2( 39.6166, 105.342 )
-nodes/Idle/node = SubResource( 3 )
-nodes/Idle/position = Vector2( 240, 60 )
-nodes/Movement/node = SubResource( 4 )
-nodes/Movement/position = Vector2( 472, 95 )
-nodes/Pain/node = SubResource( 5 )
-nodes/Pain/position = Vector2( 360, 340 )
-nodes/PainOneShot/node = SubResource( 6 )
-nodes/PainOneShot/position = Vector2( 720, 220 )
-nodes/Run/node = SubResource( 7 )
-nodes/Run/position = Vector2( 220, 180 )
-nodes/TimeScale/node = SubResource( 8 )
-nodes/TimeScale/position = Vector2( 560, 300 )
+[sub_resource type="AnimationNodeBlendTree" id=11]
+graph_offset = Vector2( 177, -52.25 )
+nodes/Biggify/node = SubResource( 3 )
+nodes/Biggify/position = Vector2( 140, -40 )
+nodes/Fattening/node = SubResource( 4 )
+nodes/Fattening/position = Vector2( 340, -160 )
+nodes/Idle/node = SubResource( 5 )
+nodes/Idle/position = Vector2( 140, -160 )
+nodes/Movement/node = SubResource( 6 )
+nodes/Movement/position = Vector2( 540, -20 )
+nodes/Pain/node = SubResource( 7 )
+nodes/Pain/position = Vector2( 340, 180 )
+nodes/PainOneShot/node = SubResource( 8 )
+nodes/PainOneShot/position = Vector2( 740, 100 )
+nodes/Run/node = SubResource( 9 )
+nodes/Run/position = Vector2( 340, 40 )
+nodes/TimeScale/node = SubResource( 10 )
+nodes/TimeScale/position = Vector2( 540, 180 )
 nodes/output/position = Vector2( 940, 100 )
-node_connections = [ "output", 0, "PainOneShot", "Movement", 0, "Idle", "Movement", 1, "Run", "TimeScale", 0, "Pain", "PainOneShot", 0, "Movement", "PainOneShot", 1, "TimeScale" ]
+node_connections = [ "output", 0, "PainOneShot", "Fattening", 0, "Idle", "Fattening", 1, "Biggify", "TimeScale", 0, "Pain", "PainOneShot", 0, "Movement", "PainOneShot", 1, "TimeScale", "Movement", 0, "Fattening", "Movement", 1, "Run" ]
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 2
@@ -80,21 +93,21 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0
 visible = false
 
 [node name="Skeleton" parent="Model/DinoBones" index="0"]
-bones/8/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2") ]
+bones/10/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2"), NodePath("BoneAttachment3") ]
 
 [node name="BoneAttachment" parent="Model/DinoBones/Skeleton" index="0"]
-transform = Transform( 1, -0.000144448, -8.59511e-05, -8.58029e-05, 0.00102445, -1, 0.000144539, 0.999999, 0.00102447, 0.00350434, 4.28124, 0.0963724 )
+transform = Transform( 1, -8.47364e-05, -5.03336e-05, -5.02826e-05, 0.000600964, -1, 8.4768e-05, 1, 0.000600979, 0.00613554, 4.27734, 0.0567362 )
 
 [node name="BoneAttachment2" parent="Model/DinoBones/Skeleton" index="1"]
-transform = Transform( 1, -0.000144448, -8.59511e-05, -8.58029e-05, 0.00102445, -1, 0.000144539, 0.999999, 0.00102447, 0.00350434, 4.28124, 0.0963724 )
+transform = Transform( 1, -8.47364e-05, -5.03336e-05, -5.02826e-05, 0.000600964, -1, 8.4768e-05, 1, 0.000600979, 0.00613554, 4.27734, 0.0567362 )
 
 [node name="EyesPain" parent="Model/DinoBones/Skeleton/BoneAttachment2" index="0"]
 visible = false
 
-[node name="ArmBones" parent="Model" index="2"]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -0.648289, 2.95691, 0.0525877 )
+[node name="BoneAttachment3" parent="Model/DinoBones/Skeleton" index="2"]
+transform = Transform( 1, -8.47364e-05, -5.03336e-05, -5.02826e-05, 0.000600964, -1, 8.4768e-05, 1, 0.000600979, 0.00613554, 4.27734, 0.0567362 )
 
-[node name="SkeletonIK" type="SkeletonIK" parent="Model/ArmBones/Skeleton2" index="1"]
+[node name="SkeletonIK" type="SkeletonIK" parent="Model/DinoBones/Skeleton" index="5"]
 process_priority = 1
 root_bone = "Arm.R"
 tip_bone = "Hand.R"
@@ -110,9 +123,10 @@ transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 18.2976,
 fov = 90.0
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 9 )
+tree_root = SubResource( 11 )
 anim_player = NodePath("../Model/AnimationPlayer")
 active = true
+parameters/Fattening/add_amount = 1.0
 parameters/Movement/add_amount = 0.0
 parameters/PainOneShot/active = false
 parameters/TimeScale/scale = 2.0
