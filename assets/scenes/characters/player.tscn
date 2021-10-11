@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/models/railkill/player/fatdino.glb" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/characters/player.gd" type="Script" id=2]
 [ext_resource path="res://assets/scripts/characters/hand_controller.gd" type="Script" id=3]
+[ext_resource path="res://assets/scenes/props/clothes/glasses.tscn" type="PackedScene" id=4]
 
 [sub_resource type="SphereShape" id=1]
 radius = 2.5
@@ -36,7 +37,7 @@ animation = "run-loop"
 [sub_resource type="AnimationNodeTimeScale" id=10]
 
 [sub_resource type="AnimationNodeBlendTree" id=11]
-graph_offset = Vector2( 177, -52.25 )
+graph_offset = Vector2( 254, 38.5 )
 nodes/Biggify/node = SubResource( 3 )
 nodes/Biggify/position = Vector2( 140, -40 )
 nodes/Fattening/node = SubResource( 4 )
@@ -54,7 +55,7 @@ nodes/Run/position = Vector2( 340, 40 )
 nodes/TimeScale/node = SubResource( 10 )
 nodes/TimeScale/position = Vector2( 540, 180 )
 nodes/output/position = Vector2( 940, 100 )
-node_connections = [ "output", 0, "PainOneShot", "Fattening", 0, "Idle", "Fattening", 1, "Biggify", "TimeScale", 0, "Pain", "PainOneShot", 0, "Movement", "PainOneShot", 1, "TimeScale", "Movement", 0, "Fattening", "Movement", 1, "Run" ]
+node_connections = [ "output", 0, "PainOneShot", "Movement", 0, "Fattening", "Movement", 1, "Run", "PainOneShot", 0, "Movement", "PainOneShot", 1, "TimeScale", "Fattening", 0, "Idle", "Fattening", 1, "Biggify", "TimeScale", 0, "Pain" ]
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 2
@@ -96,23 +97,32 @@ visible = false
 bones/10/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2"), NodePath("BoneAttachment3") ]
 
 [node name="BoneAttachment" parent="Model/DinoBones/Skeleton" index="0"]
-transform = Transform( 1, -8.47364e-05, -5.03336e-05, -5.02826e-05, 0.000600964, -1, 8.4768e-05, 1, 0.000600979, 0.00613554, 4.27734, 0.0567362 )
+transform = Transform( 1, -4.58374e-06, -2.62403e-06, -2.60933e-06, 3.28273e-05, -1, 4.61753e-06, 1, 3.29465e-05, 0.000314394, 4.28435, 0.147302 )
 
 [node name="BoneAttachment2" parent="Model/DinoBones/Skeleton" index="1"]
-transform = Transform( 1, -8.47364e-05, -5.03336e-05, -5.02826e-05, 0.000600964, -1, 8.4768e-05, 1, 0.000600979, 0.00613554, 4.27734, 0.0567362 )
+transform = Transform( 1, -4.58374e-06, -2.62403e-06, -2.60933e-06, 3.28273e-05, -1, 4.61753e-06, 1, 3.29465e-05, 0.000314394, 4.28435, 0.147302 )
 
 [node name="EyesPain" parent="Model/DinoBones/Skeleton/BoneAttachment2" index="0"]
 visible = false
 
-[node name="BoneAttachment3" parent="Model/DinoBones/Skeleton" index="2"]
-transform = Transform( 1, -8.47364e-05, -5.03336e-05, -5.02826e-05, 0.000600964, -1, 8.4768e-05, 1, 0.000600979, 0.00613554, 4.27734, 0.0567362 )
-
-[node name="SkeletonIK" type="SkeletonIK" parent="Model/DinoBones/Skeleton" index="5"]
+[node name="SkeletonIK" type="SkeletonIK" parent="Model/DinoBones/Skeleton" index="4"]
 process_priority = 1
 root_bone = "Arm.R"
 tip_bone = "Hand.R"
 override_tip_basis = false
 target_node = NodePath("../../../../HandControl/Target")
+
+[node name="BoneAttachment3" type="BoneAttachment" parent="Model/DinoBones/Skeleton" index="5"]
+transform = Transform( 1, -4.58374e-06, -2.62403e-06, -2.60933e-06, 3.28273e-05, -1, 4.61753e-06, 1, 3.29465e-05, 0.000314394, 4.28435, 0.147302 )
+bone_name = "Head"
+
+[node name="Glasses" parent="Model/DinoBones/Skeleton/BoneAttachment3" instance=ExtResource( 4 )]
+transform = Transform( 1, 3.84254e-05, -6.452e-05, 6.45292e-05, -0.000457598, 1, 3.83918e-05, -0.999999, -0.000457674, 0, 1.168, -1.035 )
+collision_layer = 0
+collision_mask = 0
+mode = 1
+mass = 0.005
+sleeping = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.89499, 0.197144 )
