@@ -13,8 +13,7 @@ mono_crash.*.json
 .directory
 *~
 
-# Godot Git Plugin (platform-specific, so it should be ignored)
-addons/godot-git-plugin
+# Local build directory
 build/
 
 # WAT Test Results
