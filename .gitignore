@@ -18,4 +18,4 @@ addons/godot-git-plugin
 build/
 
 # WAT Test Results
-tests/results/
+tests/results.xml
