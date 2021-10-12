@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/models/railkill/player/fatdino.glb" type="PackedScene" id=1]
+[ext_resource path="res://assets/scenes/props/clothes/glasses.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 1.42356
@@ -13,26 +14,23 @@ collision_mask = 3
 [node name="Model" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2.68077, 0 )
 
-[node name="Skeleton" parent="Model/DinoBones" index="0"]
-bones/8/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2") ]
-
 [node name="BoneAttachment" parent="Model/DinoBones/Skeleton" index="0"]
-transform = Transform( 1, 1.42109e-14, 1.50996e-07, 1.50996e-07, 1.3411e-07, -1, -1.42109e-14, 1, 1.63913e-07, 1.04673e-13, 4.28462, 0.152516 )
+transform = Transform( 0.97812, -0.205451, 0.0327272, 0.0117185, -0.102652, -0.994648, 0.207711, 0.973269, -0.0979984, -0.0161062, 4.20901, 0.337324 )
 
 [node name="EyesCylinder" parent="Model/DinoBones/Skeleton/BoneAttachment" index="0"]
 visible = false
 
 [node name="BoneAttachment2" parent="Model/DinoBones/Skeleton" index="1"]
-transform = Transform( 1, 1.42109e-14, 1.50996e-07, 1.50996e-07, 1.3411e-07, -1, -1.42109e-14, 1, 1.63913e-07, 1.04673e-13, 4.28462, 0.152516 )
+transform = Transform( 0.97812, -0.205451, 0.0327272, 0.0117185, -0.102652, -0.994648, 0.207711, 0.973269, -0.0979984, -0.0161062, 4.20901, 0.337324 )
 
 [node name="EyesPain" parent="Model/DinoBones/Skeleton/BoneAttachment2" index="0"]
 visible = false
 
-[node name="ArmBones" parent="Model" index="2"]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -0.648289, 2.95691, 0.0525877 )
-
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.0199475, -0.134552 )
 shape = SubResource( 1 )
+
+[node name="Glasses" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.61182, -1.31568 )
 
 [editable path="Model"]

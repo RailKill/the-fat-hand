@@ -45,7 +45,7 @@ onready var model = $Model
 
 func _ready():
 	# Start inverse kinematics for the fat hand.
-	$Model/ArmBones/Skeleton2/SkeletonIK.start()
+	$Model/DinoBones/Skeleton/SkeletonIK.start()
 	# Needed to call this on ready to fix the hand rotation right away.
 	hand.fix_roll(model.rotation_degrees.y)
 
@@ -81,18 +81,37 @@ func die():
 		corpse.translation = translation
 		corpse.get_node("Model").rotation = model.rotation
 		corpse.translate(Vector3.UP * 2)
-		corpse.apply_impulse(Vector3(0.5, 1, 0), velocity)
+		fumble(corpse)
 		get_parent().call_deferred("add_child", corpse)
 		get_parent().call_deferred("add_child", game_over.instance())
 		$CollisionShape.disabled = true
 		$HandControl/Punch/CollisionShape.disabled = true
 		visible = false
+		
+		# TODO: Hard-coded to make glasses loose. In future, when players can
+		# customize what to wear, player.gd should have an Array to store a
+		# list of clothes/wearables that will become loose objects on death.
+		corpse.connect("ready", self, "drop", [corpse.get_node("Glasses")])
 
 
 # Stops player control.
 func disable():
 	is_controllable = false
 	hand.disabled = true
+
+
+# Drop given item or article of clothing that this player posseses.
+func drop(item):
+	var old_transform = item.global_transform
+	item.get_parent().remove_child(item)
+	get_parent().call_deferred("add_child", item)
+	item.global_transform = old_transform
+	fumble(item)
+
+
+# Flip a target RigidBody object around choatically.
+func fumble(target: RigidBody, force: Vector3 = velocity):
+	target.apply_impulse(Vector3(0.5, 1, 0), force)
 
 
 # Move player according to input. Returns true if direction was pressed.
