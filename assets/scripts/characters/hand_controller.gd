@@ -1,3 +1,4 @@
+class_name Hand
 extends Spatial
 # Controls the fat hand that is used to punch and move objects in the game.
 
