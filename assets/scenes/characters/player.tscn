@@ -55,7 +55,7 @@ nodes/Run/position = Vector2( 340, 40 )
 nodes/TimeScale/node = SubResource( 10 )
 nodes/TimeScale/position = Vector2( 540, 180 )
 nodes/output/position = Vector2( 940, 100 )
-node_connections = [ "output", 0, "PainOneShot", "Movement", 0, "Fattening", "Movement", 1, "Run", "PainOneShot", 0, "Movement", "PainOneShot", 1, "TimeScale", "Fattening", 0, "Idle", "Fattening", 1, "Biggify", "TimeScale", 0, "Pain" ]
+node_connections = [ "output", 0, "PainOneShot", "Movement", 0, "Fattening", "Movement", 1, "Run", "Fattening", 0, "Idle", "Fattening", 1, "Biggify", "PainOneShot", 0, "Movement", "PainOneShot", 1, "TimeScale", "TimeScale", 0, "Pain" ]
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 2
@@ -67,7 +67,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0 )
 script = ExtResource( 3 )
 
 [node name="Target" type="Spatial" parent="HandControl"]
-transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
 
 [node name="CSGBox" type="CSGBox" parent="HandControl/Target"]
 transform = Transform( 1, 0, 0, 0, 0.501839, 0, 0, 0, 1, 0, 0, 0 )
@@ -75,7 +74,7 @@ visible = false
 depth = 6.95986
 
 [node name="CSGSphere" type="CSGSphere" parent="HandControl/Target"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.79654 )
 visible = false
 radius = 1.5
 
@@ -97,10 +96,10 @@ visible = false
 bones/10/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2"), NodePath("BoneAttachment3") ]
 
 [node name="BoneAttachment" parent="Model/DinoBones/Skeleton" index="0"]
-transform = Transform( 1, -4.58374e-06, -2.62403e-06, -2.60933e-06, 3.28273e-05, -1, 4.61753e-06, 1, 3.29465e-05, 0.000314394, 4.28435, 0.147302 )
+transform = Transform( 1, -3.81041e-05, -2.25426e-05, -2.25333e-05, 0.000270203, -1, 3.8112e-05, 1, 0.000270277, 0.00265909, 4.282, 0.109537 )
 
 [node name="BoneAttachment2" parent="Model/DinoBones/Skeleton" index="1"]
-transform = Transform( 1, -4.58374e-06, -2.62403e-06, -2.60933e-06, 3.28273e-05, -1, 4.61753e-06, 1, 3.29465e-05, 0.000314394, 4.28435, 0.147302 )
+transform = Transform( 1, -3.81041e-05, -2.25426e-05, -2.25333e-05, 0.000270203, -1, 3.8112e-05, 1, 0.000270277, 0.00265909, 4.282, 0.109537 )
 
 [node name="EyesPain" parent="Model/DinoBones/Skeleton/BoneAttachment2" index="0"]
 visible = false
@@ -113,7 +112,7 @@ override_tip_basis = false
 target_node = NodePath("../../../../HandControl/Target")
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="Model/DinoBones/Skeleton" index="5"]
-transform = Transform( 1, -4.58374e-06, -2.62403e-06, -2.60933e-06, 3.28273e-05, -1, 4.61753e-06, 1, 3.29465e-05, 0.000314394, 4.28435, 0.147302 )
+transform = Transform( 1, -3.81041e-05, -2.25426e-05, -2.25333e-05, 0.000270203, -1, 3.8112e-05, 1, 0.000270277, 0.00265909, 4.282, 0.109537 )
 bone_name = "Head"
 
 [node name="Glasses" parent="Model/DinoBones/Skeleton/BoneAttachment3" instance=ExtResource( 4 )]

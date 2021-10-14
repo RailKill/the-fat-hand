@@ -47,7 +47,7 @@ func _ready():
 	# Start inverse kinematics for the fat hand.
 	$Model/DinoBones/Skeleton/SkeletonIK.start()
 	# Needed to call this on ready to fix the hand rotation right away.
-	hand.fix_roll(model.rotation_degrees.y)
+	hand.fix_roll(model.rotation.y)
 
 
 func _physics_process(delta):
@@ -61,7 +61,7 @@ func _physics_process(delta):
 			model.rotation.y = lerp_angle(model.rotation.y, 
 					atan2(velocity.x, velocity.z), delta * rotation_speed)
 			# Fix hand roll based on player model rotation.
-			hand.fix_roll(model.rotation_degrees.y)
+			hand.fix_roll(model.rotation.y)
 		
 		velocity = move_and_slide(velocity, Vector3.UP)
 		animation_tree["parameters/Movement/add_amount"] = \
