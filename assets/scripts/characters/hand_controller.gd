@@ -17,25 +17,31 @@ var disabled = false
 
 # Physics object representing the fat hand punch.
 onready var punch = $Punch
+# Grabbable area.
+onready var grabber = $Grabber
 # Rotary target which the hand's IK is tracking towards.
 onready var target = $Target
 
 
 func _input(event):
-	# Move the hand control based on mouse input with a limited radius.
-	if event is InputEventMouseMotion and not disabled:
-		var side = translation.x + event.relative.x * sensitivity
-		var straight = translation.z + event.relative.y * sensitivity
-		translation.x = clamp(side, -max_radius, max_radius)
-		translation.z = clamp(straight, -max_radius, max_radius)
-		fix_yaw()
+	if not disabled:
+		# Move the hand control based on mouse input with a limited radius.
+		if event is InputEventMouseMotion:
+			var side = translation.x + event.relative.x * sensitivity
+			var straight = translation.z + event.relative.y * sensitivity
+			translation.x = clamp(side, -max_radius, max_radius)
+			translation.z = clamp(straight, -max_radius, max_radius)
+			fix_yaw()
+			
+			# Sets the power of the punch.
+			power = Vector2(event.relative.x, event.relative.y).length()
+			
+			# The punch KinematicBody already follows the position of this control
+			# so this move is stationary but is still needed to trigger collision.
+			punch.move_and_slide(Vector3.ZERO, Vector3.UP)
 		
-		# Sets the power of the punch.
-		power = Vector2(event.relative.x, event.relative.y).length()
-		
-		# The punch KinematicBody already follows the position of this control
-		# so this move is stationary but is still needed to trigger collision.
-		punch.move_and_slide(Vector3.ZERO, Vector3.UP)
+		elif event.is_action_pressed("grab"):
+			grab()
 
 
 func _physics_process(_delta):
@@ -57,3 +63,7 @@ func fix_yaw():
 	var x  = translation.x * cos(theta) + -translation.z * sin(theta)
 	var z  = translation.x * sin(theta) + translation.z * cos(theta)
 	rotation.x = atan2(x, z)
+
+
+func grab():
+	pass
