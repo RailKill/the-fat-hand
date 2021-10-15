@@ -46,8 +46,17 @@ func test_get_closest_body():
 
 func test_highlight_tracked():
 	var body = Spatial.new()
-	grabber.highlight(body)
-	asserts.is_equal(grabber.highlighted, body)
+	var director = direct.script(grabber.get_script())
+	director.method("clear")
+	director.method("_outline")
+	director.method("generate")
+	var double = director.double()
+	double.highlight(body)
+	asserts.was_called(director, "clear", "previous highlight clearing called")
+	asserts.was_called_with_arguments(director, "_outline", [body], 
+			"outline recursion called for test body")
+	asserts.was_called(director, "generate", "outline mesh generation called")
+	asserts.is_equal(double.highlighted, body, "highlighted body tracked")
 
 
 func test_outline_recursion():
