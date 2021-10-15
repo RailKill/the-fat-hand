@@ -16,11 +16,14 @@ var highlighted = null
 var is_active = true
 # If true, the highlighted body will be under the zone's control.
 var is_grabbing = false
-# Dictionary of MeshInstances and their outline generated. It only highlights 
-# one body but it can have many MeshInstances, so an outline is generated for
-# each one and stored here.
-# Key/value format: {MeshInstance (original): MeshInstance (outline)}
+# Dictionary containing the original MeshInstance as the key, and the
+# generated outline MeshInstance as its value.
 var outlines = {}
+
+# AudioStreamPlayer3D for grab audio.
+onready var audio_grab = get_node_or_null("AudioGrab")
+# AudioStreamPlayer3D for release audio.
+onready var audio_release = get_node_or_null("AudioRelease")
 
 
 func _ready():
@@ -105,6 +108,8 @@ func grab():
 	is_grabbing = true
 	highlighted.set_mode(RigidBody.MODE_CHARACTER)
 	emit_signal("grab_applied", 90)
+	if audio_grab:
+		audio_grab.play()
 
 
 # Highlights the given object.
@@ -121,3 +126,5 @@ func release():
 	is_grabbing = false
 	highlighted.set_mode(RigidBody.MODE_RIGID)
 	emit_signal("grab_released")
+	if audio_release:
+		audio_release.play()

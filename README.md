@@ -53,6 +53,7 @@ are under the [CC0 public domain license](https://creativecommons.org/publicdoma
   | --------------------- | ------------------------------- |
   | confirmation_001.ogg  | sounds/ui/confirmation_01.ogg   |
   | error_003.ogg         | sounds/ui/error_01.ogg          |
+  | select_005.ogg        | sounds/props/grab_01.ogg        |
   | switch_006.ogg        | sounds/ui/switch_01.ogg         |
 
 
