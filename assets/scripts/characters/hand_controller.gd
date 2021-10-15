@@ -17,8 +17,6 @@ var disabled = false
 
 # Physics object representing the fat hand punch.
 onready var punch = $Punch
-# Grabbable area.
-onready var grabber = $Grabber
 # Rotary target which the hand's IK is tracking towards.
 onready var target = $Target
 
@@ -39,15 +37,22 @@ func _input(event):
 			# The punch KinematicBody already follows the position of this control
 			# so this move is stationary but is still needed to trigger collision.
 			punch.move_and_slide(Vector3.ZERO, Vector3.UP)
-		
-		elif event.is_action_pressed("grab"):
-			grab()
 
 
 func _physics_process(_delta):
 	# Power decay.
 	if power > 0:
 		power = max(0, power - power_decay)
+
+
+# Set hand to the given y rotation in radians when gripping on something.
+func _on_grip_apply(rotation_y):
+	target.rotation.y = rotation_y
+
+
+# Reset the hand's rotation.
+func _on_grip_reset():
+	target.rotation.y = 0
 
 
 # Given the model's y-rotation in radians, fix the hand's IK y-rotation.
@@ -63,7 +68,3 @@ func fix_yaw():
 	var x  = translation.x * cos(theta) + -translation.z * sin(theta)
 	var z  = translation.x * sin(theta) + translation.z * cos(theta)
 	rotation.x = atan2(x, z)
-
-
-func grab():
-	pass

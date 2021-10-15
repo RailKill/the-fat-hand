@@ -44,6 +44,20 @@ func test_get_closest_body():
 	third.queue_free()
 
 
+func test_grab():
+	var highlighted = RigidBody.new()
+	grabber.highlighted = highlighted
+	watch(grabber, "grab_applied")
+	grabber.grab()
+	asserts.is_true(grabber.is_grabbing, "is_grabbing set to true")
+	asserts.is_equal(highlighted.mode, RigidBody.MODE_CHARACTER, 
+			"rigidbody mode set to character")
+	asserts.signal_was_emitted_with_arguments(grabber, "grab_applied", [90],
+			"grab_applied signal emitted")
+	unwatch(grabber, "grab_applied")
+	highlighted.queue_free()
+
+
 func test_highlight_tracked():
 	var body = Spatial.new()
 	var director = direct.script(grabber.get_script())
@@ -57,6 +71,33 @@ func test_highlight_tracked():
 			"outline recursion called for test body")
 	asserts.was_called(director, "generate", "outline mesh generation called")
 	asserts.is_equal(double.highlighted, body, "highlighted body tracked")
+
+
+func test_on_body_entered_increases_count():
+	grabber._on_body_entered(null)
+	asserts.is_equal(grabber.count, 1)
+
+
+func test_on_normal_body_exit():
+	var director = direct.script(grabber.get_script())
+	director.method("clear")
+	var double = director.double()
+	double.count = 1
+	double._on_body_exited(null)
+	asserts.is_equal(double.count, 0, "count decreased")
+	asserts.was_called(director, "clear", "clear() called")
+
+
+func test_on_highlighted_body_exit():
+	var director = direct.script(grabber.get_script())
+	director.method("clear")
+	var double = director.double()
+	double.count = 5
+	var highlighted = Spatial.new()
+	double.highlighted = highlighted
+	double._on_body_exited(highlighted)
+	asserts.was_called(director, "clear")
+	highlighted.queue_free()
 
 
 func test_outline_recursion():
@@ -76,6 +117,19 @@ func test_outline_recursion():
 	asserts.is_true(grabber.outlines.get(subchild) is MeshInstance, 
 			"stored subchild MeshInstance and its outline MeshInstance")
 	parent.queue_free()
+
+
+func test_release():
+	var highlighted = RigidBody.new()
+	grabber.highlighted = highlighted
+	watch(grabber, "grab_released")
+	grabber.release()
+	asserts.is_false(grabber.is_grabbing, "is_grabbing set to false")
+	asserts.is_equal(highlighted.mode, RigidBody.MODE_RIGID, "mode restored")
+	asserts.signal_was_emitted(grabber, "grab_released", 
+			"grab_released signal emitted")
+	unwatch(grabber, "grab_released")
+	highlighted.queue_free()
 
 
 func post():

@@ -59,7 +59,7 @@ nodes/Run/position = Vector2( 340, 40 )
 nodes/TimeScale/node = SubResource( 11 )
 nodes/TimeScale/position = Vector2( 540, 180 )
 nodes/output/position = Vector2( 940, 100 )
-node_connections = [ "output", 0, "PainOneShot", "Fattening", 0, "Idle", "Fattening", 1, "Biggify", "PainOneShot", 0, "Movement", "PainOneShot", 1, "TimeScale", "Movement", 0, "Fattening", "Movement", 1, "Run", "TimeScale", 0, "Pain" ]
+node_connections = [ "output", 0, "PainOneShot", "TimeScale", 0, "Pain", "PainOneShot", 0, "Movement", "PainOneShot", 1, "TimeScale", "Movement", 0, "Fattening", "Movement", 1, "Run", "Fattening", 0, "Idle", "Fattening", 1, "Biggify" ]
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 2
@@ -90,15 +90,6 @@ collision_layer = 0
 [node name="CollisionShape" type="CollisionShape" parent="HandControl/Punch"]
 shape = SubResource( 1 )
 
-[node name="Grabber" type="Area" parent="HandControl"]
-monitorable = false
-collision_layer = 0
-collision_mask = 4
-script = ExtResource( 5 )
-
-[node name="CollisionShape" type="CollisionShape" parent="HandControl/Grabber"]
-shape = SubResource( 2 )
-
 [node name="Model" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 
@@ -106,13 +97,14 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0
 visible = false
 
 [node name="Skeleton" parent="Model/DinoBones" index="0"]
+bones/8/bound_children = [ NodePath("BoneAttachment4") ]
 bones/10/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2"), NodePath("BoneAttachment3") ]
 
 [node name="BoneAttachment" parent="Model/DinoBones/Skeleton" index="0"]
-transform = Transform( 1, -8.51322e-05, -5.05723e-05, -5.05223e-05, 0.00060375, -1, 8.51676e-05, 1, 0.00060384, 0.00616622, 4.2773, 0.0562853 )
+transform = Transform( 1, -5.8895e-05, -3.49313e-05, -3.49086e-05, 0.000417657, -1, 5.89117e-05, 1, 0.000417694, 0.00417897, 4.28012, 0.0860216 )
 
 [node name="BoneAttachment2" parent="Model/DinoBones/Skeleton" index="1"]
-transform = Transform( 1, -8.51322e-05, -5.05723e-05, -5.05223e-05, 0.00060375, -1, 8.51676e-05, 1, 0.00060384, 0.00616622, 4.2773, 0.0562853 )
+transform = Transform( 1, -5.8895e-05, -3.49313e-05, -3.49086e-05, 0.000417657, -1, 5.89117e-05, 1, 0.000417694, 0.00417897, 4.28012, 0.0860216 )
 
 [node name="EyesPain" parent="Model/DinoBones/Skeleton/BoneAttachment2" index="0"]
 visible = false
@@ -125,7 +117,7 @@ override_tip_basis = false
 target_node = NodePath("../../../../HandControl/Target")
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="Model/DinoBones/Skeleton" index="5"]
-transform = Transform( 1, -8.51322e-05, -5.05723e-05, -5.05223e-05, 0.00060375, -1, 8.51676e-05, 1, 0.00060384, 0.00616622, 4.2773, 0.0562853 )
+transform = Transform( 1, -5.8895e-05, -3.49313e-05, -3.49086e-05, 0.000417657, -1, 5.89117e-05, 1, 0.000417694, 0.00417897, 4.28012, 0.0860216 )
 bone_name = "Head"
 
 [node name="Glasses" parent="Model/DinoBones/Skeleton/BoneAttachment3" instance=ExtResource( 4 )]
@@ -135,6 +127,20 @@ collision_mask = 0
 mode = 1
 mass = 0.005
 sleeping = true
+
+[node name="BoneAttachment4" type="BoneAttachment" parent="Model/DinoBones/Skeleton" index="6"]
+transform = Transform( -0.801669, -0.177468, 1.82369, 1.82779, 0.0621295, 0.809519, -0.128484, 1.99114, 0.137284, -3.13868, 2.59857, 0.684523 )
+bone_name = "Hand.R"
+
+[node name="Grabber" type="Area" parent="Model/DinoBones/Skeleton/BoneAttachment4"]
+transform = Transform( 0.206166, 0.455275, 0.0148593, 0.0280423, 0.00359445, -0.4992, -0.454653, 0.20667, -0.0240519, -0.862771, 1.39215, -0.313041 )
+monitorable = false
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Model/DinoBones/Skeleton/BoneAttachment4/Grabber"]
+shape = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.89499, 0.197144 )
@@ -152,5 +158,8 @@ parameters/Fattening/add_amount = 1.0
 parameters/Movement/add_amount = 0.0
 parameters/PainOneShot/active = false
 parameters/TimeScale/scale = 2.0
+
+[connection signal="grab_applied" from="Model/DinoBones/Skeleton/BoneAttachment4/Grabber" to="HandControl" method="_on_grip_apply"]
+[connection signal="grab_released" from="Model/DinoBones/Skeleton/BoneAttachment4/Grabber" to="HandControl" method="_on_grip_reset"]
 
 [editable path="Model"]

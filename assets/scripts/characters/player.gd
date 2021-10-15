@@ -37,8 +37,10 @@ var velocity = Vector3.ZERO
 onready var animation_tree = $AnimationTree
 # Player camera.
 onready var camera = $Camera
-# Controller of the fat hand.
+# Controller of the fat hand for punching.
 onready var hand = $HandControl
+# Grabber zone for grabbing objects.
+onready var grabber = $Model/DinoBones/Skeleton/BoneAttachment4/Grabber
 # Player model.
 onready var model = $Model
 
@@ -98,6 +100,7 @@ func die():
 func disable():
 	is_controllable = false
 	hand.disabled = true
+	grabber.is_active = false
 
 
 # Drop given item or article of clothing that this player posseses.

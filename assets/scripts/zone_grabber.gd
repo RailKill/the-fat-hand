@@ -3,6 +3,8 @@ extends Area
 # Area which highlights stuff closest to its center.
 
 
+signal grab_applied(rotation_y)
+signal grab_released
 signal highlight_cleared
 
 
@@ -10,11 +12,13 @@ signal highlight_cleared
 var count = 0
 # The currently highlighted body, can be null.
 var highlighted = null
-
+# Continues checking for objects to highlight if true.
+var is_active = true
+# If true, the highlighted body will be under the zone's control.
+var is_grabbing = false
 # Dictionary of MeshInstances and their outline generated. It only highlights 
 # one body but it can have many MeshInstances, so an outline is generated for
 # each one and stored here.
-#
 # Key/value format: {MeshInstance (original): MeshInstance (outline)}
 var outlines = {}
 
@@ -24,13 +28,23 @@ func _ready():
 	var _exit = connect("body_exited", self, "_on_body_exited")
 
 
+func _input(event):
+	if event.is_action_pressed("grab") and highlighted and not is_grabbing:
+		grab()
+	elif event.is_action_released("grab") and is_grabbing:
+		release()
+
+
 func _physics_process(_delta):
-	if count > 0:
-		var grabbables = get_overlapping_bodies()
-		if count == 1 and grabbables[0] != highlighted:
-			highlight(grabbables[0])
+	if is_active and count > 0:
+		if is_grabbing:
+			highlighted.global_transform.origin = global_transform.origin
 		else:
-			highlight(get_closest(grabbables))
+			var grabbables = get_overlapping_bodies()
+			if count == 1 and grabbables[0] != highlighted:
+				highlight(grabbables[0])
+			else:
+				highlight(get_closest(grabbables))
 
 
 func _on_body_entered(_body):
@@ -86,6 +100,13 @@ func get_closest(bodies = get_overlapping_bodies(),
 	return closest
 
 
+# Apply grab to highlighted body.
+func grab():
+	is_grabbing = true
+	highlighted.set_mode(RigidBody.MODE_CHARACTER)
+	emit_signal("grab_applied", 90)
+
+
 # Highlights the given object.
 func highlight(body):
 	if body:
@@ -93,3 +114,10 @@ func highlight(body):
 		_outline(body)
 		generate()
 		highlighted = body
+
+
+# Release grab of the highlighted body.
+func release():
+	is_grabbing = false
+	highlighted.set_mode(RigidBody.MODE_RIGID)
+	emit_signal("grab_released")
