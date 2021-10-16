@@ -52,7 +52,7 @@ func test_grab():
 	asserts.is_true(grabber.is_grabbing, "is_grabbing set to true")
 	asserts.is_equal(highlighted.mode, RigidBody.MODE_CHARACTER, 
 			"rigidbody mode set to character")
-	asserts.signal_was_emitted_with_arguments(grabber, "grab_applied", [90],
+	asserts.signal_was_emitted_with_arguments(grabber, "grab_applied", [1.5708],
 			"grab_applied signal emitted")
 	unwatch(grabber, "grab_applied")
 	highlighted.queue_free()
