@@ -107,7 +107,7 @@ func get_closest(bodies = get_overlapping_bodies(),
 func grab():
 	is_grabbing = true
 	highlighted.set_mode(RigidBody.MODE_CHARACTER)
-	emit_signal("grab_applied", 90)
+	emit_signal("grab_applied", 1.5708)
 	if audio_grab:
 		audio_grab.play()
 
