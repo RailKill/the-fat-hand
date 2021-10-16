@@ -126,8 +126,8 @@ func test_release():
 	grabber.release()
 	asserts.is_false(grabber.is_grabbing, "is_grabbing set to false")
 	asserts.is_equal(highlighted.mode, RigidBody.MODE_RIGID, "mode restored")
-	asserts.signal_was_emitted(grabber, "grab_released", 
-			"grab_released signal emitted")
+	asserts.signal_was_emitted_with_arguments(grabber, "grab_released", 
+			[highlighted], "grab_released signal emitted")
 	unwatch(grabber, "grab_released")
 	highlighted.queue_free()
 

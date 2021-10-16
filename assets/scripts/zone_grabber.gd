@@ -4,7 +4,7 @@ extends Area
 
 
 signal grab_applied(rotation_y)
-signal grab_released
+signal grab_released(body)
 signal highlight_cleared
 
 
@@ -40,7 +40,7 @@ func _input(event):
 
 func _physics_process(_delta):
 	if is_active and count > 0:
-		if is_grabbing:
+		if is_grabbing and highlighted:
 			highlighted.global_transform.origin = global_transform.origin
 		else:
 			var grabbables = get_overlapping_bodies()
@@ -125,6 +125,6 @@ func highlight(body):
 func release():
 	is_grabbing = false
 	highlighted.set_mode(RigidBody.MODE_RIGID)
-	emit_signal("grab_released")
+	emit_signal("grab_released", highlighted)
 	if audio_release:
 		audio_release.play()

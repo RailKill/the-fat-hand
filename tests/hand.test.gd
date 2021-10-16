@@ -8,7 +8,7 @@ var hand
 
 
 func pre():
-	hand = Hand.new()
+	hand = HandController.new()
 
 
 # Ensure hand is not twisted by matching its y-rotation.

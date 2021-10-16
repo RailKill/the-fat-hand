@@ -20,7 +20,7 @@ _global_script_classes=[ {
 "path": "res://addons/godot-git-plugin/git_api.gdns"
 }, {
 "base": "Spatial",
-"class": "Hand",
+"class": "HandController",
 "language": "GDScript",
 "path": "res://assets/scripts/characters/hand_controller.gd"
 }, {
@@ -67,7 +67,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "GameOver": "",
 "GitAPI": "",
-"Hand": "",
+"HandController": "",
 "Level": "",
 "Player": "",
 "Utility": "",

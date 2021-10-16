@@ -46,6 +46,8 @@ onready var model = $Model
 
 
 func _ready():
+	# Perform throw if grab is released.
+	grabber.connect("grab_released", self, "throw")
 	# Start inverse kinematics for the fat hand.
 	$Model/DinoBones/Skeleton/SkeletonIK.start()
 	# Needed to call this on ready to fix the hand rotation right away.
@@ -83,11 +85,11 @@ func die():
 		corpse.translation = translation
 		corpse.get_node("Model").rotation = model.rotation
 		corpse.translate(Vector3.UP * 2)
-		fumble(corpse)
+		throw(corpse, velocity)
 		get_parent().call_deferred("add_child", corpse)
 		get_parent().call_deferred("add_child", game_over.instance())
 		$CollisionShape.disabled = true
-		$HandControl/Punch/CollisionShape.disabled = true
+		$HandControl/Puncher/CollisionShape.disabled = true
 		visible = false
 		
 		# TODO: Hard-coded to make glasses loose. In future, when players can
@@ -99,7 +101,7 @@ func die():
 # Stops player control.
 func disable():
 	is_controllable = false
-	hand.disabled = true
+	hand.is_enabled = false
 	grabber.is_active = false
 
 
@@ -109,12 +111,14 @@ func drop(item):
 	item.get_parent().remove_child(item)
 	get_parent().call_deferred("add_child", item)
 	item.global_transform = old_transform
-	fumble(item)
+	throw(item, velocity)
 
 
-# Flip a target RigidBody object around choatically.
-func fumble(target: RigidBody, force: Vector3 = velocity):
-	target.apply_impulse(Vector3(0.5, 1, 0), force)
+# Flip a target RigidBody object with given force around given position.
+func throw(target, force = velocity / 2 + hand.power * \
+		global_transform.origin.direction_to(hand.global_transform.origin),
+		position = Vector3(0.5, 1, 0)):
+	target.apply_impulse(position, force)
 
 
 # Move player according to input. Returns true if direction was pressed.

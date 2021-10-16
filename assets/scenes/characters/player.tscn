@@ -13,7 +13,7 @@ radius = 2.5
 [sub_resource type="SphereShape" id=2]
 radius = 5.0
 
-[sub_resource type="AudioStreamRandomPitch" id=14]
+[sub_resource type="AudioStreamRandomPitch" id=3]
 audio_stream = ExtResource( 7 )
 
 [sub_resource type="CapsuleShape" id=4]
@@ -86,12 +86,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.79654 )
 visible = false
 radius = 1.5
 
-[node name="Punch" type="KinematicBody" parent="HandControl" groups=[
+[node name="Puncher" type="KinematicBody" parent="HandControl" groups=[
 "attack",
 ]]
 collision_layer = 0
 
-[node name="CollisionShape" type="CollisionShape" parent="HandControl/Punch"]
+[node name="CollisionShape" type="CollisionShape" parent="HandControl/Puncher"]
 shape = SubResource( 1 )
 
 [node name="Model" parent="." instance=ExtResource( 1 )]
@@ -105,10 +105,10 @@ bones/8/bound_children = [ NodePath("BoneAttachment4") ]
 bones/10/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2"), NodePath("BoneAttachment3") ]
 
 [node name="BoneAttachment" parent="Model/DinoBones/Skeleton" index="0"]
-transform = Transform( 1, 4.60758e-05, 2.75736e-05, 2.7588e-05, -0.000326723, -1, -4.60648e-05, 1, -0.000326723, 0.00170109, 4.28285, 0.124737 )
+transform = Transform( 1, -8.5053e-05, -5.05236e-05, -5.04736e-05, 0.000603192, -1, 8.50884e-05, 1, 0.000603236, 0.00615997, 4.2773, 0.0563773 )
 
 [node name="BoneAttachment2" parent="Model/DinoBones/Skeleton" index="1"]
-transform = Transform( 1, 4.60758e-05, 2.75736e-05, 2.7588e-05, -0.000326723, -1, -4.60648e-05, 1, -0.000326723, 0.00170109, 4.28285, 0.124737 )
+transform = Transform( 1, -8.5053e-05, -5.05236e-05, -5.04736e-05, 0.000603192, -1, 8.50884e-05, 1, 0.000603236, 0.00615997, 4.2773, 0.0563773 )
 
 [node name="EyesPain" parent="Model/DinoBones/Skeleton/BoneAttachment2" index="0"]
 visible = false
@@ -121,7 +121,7 @@ override_tip_basis = false
 target_node = NodePath("../../../../HandControl/Target")
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="Model/DinoBones/Skeleton" index="5"]
-transform = Transform( 1, 4.60758e-05, 2.75736e-05, 2.7588e-05, -0.000326723, -1, -4.60648e-05, 1, -0.000326723, 0.00170109, 4.28285, 0.124737 )
+transform = Transform( 1, -8.5053e-05, -5.05236e-05, -5.04736e-05, 0.000603192, -1, 8.50884e-05, 1, 0.000603236, 0.00615997, 4.2773, 0.0563773 )
 bone_name = "Head"
 
 [node name="Glasses" parent="Model/DinoBones/Skeleton/BoneAttachment3" instance=ExtResource( 4 )]
@@ -133,7 +133,7 @@ mass = 0.005
 sleeping = true
 
 [node name="BoneAttachment4" type="BoneAttachment" parent="Model/DinoBones/Skeleton" index="6"]
-transform = Transform( -0.814247, -0.144225, 1.82104, 1.82497, 0.0237552, 0.817882, -0.0806095, 1.99465, 0.121932, -3.13322, 2.57306, 0.701306 )
+transform = Transform( -0.787691, -0.215169, 1.82572, 1.83073, 0.0889061, 0.800331, -0.167262, 1.9864, 0.161943, -3.14398, 2.62181, 0.668258 )
 bone_name = "Hand.R"
 
 [node name="Grabber" type="Area" parent="Model/DinoBones/Skeleton/BoneAttachment4"]
@@ -147,7 +147,7 @@ script = ExtResource( 5 )
 shape = SubResource( 2 )
 
 [node name="AudioGrab" type="AudioStreamPlayer3D" parent="Model/DinoBones/Skeleton/BoneAttachment4/Grabber"]
-stream = SubResource( 14 )
+stream = SubResource( 3 )
 unit_db = 5.0
 bus = "SFX"
 
