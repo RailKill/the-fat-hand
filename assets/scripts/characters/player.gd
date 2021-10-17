@@ -37,10 +37,10 @@ var velocity = Vector3.ZERO
 onready var animation_tree = $AnimationTree
 # Player camera.
 onready var camera = $Camera
-# Controller of the fat hand for punching.
-onready var hand = $HandControl
 # Grabber zone for grabbing objects.
 onready var grabber = $Model/DinoBones/Skeleton/BoneAttachment4/Grabber
+# Controller of the fat hand for punching.
+onready var hand = $HandControl
 # Player model.
 onready var model = $Model
 
@@ -68,8 +68,8 @@ func _physics_process(delta):
 			hand.fix_roll(model.rotation.y)
 		
 		velocity = move_and_slide(velocity, Vector3.UP)
-		animation_tree["parameters/Movement/add_amount"] = \
-				velocity.length() / move_speed
+		animation_tree.set("parameters/Movement/add_amount",
+				velocity.length() / move_speed)
 	
 	# A way for the player to kill themselves.
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -86,8 +86,8 @@ func die():
 		corpse.get_node("Model").rotation = model.rotation
 		corpse.translate(Vector3.UP * 2)
 		throw(corpse, velocity)
-		get_parent().call_deferred("add_child", corpse)
-		get_parent().call_deferred("add_child", game_over.instance())
+		get_parent().call_deferred("add_child", corpse, true)
+		get_parent().call_deferred("add_child", game_over.instance(), true)
 		$CollisionShape.disabled = true
 		$HandControl/Puncher/CollisionShape.disabled = true
 		visible = false

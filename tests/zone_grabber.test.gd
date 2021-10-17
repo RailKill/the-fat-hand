@@ -6,6 +6,11 @@ extends WAT.Test
 var grabber
 
 
+func start():
+	if Engine.editor_hint:
+		InputMap.load_from_globals()
+
+
 func pre():
 	grabber = ZoneGrabber.new()
 	add_child(grabber)
