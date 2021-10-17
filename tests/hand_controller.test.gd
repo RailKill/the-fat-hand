@@ -8,7 +8,7 @@ var hand
 
 
 func pre():
-	hand = Hand.new()
+	hand = HandController.new()
 
 
 # Ensure hand is not twisted by matching its y-rotation.
@@ -39,6 +39,22 @@ func test_fix_yaw():
 	hand.rotation.y = p["angle"]
 	hand.fix_yaw()
 	asserts.is_equal(stepify(hand.rotation.x, 0.1), p["result"], p["context"])
+
+
+func test_on_grip_apply():
+	var target = Spatial.new()
+	hand.target = target
+	hand._on_grip_apply(2)
+	asserts.is_equal(hand.target.rotation.y, 2)
+	target.queue_free()
+
+
+func test_on_grip_reset():
+	var target = Spatial.new()
+	hand.target = target
+	hand._on_grip_reset(null)
+	asserts.is_equal(hand.target.rotation.y, 0)
+	target.queue_free()
 
 
 func post():
