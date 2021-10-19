@@ -30,6 +30,13 @@ func pre():
 		player.add_child(collision, true)
 		collision.translate(Vector3(0, 2.95, 0.197))
 		collision.rotate_x(1.5708)
+		
+		# Setup foothold.
+		var fshape = BoxShape.new()
+		fshape.extents = Vector3(1.2, 0.2, 0.5)
+		var foothold = Utility.add_child_to(player, Area.new(), "Foothold")
+		Utility.add_child_to(foothold, CollisionShape.new()).shape = fshape
+		foothold.translate(Vector3(0, -0.385, 0))
 
 		# Construct hand controller double.
 		var hand = Utility.add_child_to(
@@ -99,8 +106,8 @@ func test_fall_gravity_is_normal():
 	player.get_node("CollisionShape").queue_free()
 	yield(until_timeout(1), YIELD)
 	var y = player.global_transform.origin.y
-	asserts.is_less_than(y, -8)
-	asserts.is_greater_than(y, -12)
+	asserts.is_less_than(y, -16)
+	asserts.is_greater_than(y, -20)
 
 
 func test_movement_on_flat_surface():

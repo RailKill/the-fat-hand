@@ -5,7 +5,8 @@ class_name Utility
 # Adds a given child to the parent node and set given name. If name is empty,
 # it will default to the class name. Returns the given child node back.
 static func add_child_to(parent, child, name = ""):
-	child.name = name
+	if not name.empty():
+		child.name = name
 	parent.add_child(child, name.empty())
 	return child
 

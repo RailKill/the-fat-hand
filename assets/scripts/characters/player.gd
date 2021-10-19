@@ -11,6 +11,8 @@ const DIRECTIONS = {
 	"ui_right": Vector3.RIGHT
 }
 
+# Jump strength.
+export var jump_strength = 20
 # Movement speed.
 export var move_speed = 45
 # Rotation speed.
@@ -30,6 +32,8 @@ var gravity_magnitude = \
 var is_controllable = true
 # Boolean to mark if the player is dead.
 var is_dead = false
+# Delay timer for jump cooldown.
+var jump_delay: Timer
 # Current velocity of the player character.
 var velocity = Vector3.ZERO
 
@@ -37,6 +41,8 @@ var velocity = Vector3.ZERO
 onready var animation_tree = $AnimationTree
 # Player camera.
 onready var camera = $Camera
+# Area to detect if player is standing on something.
+onready var foothold = $Foothold
 # Grabber zone for grabbing objects.
 onready var grabber = $Model/DinoBones/Skeleton/BoneAttachment4/Grabber
 # Controller of the fat hand for punching.
@@ -52,15 +58,30 @@ func _ready():
 	$Model/DinoBones/Skeleton/SkeletonIK.start()
 	# Needed to call this on ready to fix the hand rotation right away.
 	hand.fix_roll(model.rotation.y)
+	
+	# Setup jump cooldown timer.
+	jump_delay = Timer.new()
+	jump_delay.wait_time = 0.1
+	jump_delay.one_shot = true
+	add_child(jump_delay, true)
 
 
 func _physics_process(delta):
-	if (is_controllable):
-		# Simulate gravity.
+	# Simulate gravity.
+	if is_on_ground() and jump_delay.is_stopped():
+		suspend()
+	else:
 		velocity += gravity_vector * gravity_magnitude * delta
+	
+	if (is_controllable):
+		# Handle jumping.
+		if Input.is_action_pressed("jump") and is_on_ground() \
+				and jump_delay.time_left == 0:
+			jump_delay.start()
+			suspend()
+			velocity += -gravity_vector * jump_strength
 		
-		# Rotate the model if the player moved.
-		if(move()):
+		if move():
 			# Face model towards direction of movement.
 			model.rotation.y = lerp_angle(model.rotation.y, 
 					atan2(velocity.x, velocity.z), delta * rotation_speed)
@@ -114,11 +135,9 @@ func drop(item):
 	throw(item, velocity)
 
 
-# Flip a target RigidBody object with given force around given position.
-func throw(target, force = velocity / 2 + hand.power * \
-		global_transform.origin.direction_to(hand.global_transform.origin),
-		position = Vector3(0.5, 1, 0)):
-	target.apply_impulse(position, force)
+# Checks if the player is on the ground or on some object.
+func is_on_ground():
+	return foothold.get_overlapping_bodies().size() > 0 or is_on_floor()
 
 
 # Move player according to input. Returns true if direction was pressed.
@@ -138,6 +157,18 @@ func move():
 	velocity.y = vertical
 	
 	return is_moving
+
+
+# Suspends the player's gravity by zeroing the falling velocity.
+func suspend():
+	velocity *= Vector3.ONE - gravity_vector.abs()
+
+
+# Flip a target RigidBody object with given force around given position.
+func throw(target, force = velocity / 2 + hand.power * \
+		global_transform.origin.direction_to(hand.global_transform.origin),
+		position = Vector3(0.5, 1, 0)):
+	target.apply_impulse(position, force)
 
 
 # Toggles between pain eyes or default eyes.

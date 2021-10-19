@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/models/railkill/player/fatdino.glb" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/characters/player.gd" type="Script" id=2]
@@ -63,7 +63,10 @@ nodes/Run/position = Vector2( 340, 40 )
 nodes/TimeScale/node = SubResource( 12 )
 nodes/TimeScale/position = Vector2( 540, 180 )
 nodes/output/position = Vector2( 940, 100 )
-node_connections = [ "output", 0, "PainOneShot", "PainOneShot", 0, "Movement", "PainOneShot", 1, "TimeScale", "Movement", 0, "Fattening", "Movement", 1, "Run", "TimeScale", 0, "Pain", "Fattening", 0, "Idle", "Fattening", 1, "Biggify" ]
+node_connections = [ "output", 0, "PainOneShot", "TimeScale", 0, "Pain", "Fattening", 0, "Idle", "Fattening", 1, "Biggify", "Movement", 0, "Fattening", "Movement", 1, "Run", "PainOneShot", 0, "Movement", "PainOneShot", 1, "TimeScale" ]
+
+[sub_resource type="BoxShape" id=14]
+extents = Vector3( 1.2, 0.2, 0.5 )
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 2
@@ -100,15 +103,11 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0
 [node name="EyesDead" parent="Model" index="0"]
 visible = false
 
-[node name="Skeleton" parent="Model/DinoBones" index="0"]
-bones/8/bound_children = [ NodePath("BoneAttachment4") ]
-bones/10/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2"), NodePath("BoneAttachment3") ]
-
 [node name="BoneAttachment" parent="Model/DinoBones/Skeleton" index="0"]
-transform = Transform( 1, 3.03171e-05, 1.81972e-05, 1.82033e-05, -0.000215054, -1, -3.0312e-05, 1, -0.000215054, 0.00138689, 4.28323, 0.12979 )
+transform = Transform( 1, -3.82239e-07, -7.65858e-08, -7.65981e-08, 2.68221e-06, -1, 3.82264e-07, 1, 2.71201e-06, 2.58654e-05, 4.28459, 0.152085 )
 
 [node name="BoneAttachment2" parent="Model/DinoBones/Skeleton" index="1"]
-transform = Transform( 1, 3.03171e-05, 1.81972e-05, 1.82033e-05, -0.000215054, -1, -3.0312e-05, 1, -0.000215054, 0.00138689, 4.28323, 0.12979 )
+transform = Transform( 1, -3.82239e-07, -7.65858e-08, -7.65981e-08, 2.68221e-06, -1, 3.82264e-07, 1, 2.71201e-06, 2.58654e-05, 4.28459, 0.152085 )
 
 [node name="EyesPain" parent="Model/DinoBones/Skeleton/BoneAttachment2" index="0"]
 visible = false
@@ -121,7 +120,7 @@ override_tip_basis = false
 target_node = NodePath("../../../../HandControl/Target")
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="Model/DinoBones/Skeleton" index="5"]
-transform = Transform( 1, 3.03171e-05, 1.81972e-05, 1.82033e-05, -0.000215054, -1, -3.0312e-05, 1, -0.000215054, 0.00138689, 4.28323, 0.12979 )
+transform = Transform( 1, -3.82239e-07, -7.65858e-08, -7.65981e-08, 2.68221e-06, -1, 3.82264e-07, 1, 2.71201e-06, 2.58654e-05, 4.28459, 0.152085 )
 bone_name = "Head"
 
 [node name="Glasses" parent="Model/DinoBones/Skeleton/BoneAttachment3" instance=ExtResource( 4 )]
@@ -133,7 +132,7 @@ mass = 0.005
 sleeping = true
 
 [node name="BoneAttachment4" type="BoneAttachment" parent="Model/DinoBones/Skeleton" index="6"]
-transform = Transform( -0.816506, -0.137896, 1.82052, 1.82424, 0.0192199, 0.819627, -0.074007, 1.99515, 0.117931, -3.13227, 2.56909, 0.703852 )
+transform = Transform( -0.827294, -0.107001, 1.81773, 1.82033, 2.02954e-05, 0.828482, -0.0443428, 1.99714, 0.0973804, -3.12769, 2.55029, 0.71547 )
 bone_name = "Hand.R"
 
 [node name="Grabber" type="Area" parent="Model/DinoBones/Skeleton/BoneAttachment4"]
@@ -167,6 +166,14 @@ parameters/Fattening/add_amount = 1.0
 parameters/Movement/add_amount = 0.0
 parameters/PainOneShot/active = false
 parameters/TimeScale/scale = 2.0
+
+[node name="Foothold" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38537, 0 )
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Foothold"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18926, 0.0982941 )
+shape = SubResource( 14 )
 
 [connection signal="grab_applied" from="Model/DinoBones/Skeleton/BoneAttachment4/Grabber" to="HandControl" method="_on_grip_apply"]
 [connection signal="grab_released" from="Model/DinoBones/Skeleton/BoneAttachment4/Grabber" to="HandControl" method="_on_grip_reset"]
