@@ -9,6 +9,7 @@ height = 0.506913
 [node name="BigLemon" type="RigidBody" groups=[
 "ingredient",
 ]]
+collision_layer = 5
 
 [node name="lemon" parent="." instance=ExtResource( 1 )]
 transform = Transform( 12, 0, 0, 0, 12, 0, 0, 0, 12, 0, -1.35128, 0 )

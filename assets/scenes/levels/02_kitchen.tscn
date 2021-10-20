@@ -322,6 +322,6 @@ projection = 1
 size = 11.0
 
 [connection signal="expired" from="Countdown" to="Player" method="die"]
-[connection signal="consumed_good" from="ZoneConsume" to="Oven/CSGCylinder3" method="on"]
 [connection signal="consumed_good" from="ZoneConsume" to="Oven/CSGCylinder" method="on"]
 [connection signal="consumed_good" from="ZoneConsume" to="Oven/CSGCylinder2" method="on"]
+[connection signal="consumed_good" from="ZoneConsume" to="Oven/CSGCylinder3" method="on"]

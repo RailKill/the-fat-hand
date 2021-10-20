@@ -108,6 +108,7 @@ func get_closest(bodies = get_overlapping_bodies(),
 func grab():
 	is_grabbing = true
 	highlighted.set_mode(RigidBody.MODE_CHARACTER)
+	highlighted.connect("tree_exiting", self, "release")
 	emit_signal("grab_applied", 1.5708)
 	if audio_grab:
 		audio_grab.play()
@@ -125,7 +126,9 @@ func highlight(body):
 # Release grab of the highlighted body.
 func release():
 	is_grabbing = false
-	highlighted.set_mode(RigidBody.MODE_RIGID)
-	emit_signal("grab_released", highlighted)
+	if is_instance_valid(highlighted):
+		highlighted.set_mode(RigidBody.MODE_RIGID)
+		highlighted.disconnect("tree_exiting", self, "release")
+		emit_signal("grab_released", highlighted)
 	if audio_release:
 		audio_release.play()

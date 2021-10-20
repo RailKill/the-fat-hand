@@ -9,6 +9,7 @@ height = 0.382891
 [node name="BigCupcake" type="RigidBody" groups=[
 "ingredient",
 ]]
+collision_layer = 5
 linear_damp = 1.0
 angular_damp = 1.0
 

@@ -9,6 +9,7 @@ radius = 1.7864
 "ingredient",
 "vegetable",
 ]]
+collision_layer = 5
 
 [node name="cabbage" parent="." instance=ExtResource( 1 )]
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -1.29629, 0 )
