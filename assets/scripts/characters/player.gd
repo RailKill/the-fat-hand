@@ -151,15 +151,18 @@ func is_on_ground():
 
 # Move player according to input. Returns true if direction was pressed.
 func move():
-	var is_moving = false
+	var motion = Vector3.ZERO
 	# Add velocity depending on directional input.
 	for vector in DIRECTIONS:
 		if Input.is_action_pressed(vector):
-			is_moving = true
-			velocity += DIRECTIONS[vector] * (move_speed / 5 + inertia)
-			velocity.x = clamp(velocity.x, -move_speed, move_speed)
-			velocity.z = clamp(velocity.z, -move_speed, move_speed)
-	return is_moving
+			motion += DIRECTIONS[vector] * (move_speed * inertia)
+	var horizontal = velocity * (Vector3.RIGHT + Vector3.BACK)
+	var vertical = velocity * Vector3.UP
+	if (horizontal + motion).length() > move_speed:
+		velocity = motion.normalized() * move_speed + vertical
+	else:
+		velocity = horizontal + motion + vertical
+	return motion
 
 
 # Simulate gravity and falling velocity of the player given delta time passed.
