@@ -94,12 +94,21 @@ func test_death():
 			child.queue_free()
 
 
-func test_disable_prevents_movement_input():
+func test_disable():
+	player.hand.is_enabled = true
+	player.grabber.is_active = true
+	var highlighted = Spatial.new()
+	player.grabber.highlighted = highlighted
 	player.disable()
 	Utility.simulate_action("ui_up")
 	yield(until_timeout(0.25), YIELD)
 	Utility.simulate_action("ui_up", false)
-	asserts.is_equal(player.global_transform.origin, Vector3.ZERO)
+	asserts.is_equal(player.global_transform.origin, Vector3.ZERO, 
+			"movement input prevented")
+	asserts.is_false(player.hand.is_enabled, "hand controller disabled")
+	asserts.is_false(player.grabber.is_active, "grabber disabled")
+	asserts.is_null(player.grabber.highlighted, "grab highlights cleared")
+	highlighted.queue_free()
 
 
 func test_fall_gravity_is_normal():

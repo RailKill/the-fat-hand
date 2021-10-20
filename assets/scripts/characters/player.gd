@@ -123,7 +123,10 @@ func die():
 func disable():
 	is_controllable = false
 	hand.is_enabled = false
+	if grabber.is_grabbing and grabber.highlighted:
+		grabber.release()
 	grabber.is_active = false
+	grabber.clear()
 
 
 # Drop given item or article of clothing that this player posseses.

@@ -32,10 +32,11 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("grab") and highlighted and not is_grabbing:
-		grab()
-	elif event.is_action_released("grab") and is_grabbing:
-		release()
+	if is_active:
+		if event.is_action_pressed("grab") and highlighted and not is_grabbing:
+			grab()
+		elif event.is_action_released("grab") and is_grabbing:
+			release()
 
 
 func _physics_process(_delta):
