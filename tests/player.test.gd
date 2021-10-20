@@ -35,8 +35,8 @@ func pre():
 		var fshape = BoxShape.new()
 		fshape.extents = Vector3(1.2, 0.2, 0.5)
 		var foothold = Utility.add_child_to(player, Area.new(), "Foothold")
-		Utility.add_child_to(foothold, CollisionShape.new()).shape = fshape
 		foothold.translate(Vector3(0, -0.385, 0))
+		Utility.add_child_to(foothold, CollisionShape.new()).shape = fshape
 
 		# Construct hand controller double.
 		var hand = Utility.add_child_to(
@@ -67,6 +67,12 @@ func pre():
 	
 	add_child(player)
 
+
+func test_dampen():
+	player.inertia = 0.1
+	player.velocity = Vector3(10, 10, 10)
+	player.dampen()
+	asserts.is_equal(player.velocity, Vector3(9, 10, 9))
 
 
 func test_death():
@@ -121,10 +127,10 @@ func test_fall_gravity_is_normal():
 
 func test_movement_on_flat_surface():
 	parameters([["direction", "action", "axis", "expected"], 
-			["forward", "ui_up", "z", -10],
-			["back", "ui_down", "z", 10],
-			["left", "ui_left", "x", -10],
-			["right", "ui_right", "x", 10]])
+			["forward", "ui_up", "z", -8],
+			["back", "ui_down", "z", 8],
+			["left", "ui_left", "x", -8],
+			["right", "ui_right", "x", 8]])
 	
 	# Setup a flat surface for the player to walk.
 	var ground = CSGBox.new()
@@ -133,7 +139,7 @@ func test_movement_on_flat_surface():
 	ground.depth = 100
 	ground.use_collision = true
 	add_child(ground)
-	ground.translate(Vector3.DOWN * ground.height / 2)
+	ground.translate(Vector3.DOWN * ground.height)
 	
 	# Simulate directional controls.
 	Utility.simulate_action(p["action"])
@@ -152,6 +158,13 @@ func test_movement_on_flat_surface():
 			"%s: did not fall through floor" % p["direction"])
 	
 	ground.queue_free()
+
+
+func test_suspend():
+	player.gravity_vector = Vector3.DOWN
+	player.velocity = Vector3(10, 10, 10)
+	player.suspend()
+	asserts.is_equal(player.velocity, Vector3(10, 0, 10))
 
 
 func post():

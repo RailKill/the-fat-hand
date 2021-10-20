@@ -11,6 +11,8 @@ const DIRECTIONS = {
 	"ui_right": Vector3.RIGHT
 }
 
+# Start-stop dampening of movement.
+export var inertia = 0.2
 # Jump strength.
 export var jump_strength = 20
 # Movement speed.
@@ -67,12 +69,8 @@ func _ready():
 
 
 func _physics_process(delta):
-	# Simulate gravity.
-	if is_on_ground() and jump_delay.is_stopped():
-		suspend()
-	else:
-		velocity += gravity_vector * gravity_magnitude * delta
-	
+	simulate_gravity(delta)
+	dampen()
 	if (is_controllable):
 		# Handle jumping.
 		if Input.is_action_pressed("jump") and is_on_ground() \
@@ -95,6 +93,12 @@ func _physics_process(delta):
 	# A way for the player to kill themselves.
 	if Input.is_action_just_pressed("ui_cancel"):
 		die()
+
+
+# Dampen xz movement using inertia.
+func dampen():
+	velocity.x = lerp(velocity.x, 0, inertia)
+	velocity.z = lerp(velocity.z, 0, inertia)
 
 
 # Handle player death and spawn a corpse.
@@ -145,21 +149,23 @@ func is_on_ground():
 
 # Move player according to input. Returns true if direction was pressed.
 func move():
-	# Preserve jump/fall velocity.
-	var vertical = velocity.y
 	var is_moving = false
-	
 	# Add velocity depending on directional input.
-	velocity = Vector3()
 	for vector in DIRECTIONS:
 		if Input.is_action_pressed(vector):
 			is_moving = true
-			velocity += DIRECTIONS[vector] * move_speed
-	
-	# Restore jump/fall velocity.
-	velocity.y = vertical
-	
+			velocity += DIRECTIONS[vector] * (move_speed / 5 + inertia)
+			velocity.x = clamp(velocity.x, -move_speed, move_speed)
+			velocity.z = clamp(velocity.z, -move_speed, move_speed)
 	return is_moving
+
+
+# Simulate gravity and falling velocity of the player given delta time passed.
+func simulate_gravity(delta):
+	if is_on_ground() and jump_delay.is_stopped():
+		suspend()
+	else:
+		velocity += gravity_vector * gravity_magnitude * delta
 
 
 # Suspends the player's gravity by zeroing the falling velocity.

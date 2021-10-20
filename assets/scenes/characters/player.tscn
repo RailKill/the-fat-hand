@@ -45,7 +45,7 @@ animation = "run-loop"
 [sub_resource type="AnimationNodeTimeScale" id=12]
 
 [sub_resource type="AnimationNodeBlendTree" id=13]
-graph_offset = Vector2( 254, 38.5 )
+graph_offset = Vector2( 54, -105 )
 nodes/Biggify/node = SubResource( 5 )
 nodes/Biggify/position = Vector2( 140, -40 )
 nodes/Fattening/node = SubResource( 6 )
@@ -108,10 +108,10 @@ bones/8/bound_children = [ NodePath("BoneAttachment4") ]
 bones/10/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2"), NodePath("BoneAttachment3") ]
 
 [node name="BoneAttachment" parent="Model/DinoBones/Skeleton" index="0"]
-transform = Transform( 1, -8.29017e-05, -4.9241e-05, -4.91949e-05, 0.000587955, -1, 8.29371e-05, 1, 0.000587985, 0.00599444, 4.27756, 0.0588133 )
+transform = Transform( 1, -0.000144212, -8.58096e-05, -8.56628e-05, 0.00102276, -0.999999, 0.000144301, 0.999999, 0.00102278, 0.00350228, 4.28125, 0.0964043 )
 
 [node name="BoneAttachment2" parent="Model/DinoBones/Skeleton" index="1"]
-transform = Transform( 1, -8.29017e-05, -4.9241e-05, -4.91949e-05, 0.000587955, -1, 8.29371e-05, 1, 0.000587985, 0.00599444, 4.27756, 0.0588133 )
+transform = Transform( 1, -0.000144212, -8.58096e-05, -8.56628e-05, 0.00102276, -0.999999, 0.000144301, 0.999999, 0.00102278, 0.00350228, 4.28125, 0.0964043 )
 
 [node name="EyesPain" parent="Model/DinoBones/Skeleton/BoneAttachment2" index="0"]
 visible = false
@@ -124,7 +124,7 @@ override_tip_basis = false
 target_node = NodePath("../../../../HandControl/Target")
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="Model/DinoBones/Skeleton" index="5"]
-transform = Transform( 1, -8.29017e-05, -4.9241e-05, -4.91949e-05, 0.000587955, -1, 8.29371e-05, 1, 0.000587985, 0.00599444, 4.27756, 0.0588133 )
+transform = Transform( 1, -0.000144212, -8.58096e-05, -8.56628e-05, 0.00102276, -0.999999, 0.000144301, 0.999999, 0.00102278, 0.00350228, 4.28125, 0.0964043 )
 bone_name = "Head"
 
 [node name="Glasses" parent="Model/DinoBones/Skeleton/BoneAttachment3" instance=ExtResource( 4 )]
@@ -136,7 +136,7 @@ mass = 0.005
 sleeping = true
 
 [node name="BoneAttachment4" type="BoneAttachment" parent="Model/DinoBones/Skeleton" index="6"]
-transform = Transform( -0.789452, -0.210288, 1.82553, 1.83029, 0.0870809, 0.801542, -0.163762, 1.98701, 0.158071, -3.14337, 2.61931, 0.670023 )
+transform = Transform( -0.802615, -0.176036, 1.82341, 1.82815, 0.0501437, 0.809542, -0.116971, 1.99161, 0.140787, -3.13803, 2.59466, 0.687474 )
 bone_name = "Hand.R"
 
 [node name="Grabber" type="Area" parent="Model/DinoBones/Skeleton/BoneAttachment4"]
