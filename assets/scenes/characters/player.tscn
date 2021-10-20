@@ -108,10 +108,10 @@ bones/8/bound_children = [ NodePath("BoneAttachment4") ]
 bones/10/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2"), NodePath("BoneAttachment3") ]
 
 [node name="BoneAttachment" parent="Model/DinoBones/Skeleton" index="0"]
-transform = Transform( 1, -0.000144212, -8.58096e-05, -8.56628e-05, 0.00102276, -0.999999, 0.000144301, 0.999999, 0.00102278, 0.00350228, 4.28125, 0.0964043 )
+transform = Transform( 1, -2.21992e-05, -1.30687e-05, -1.30656e-05, 0.000157431, -1, 2.2203e-05, 1, 0.000157535, 0.00152924, 4.28322, 0.127496 )
 
 [node name="BoneAttachment2" parent="Model/DinoBones/Skeleton" index="1"]
-transform = Transform( 1, -0.000144212, -8.58096e-05, -8.56628e-05, 0.00102276, -0.999999, 0.000144301, 0.999999, 0.00102278, 0.00350228, 4.28125, 0.0964043 )
+transform = Transform( 1, -2.21992e-05, -1.30687e-05, -1.30656e-05, 0.000157431, -1, 2.2203e-05, 1, 0.000157535, 0.00152924, 4.28322, 0.127496 )
 
 [node name="EyesPain" parent="Model/DinoBones/Skeleton/BoneAttachment2" index="0"]
 visible = false
@@ -124,7 +124,7 @@ override_tip_basis = false
 target_node = NodePath("../../../../HandControl/Target")
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="Model/DinoBones/Skeleton" index="5"]
-transform = Transform( 1, -0.000144212, -8.58096e-05, -8.56628e-05, 0.00102276, -0.999999, 0.000144301, 0.999999, 0.00102278, 0.00350228, 4.28125, 0.0964043 )
+transform = Transform( 1, -2.21992e-05, -1.30687e-05, -1.30656e-05, 0.000157431, -1, 2.2203e-05, 1, 0.000157535, 0.00152924, 4.28322, 0.127496 )
 bone_name = "Head"
 
 [node name="Glasses" parent="Model/DinoBones/Skeleton/BoneAttachment3" instance=ExtResource( 4 )]
@@ -136,7 +136,7 @@ mass = 0.005
 sleeping = true
 
 [node name="BoneAttachment4" type="BoneAttachment" parent="Model/DinoBones/Skeleton" index="6"]
-transform = Transform( -0.802615, -0.176036, 1.82341, 1.82815, 0.0501437, 0.809542, -0.116971, 1.99161, 0.140787, -3.13803, 2.59466, 0.687474 )
+transform = Transform( -0.818849, -0.130307, 1.82003, 1.82314, 0.0237461, 0.821948, -0.0751626, 1.99561, 0.109062, -3.13155, 2.56743, 0.704939 )
 bone_name = "Hand.R"
 
 [node name="Grabber" type="Area" parent="Model/DinoBones/Skeleton/BoneAttachment4"]

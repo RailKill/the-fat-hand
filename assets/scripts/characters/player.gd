@@ -86,7 +86,9 @@ func _physics_process(delta):
 			# Fix hand roll based on player model rotation.
 			hand.fix_roll(model.rotation.y)
 		
-		velocity = move_and_slide(velocity, Vector3.UP)
+		# Vector3.DOWN is treated as UP in move_and_slide() to prevent
+		# flying off steep slopes.
+		velocity = move_and_slide(velocity, Vector3.DOWN)
 		animation_tree.set("parameters/Movement/add_amount",
 				velocity.length() / move_speed)
 	
@@ -144,7 +146,7 @@ func drop(item):
 
 # Checks if the player is on the ground or on some object.
 func is_on_ground():
-	return foothold.get_overlapping_bodies().size() > 0 or is_on_floor()
+	return foothold.get_overlapping_bodies().size() > 0 or is_on_ceiling()
 
 
 # Move player according to input. Returns true if direction was pressed.
