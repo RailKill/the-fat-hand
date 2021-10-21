@@ -16,6 +16,8 @@ var highlighted = null
 var is_active = true
 # If true, the highlighted body will be under the zone's control.
 var is_grabbing = false
+# Material used for highlighting.
+var material = preload("res://assets/resources/highlight_material.tres")
 # Dictionary containing the original MeshInstance as the key, and the
 # generated outline MeshInstance as its value.
 var outlines = {}
@@ -66,7 +68,11 @@ func _outline(node):
 	for child in node.get_children():
 		if child is MeshInstance:
 			var outline = MeshInstance.new()
-			outline.mesh = child.mesh.create_outline(0.1)
+			var size = child.global_transform.basis.get_scale().length()
+			var margin = 0.05 / (pow(10, size / 10) if size < 25 else size * 8)
+			outline.mesh = child.mesh.create_outline(size * margin)
+			outline.cast_shadow = GeometryInstance.SHADOW_CASTING_SETTING_OFF
+			outline.material_override = material
 			outlines[child] = outline
 		_outline(child)
 
