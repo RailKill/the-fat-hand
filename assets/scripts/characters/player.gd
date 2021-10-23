@@ -49,15 +49,19 @@ onready var foothold = $Foothold
 onready var grabber = $Model/DinoBones/Skeleton/BoneAttachment4/Grabber
 # Controller of the fat hand for punching.
 onready var hand = $HandControl
+# Hand skeleton inverse kinematics.
+onready var ik = $Model/DinoBones/Skeleton/SkeletonIK
 # Player model.
 onready var model = $Model
+
+onready var audio_jump = get_node_or_null("Foothold/AudioJump")
 
 
 func _ready():
 	# Perform throw if grab is released.
 	grabber.connect("grab_released", self, "throw")
 	# Start inverse kinematics for the fat hand.
-	$Model/DinoBones/Skeleton/SkeletonIK.start()
+	ik.start()
 	# Needed to call this on ready to fix the hand rotation right away.
 	hand.fix_roll(model.rotation.y)
 	
@@ -75,9 +79,7 @@ func _physics_process(delta):
 		# Handle jumping.
 		if Input.is_action_pressed("jump") and is_on_ground() \
 				and jump_delay.time_left == 0:
-			jump_delay.start()
-			suspend()
-			velocity += -gravity_vector * jump_strength
+			jump()
 		
 		if move():
 			# Face model towards direction of movement.
@@ -127,6 +129,7 @@ func die():
 
 # Stops player control.
 func disable():
+	ik.stop()
 	is_controllable = false
 	hand.is_enabled = false
 	if grabber.is_grabbing and grabber.highlighted:
@@ -144,9 +147,28 @@ func drop(item):
 	throw(item, velocity)
 
 
+# Regain player control.
+func enable():
+	ik.start()
+	is_controllable = true
+	hand.is_enabled = true
+	grabber.is_active = true
+
+
 # Checks if the player is on the ground or on some object.
 func is_on_ground():
 	return foothold.get_overlapping_bodies().size() > 0 or is_on_ceiling()
+
+
+# Launches the player upward.
+func jump():
+	jump_delay.start()
+	suspend()
+	velocity += -gravity_vector * jump_strength
+	if not animation_tree.get("parameters/Jumping/active"):
+		animation_tree.set("parameters/Jumping/active", true)
+		animation_tree.set("parameters/Air/conditions/landed", false)
+	audio_jump.play()
 
 
 # Move player according to input. Returns true if direction was pressed.
@@ -169,6 +191,9 @@ func move():
 func simulate_gravity(delta):
 	if is_on_ground() and jump_delay.is_stopped():
 		suspend()
+		# Play landing animation if player was jumping.
+		if animation_tree.get("parameters/Jumping/active"):
+			animation_tree.set("parameters/Air/conditions/landed", true)
 	else:
 		velocity += gravity_vector * gravity_magnitude * delta
 
