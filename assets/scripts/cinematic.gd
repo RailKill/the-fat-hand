@@ -22,13 +22,13 @@ func _ready():
 		connect("animation_finished", self, "done")
 		
 		$Cinemacam.current = true
-		player.is_controllable = false
+		player.disable()
 		play("Begin")
 		global.play(level_number)
 		
 		# TODO: Terrible coding, had to rush. Generalize this in future.
 		if play_pain:
-			player.animation_tree["parameters/PainOneShot/active"] = true
+			player.animation_tree["parameters/PainEmote/active"] = true
 			player.toggle_pain_eyes(true)
 	else:
 		done("Begin")
@@ -37,6 +37,6 @@ func _ready():
 func done(_name):
 	# Start countdown timer and make player controllable.
 	get_node(countdown_path).start()
-	player.is_controllable = true
+	player.enable()
 	player.toggle_pain_eyes(false)
 	queue_free()

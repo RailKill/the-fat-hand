@@ -9,6 +9,7 @@ radius = 1.95321
 "ingredient",
 "pizza",
 ]]
+collision_layer = 5
 mass = 3.0
 linear_damp = 1.0
 

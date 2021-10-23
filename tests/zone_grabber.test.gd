@@ -126,6 +126,7 @@ func test_outline_recursion():
 
 func test_release():
 	var highlighted = RigidBody.new()
+	highlighted.connect("tree_exiting", grabber, "release")
 	grabber.highlighted = highlighted
 	watch(grabber, "grab_released")
 	grabber.release()

@@ -16,6 +16,8 @@ var highlighted = null
 var is_active = true
 # If true, the highlighted body will be under the zone's control.
 var is_grabbing = false
+# Material used for highlighting.
+var material = preload("res://assets/resources/highlight_material.tres")
 # Dictionary containing the original MeshInstance as the key, and the
 # generated outline MeshInstance as its value.
 var outlines = {}
@@ -32,10 +34,11 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("grab") and highlighted and not is_grabbing:
-		grab()
-	elif event.is_action_released("grab") and is_grabbing:
-		release()
+	if is_active:
+		if event.is_action_pressed("grab") and highlighted and not is_grabbing:
+			grab()
+		elif event.is_action_released("grab") and is_grabbing:
+			release()
 
 
 func _physics_process(_delta):
@@ -65,7 +68,11 @@ func _outline(node):
 	for child in node.get_children():
 		if child is MeshInstance:
 			var outline = MeshInstance.new()
-			outline.mesh = child.mesh.create_outline(0.1)
+			var size = child.global_transform.basis.get_scale().length()
+			var margin = 0.05 / (pow(10, size / 10) if size < 25 else size * 8)
+			outline.mesh = child.mesh.create_outline(size * margin)
+			outline.cast_shadow = GeometryInstance.SHADOW_CASTING_SETTING_OFF
+			outline.material_override = material
 			outlines[child] = outline
 		_outline(child)
 
@@ -107,6 +114,7 @@ func get_closest(bodies = get_overlapping_bodies(),
 func grab():
 	is_grabbing = true
 	highlighted.set_mode(RigidBody.MODE_CHARACTER)
+	highlighted.connect("tree_exiting", self, "release")
 	emit_signal("grab_applied", 1.5708)
 	if audio_grab:
 		audio_grab.play()
@@ -124,7 +132,9 @@ func highlight(body):
 # Release grab of the highlighted body.
 func release():
 	is_grabbing = false
-	highlighted.set_mode(RigidBody.MODE_RIGID)
-	emit_signal("grab_released", highlighted)
+	if is_instance_valid(highlighted):
+		highlighted.set_mode(RigidBody.MODE_RIGID)
+		highlighted.disconnect("tree_exiting", self, "release")
+		emit_signal("grab_released", highlighted)
 	if audio_release:
 		audio_release.play()

@@ -9,6 +9,7 @@ height = 1.14
 [node name="BigDonut" type="RigidBody" groups=[
 "ingredient",
 ]]
+collision_layer = 5
 
 [node name="donutSprinkles" parent="." instance=ExtResource( 1 )]
 transform = Transform( 12, 0, 0, 0, 12, 0, 0, 0, 12, 0, -0.52633, 0 )

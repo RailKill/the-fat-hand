@@ -7,6 +7,7 @@ radius = 2.82491
 height = 1.31444
 
 [node name="Pizza" type="RigidBody"]
+collision_layer = 5
 
 [node name="pizza" parent="." instance=ExtResource( 1 )]
 transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0 )

@@ -10,6 +10,7 @@ height = 3.52618
 "ingredient",
 "pizza",
 ]]
+collision_layer = 5
 mass = 5.0
 linear_damp = 2.0
 

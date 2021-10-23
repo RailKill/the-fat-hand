@@ -9,6 +9,7 @@ height = 3.74918
 [node name="HotDog" type="RigidBody" groups=[
 "ingredient",
 ]]
+collision_layer = 5
 
 [node name="hotDog" parent="." instance=ExtResource( 1 )]
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -0.835636, 0 )

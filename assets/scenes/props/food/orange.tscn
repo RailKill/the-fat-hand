@@ -8,6 +8,7 @@ radius = 1.66
 [node name="BigOrange" type="RigidBody" groups=[
 "ingredient",
 ]]
+collision_layer = 5
 
 [node name="orange" parent="." instance=ExtResource( 1 )]
 transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -1.42304, 0 )
