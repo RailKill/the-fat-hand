@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "RigidBody",
+"class": "BoundedBody",
+"language": "GDScript",
+"path": "res://assets/scripts/props/bounded.gd"
+}, {
 "base": "Control",
 "class": "GameOver",
 "language": "GDScript",
@@ -18,6 +23,11 @@ _global_script_classes=[ {
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://addons/godot-git-plugin/git_api.gdns"
+}, {
+"base": "Node",
+"class": "GlobalConfiguration",
+"language": "GDScript",
+"path": "res://assets/scripts/global.gd"
 }, {
 "base": "Spatial",
 "class": "HandController",
@@ -49,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/WAT/test/test.gd"
 }, {
+"base": "Area",
+"class": "ZoneBounds",
+"language": "GDScript",
+"path": "res://assets/scripts/zone_bounds.gd"
+}, {
 "base": "ZoneVictory",
 "class": "ZoneConsume",
 "language": "GDScript",
@@ -65,14 +80,17 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/zone_victory.gd"
 } ]
 _global_script_class_icons={
+"BoundedBody": "",
 "GameOver": "",
 "GitAPI": "",
+"GlobalConfiguration": "",
 "HandController": "",
 "Level": "",
 "Player": "",
 "Utility": "",
 "WAT": "",
 "WATTest": "",
+"ZoneBounds": "",
 "ZoneConsume": "",
 "ZoneGrabber": "",
 "ZoneVictory": ""
@@ -178,6 +196,7 @@ jump={
 3d_physics/layer_1="environment"
 3d_physics/layer_2="character"
 3d_physics/layer_3="grabbable"
+3d_physics/layer_4="boundary"
 
 [physics]
 

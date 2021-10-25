@@ -82,4 +82,4 @@ nodes/Run/position = Vector2( 340, 40 )
 nodes/TimeScale/node = SubResource( 16 )
 nodes/TimeScale/position = Vector2( 540, 180 )
 nodes/output/position = Vector2( 1480, 100 )
-node_connections = [ "output", 0, "Fattening", "Jumping", 0, "PainEmote", "Jumping", 1, "Air", "Fattening", 0, "Jumping", "Fattening", 1, "Biggify", "Movement", 0, "Idle", "Movement", 1, "Run", "TimeScale", 0, "Pain", "PainEmote", 0, "Movement", "PainEmote", 1, "TimeScale" ]
+node_connections = [ "output", 0, "Fattening", "Jumping", 0, "PainEmote", "Jumping", 1, "Air", "Movement", 0, "Idle", "Movement", 1, "Run", "TimeScale", 0, "Pain", "PainEmote", 0, "Movement", "PainEmote", 1, "TimeScale", "Fattening", 0, "Jumping", "Fattening", 1, "Biggify" ]

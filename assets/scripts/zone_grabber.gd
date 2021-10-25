@@ -59,6 +59,10 @@ func _on_body_entered(_body):
 
 func _on_body_exited(body):
 	count -= 1
+	# Release grab check, must happen first.
+	if body == highlighted:
+		release()
+	# Then do clear highlights check.
 	if not count or body == highlighted:
 		clear()
 
@@ -131,10 +135,11 @@ func highlight(body):
 
 # Release grab of the highlighted body.
 func release():
-	is_grabbing = false
-	if is_instance_valid(highlighted):
-		highlighted.set_mode(RigidBody.MODE_RIGID)
-		highlighted.disconnect("tree_exiting", self, "release")
-		emit_signal("grab_released", highlighted)
-	if audio_release:
-		audio_release.play()
+	if is_grabbing:
+		is_grabbing = false
+		if is_instance_valid(highlighted):
+			highlighted.set_mode(RigidBody.MODE_RIGID)
+			highlighted.disconnect("tree_exiting", self, "release")
+			emit_signal("grab_released", highlighted)
+		if audio_release:
+			audio_release.play()
