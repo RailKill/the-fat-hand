@@ -1,4 +1,3 @@
-class_name GlobalConfiguration
 extends Node
 # Global game configuration.
 

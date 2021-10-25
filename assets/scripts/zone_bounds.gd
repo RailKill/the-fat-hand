@@ -6,9 +6,8 @@ extends Area
 func _ready():
 	# warning-ignore:return_value_discarded
 	connect("body_exited", self, "_on_body_exited")
-	collision_layer = GlobalConfiguration.BOUNDARY_LAYER
-	collision_mask = GlobalConfiguration.GRABBABLE_LAYER + \
-			GlobalConfiguration.ENVIRONMENT_LAYER
+	collision_layer = Global.BOUNDARY_LAYER
+	collision_mask = Global.GRABBABLE_LAYER + Global.ENVIRONMENT_LAYER
 
 
 func _on_body_exited(body):
@@ -19,5 +18,5 @@ func _on_body_exited(body):
 		var space_state = get_world().direct_space_state
 		var result = space_state.intersect_ray(body.global_transform.origin, 
 				global_transform.origin, [], 
-				GlobalConfiguration.BOUNDARY_LAYER, false, true)
+				Global.BOUNDARY_LAYER, false, true)
 		body.set_exit(result, body.linear_velocity)

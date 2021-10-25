@@ -24,11 +24,6 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://addons/godot-git-plugin/git_api.gdns"
 }, {
-"base": "Node",
-"class": "GlobalConfiguration",
-"language": "GDScript",
-"path": "res://assets/scripts/global.gd"
-}, {
 "base": "Spatial",
 "class": "HandController",
 "language": "GDScript",
@@ -83,7 +78,6 @@ _global_script_class_icons={
 "BoundedBody": "",
 "GameOver": "",
 "GitAPI": "",
-"GlobalConfiguration": "",
 "HandController": "",
 "Level": "",
 "Player": "",
