@@ -127,10 +127,10 @@ func test_fall_gravity_is_normal():
 
 func test_movement_on_flat_surface():
 	parameters([["direction", "action", "axis", "expected"], 
-			["forward", "ui_up", "z", -8],
-			["back", "ui_down", "z", 8],
-			["left", "ui_left", "x", -8],
-			["right", "ui_right", "x", 8]])
+			["forward", "ui_up", "z", -7],
+			["back", "ui_down", "z", 7],
+			["left", "ui_left", "x", -7],
+			["right", "ui_right", "x", 7]])
 	
 	# Setup a flat surface for the player to walk.
 	var ground = CSGBox.new()
