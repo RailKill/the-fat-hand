@@ -8,7 +8,7 @@ export(AudioStream) var level_music
 
 
 func _ready():
-	var player = get_node("/root/Global").music_player
+	var player = Global.music_player
 	if player.stream != level_music or not player.playing:
 		player.stream = level_music
 		player.play()

@@ -50,7 +50,7 @@ func _on_body_entered(body):
 			if goods_consumed >= required_consumption:
 				._on_body_entered(get_node(player_path))
 				# TODO: Generalize this...
-				get_node("/root/Global").number_of_wins += 1
+				Global.number_of_wins += 1
 		elif body.is_in_group("vegetable"):
 			# ignore veggies
 			good_player.play()
