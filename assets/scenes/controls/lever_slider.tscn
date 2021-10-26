@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/models/kenney/food_kit/red.material" type="Material" id=5]
 [ext_resource path="res://assets/models/kenney/furniture_kit/metalDark.material" type="Material" id=6]
 [ext_resource path="res://assets/scripts/zone_bounds.gd" type="Script" id=7]
-[ext_resource path="res://assets/scripts/props/bounded.gd" type="Script" id=8]
+[ext_resource path="res://assets/scripts/props/bounded_body.gd" type="Script" id=8]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 2.26856, 1 )

@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "RigidBody",
+"base": "Reference",
 "class": "BoundedBody",
 "language": "GDScript",
-"path": "res://assets/scripts/props/bounded.gd"
+"path": "res://assets/scripts/props/bounded_body.gd"
 }, {
 "base": "Control",
 "class": "GameOver",

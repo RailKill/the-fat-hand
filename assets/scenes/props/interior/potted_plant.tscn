@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/models/kenney/furniture_kit/woodDark.material" type="Material" id=1]
 [ext_resource path="res://assets/models/kenney/furniture_kit/plant.material" type="Material" id=2]
 [ext_resource path="res://assets/models/kenney/furniture_kit/wood.material" type="Material" id=3]
+[ext_resource path="res://assets/scripts/props/bounded_body.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.0420516
@@ -49,6 +50,7 @@ surfaces/0 = {
 }
 
 [node name="PottedPlant" type="RigidBody"]
+script = ExtResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 25, 0, 0, 0, -1.09278e-06, 25, 0, -25, -1.09278e-06, 0, 1.80834, 0 )

@@ -5,7 +5,7 @@ extends RigidBody
 
 
 # NodePath to the bounding play area.
-export(NodePath) var bounds_path = "../PlayArea"
+export(NodePath) var bounds_path = "../../PlayArea"
 
 # ZoneBounds area in which this RigidBody must be inside of.
 var bounds

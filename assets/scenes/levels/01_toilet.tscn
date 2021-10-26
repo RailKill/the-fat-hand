@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/scenes/characters/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scenes/props/interior/crate.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/scripts/levels/level.gd" type="Script" id=17]
 [ext_resource path="res://assets/sounds/music/01_toilet.ogg" type="AudioStream" id=18]
 [ext_resource path="res://assets/scripts/cinematic.gd" type="Script" id=19]
+[ext_resource path="res://assets/scripts/zone_bounds.gd" type="Script" id=20]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.87451, 0.862745, 0.843137, 1 )
@@ -116,6 +117,15 @@ tracks/7/keys = {
 "update": 0,
 "values": [ Vector3( 0, 158.601, 0 ), Vector3( 0, 136.424, 0 ), Vector3( 0, 136.424, 0 ), Vector3( -38.151, -157.704, 0.887 ), Vector3( -50.353, -116.046, 8.537 ), Vector3( -12.897, -94.323, 11.211 ), Vector3( -27.5309, -22.8182, 2.96124 ), Vector3( -29.157, -2.559, -0.597 ), Vector3( -65.514, -3.47, 3.071 ), Vector3( -39.823, 17.921, 0.172 ), Vector3( -39.823, 26.704, 0.172 ) ]
 }
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 11.405, 8.80101, 29.7342 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 87.1379, 8.8, 15.0704 )
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 18.8312, 8.8, 65.8237 )
 
 [node name="LevelToilet" type="Spatial"]
 script = ExtResource( 17 )
@@ -470,5 +480,21 @@ level_number = 1
 [node name="Cinemacam" type="Camera" parent="Cinematic"]
 transform = Transform( 0.947778, -0.205921, 0.243543, 0.00230155, 0.76802, 0.640422, -0.318922, -0.606417, 0.728387, 126.643, 8.34, -170.859 )
 fov = 60.0
+
+[node name="PlayArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.2845, 3.57159 )
+script = ExtResource( 20 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.5206, 0, 14.9186 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="PlayArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54.404, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="PlayArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.196, 0, -80.7459 )
+shape = SubResource( 7 )
 
 [connection signal="expired" from="Countdown" to="Player" method="die"]
