@@ -22,11 +22,23 @@ func _ready():
 
 func _integrate_forces(state):
 	if exit_point and is_instance_valid(bounds):
-		state.transform.origin = exit_point["position"] + \
+		state.transform.origin = conform(exit_point["position"] + \
 			global_transform.origin.distance_to(exit_point["position"]) * \
-			exit_point["position"].direction_to(global_transform.origin) / 2
+			exit_point["position"].direction_to(global_transform.origin) / 2)
 		state.linear_velocity = exit_velocity.bounce(exit_point["normal"])
 		reset()
+
+
+# Conform a given vector to axis lock.
+func conform(vector):
+	var conformed = vector
+	if axis_lock_linear_x:
+		conformed.x = global_transform.origin.x
+	if axis_lock_linear_y:
+		conformed.y = global_transform.origin.y
+	if axis_lock_linear_z:
+		conformed.z = global_transform.origin.z
+	return conformed
 
 
 # Resets bounding body if it is inside the bounding area.

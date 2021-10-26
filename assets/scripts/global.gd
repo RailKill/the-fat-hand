@@ -11,6 +11,11 @@ const GRABBABLE_LAYER = 4
 # Bit value of the boundary collision layer.
 const BOUNDARY_LAYER = 8
 
+# Bus ID for the Music audio channel.
+const MUSIC_BUS = 1
+# Bus ID for the Sound Effects audio channel.
+const SFX_BUS = 2
+
 # Checks if the game is set to fullscreen option.
 var is_fullscreen = false
 # Number of pizzas to generate in main menu.
