@@ -49,6 +49,6 @@ func reset():
 
 
 # Sets the collision point where this bounded body exits its bounded area.
-func set_exit(collision, velocity = linear_velocity):
+func set_exit(collision, velocity):
 	exit_point = collision
 	exit_velocity = velocity
