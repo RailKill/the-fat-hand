@@ -269,7 +269,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0328, 0.658875, 1.62741 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00675, 1.95094, 0.702247 )
 
 [node name="BigDonut" parent="Food" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1323, 0.186408, -19.2289 )
+transform = Transform( 0.999749, -0.0223906, 0, 0.0223906, 0.999749, 0, 0, 0, 1, -20.1323, 0.65801, -19.2289 )
 
 [node name="HotDog" parent="Food" instance=ExtResource( 11 )]
 transform = Transform( 0.0781459, 0, 0.996942, 0, 1, 0, -0.996942, 0, 0.0781459, 23.3102, 0.286385, 23.5966 )

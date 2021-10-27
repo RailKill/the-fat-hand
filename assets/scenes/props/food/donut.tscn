@@ -4,8 +4,8 @@
 [ext_resource path="res://assets/scripts/props/bounded_body.gd" type="Script" id=2]
 
 [sub_resource type="CylinderShape" id=1]
-radius = 1.4
-height = 1.14
+radius = 2.12358
+height = 1.51408
 
 [node name="BigDonut" type="RigidBody" groups=[
 "ingredient",
@@ -17,5 +17,4 @@ script = ExtResource( 2 )
 transform = Transform( 12, 0, 0, 0, 12, 0, 0, 0, 12, 0, -0.52633, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0436695, 0 )
 shape = SubResource( 1 )
