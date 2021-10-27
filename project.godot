@@ -113,6 +113,7 @@ Cache_Tests=true
 config/name="The Fat Hand"
 run/main_scene="res://assets/scenes/levels/00_menu.tscn"
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
