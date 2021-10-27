@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/models/kenney/furniture_kit/metalDark.material" type="Material" id=1]
 [ext_resource path="res://assets/models/kenney/furniture_kit/metal.material" type="Material" id=2]
+[ext_resource path="res://assets/scripts/props/bounded_body.gd" type="Script" id=3]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.237354
@@ -34,6 +35,7 @@ surfaces/1 = {
 }
 
 [node name="Trashcan" type="RigidBody"]
+script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.171962, 0 )

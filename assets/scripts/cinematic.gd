@@ -16,15 +16,14 @@ onready var player = get_node(player_path)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var global = get_node("/root/Global")
-	if not global.cinematic_played[level_number]:
+	if not Global.cinematic_played[level_number]:
 		# warning-ignore:return_value_discarded
 		connect("animation_finished", self, "done")
 		
 		$Cinemacam.current = true
 		player.disable()
 		play("Begin")
-		global.play(level_number)
+		Global.play(level_number)
 		
 		# TODO: Terrible coding, had to rush. Generalize this in future.
 		if play_pain:

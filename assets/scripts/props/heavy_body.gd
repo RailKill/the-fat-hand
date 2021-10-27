@@ -1,4 +1,4 @@
-extends RigidBody
+extends BoundedBody
 # Heavy object that must be damaged by attacks before it becomes a rigidbody.
 
 
@@ -14,7 +14,7 @@ var hit_player
 
 func _ready():
 	collision_layer = 0
-	collision_mask = 3
+	collision_mask = Global.ENVIRONMENT_LAYER + Global.CHARACTER_LAYER
 	area = Area.new()
 	area.connect("body_entered", self, "_on_body_entered")
 	area.add_child($CollisionShape.duplicate())
@@ -46,5 +46,5 @@ func take_damage(amount):
 	
 	if is_destroyed():
 		mode = RigidBody.MODE_RIGID
-		collision_layer = 1
+		collision_layer = Global.ENVIRONMENT_LAYER
 		area.queue_free()

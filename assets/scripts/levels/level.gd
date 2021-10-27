@@ -8,7 +8,13 @@ export(AudioStream) var level_music
 
 
 func _ready():
-	var player = get_node("/root/Global").music_player
+	var player = Global.music_player
 	if player.stream != level_music or not player.playing:
 		player.stream = level_music
 		player.play()
+
+
+# Changes the volume of the given bus index to the given value.
+func adjust_volume(value: float, bus_index: int):
+	AudioServer.set_bus_mute(bus_index, value <= 0)
+	AudioServer.set_bus_volume_db(bus_index, value / 2 - 50)

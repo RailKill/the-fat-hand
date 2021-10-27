@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/models/kenney/furniture_kit/wood.material" type="Material" id=1]
 [ext_resource path="res://assets/models/kenney/furniture_kit/carpet.material" type="Material" id=2]
-[ext_resource path="res://assets/scripts/heavy.gd" type="Script" id=3]
+[ext_resource path="res://assets/scripts/props/heavy_body.gd" type="Script" id=3]
 [ext_resource path="res://assets/sounds/props/impact_soft_01.ogg" type="AudioStream" id=4]
 
 [sub_resource type="ConvexPolygonShape" id=1]

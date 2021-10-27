@@ -126,8 +126,10 @@ func test_outline_recursion():
 
 func test_release():
 	var highlighted = RigidBody.new()
+	highlighted.mode = RigidBody.MODE_CHARACTER
 	highlighted.connect("tree_exiting", grabber, "release")
 	grabber.highlighted = highlighted
+	grabber.is_grabbing = true
 	watch(grabber, "grab_released")
 	grabber.release()
 	asserts.is_false(grabber.is_grabbing, "is_grabbing set to false")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://assets/scenes/characters/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/models/kenney/furniture_kit/metalDark.material" type="Material" id=2]
@@ -24,6 +24,8 @@
 [ext_resource path="res://assets/sounds/music/02_kitchen.ogg" type="AudioStream" id=22]
 [ext_resource path="res://assets/images/poster_pizza.png" type="Texture" id=23]
 [ext_resource path="res://assets/scripts/cinematic.gd" type="Script" id=24]
+[ext_resource path="res://assets/scripts/zone_bounds.gd" type="Script" id=25]
+[ext_resource path="res://assets/scripts/props/bounded_body.gd" type="Script" id=26]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -83,6 +85,9 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 15.0, 12.0, 11.0 ]
 }
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 26, 19, 26 )
 
 [node name="LevelKitchen" type="Spatial"]
 script = ExtResource( 21 )
@@ -246,6 +251,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00203, 6.83429 )
 mass = 10.0
 gravity_scale = 2.0
 linear_damp = 3.0
+script = ExtResource( 26 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Food/Doughball"]
 transform = Transform( 2.24863, 0, 0, 0, 2.24863, 0, 0, 0, 2.24863, 0, 0, 0 )
@@ -280,11 +286,11 @@ mass = 3.0
 linear_damp = 0.5
 
 [node name="BigOrange" parent="Food" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.1872, -0.0565062, 23.5143 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.1872, 0.909276, 23.5143 )
 mass = 2.0
 linear_damp = 1.0
 
-[node name="pear" parent="Food" instance=ExtResource( 15 )]
+[node name="Pear" parent="Food" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3169, 0, -9.97964 )
 
 [node name="BigFish" parent="Food" instance=ExtResource( 10 )]
@@ -320,6 +326,13 @@ level_number = 2
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.9394, 26.4763 )
 projection = 1
 size = 11.0
+
+[node name="PlayArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.6221, 0 )
+script = ExtResource( 25 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayArea"]
+shape = SubResource( 10 )
 
 [connection signal="expired" from="Countdown" to="Player" method="die"]
 [connection signal="consumed_good" from="ZoneConsume" to="Oven/CSGCylinder" method="on"]
