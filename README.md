@@ -55,7 +55,14 @@ are under the [CC0 public domain license](https://creativecommons.org/publicdoma
   | error_003.ogg         | sounds/ui/error_01.ogg          |
   | maximize_003.ogg      | sounds/characters/jump_01.ogg   |
   | select_005.ogg        | sounds/props/grab_01.ogg        |
-  | switch_006.ogg        | sounds/ui/switch_01.ogg         |
+  | switch_006.ogg        | sounds/controls/switch_01.ogg   |
+
+
+- #### [Kenney UI Audio](https://www.kenney.nl/assets/ui-audio)
+
+  | Original              | Renamed                         |
+  | --------------------- | ------------------------------- |
+  | switch2.ogg           | sounds/controls/toggle_01.ogg   |
 
 
 - #### [Level Up, Power Up, Coin Get (13 Sounds) by wobbleboxx](https://opengameart.org/content/level-up-power-up-coin-get-13-sounds)

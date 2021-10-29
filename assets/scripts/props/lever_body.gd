@@ -2,6 +2,10 @@ extends RigidBody
 # Lever knob's physics handler.
 
 
+# Happens when limit is reached or tick is hit, broadcasts state value.
+signal ticked(state)
+
+
 # Local x translation that determines the limit for the lever value.
 export(float) var limit = 3.35
 # Maximum local x position drift from starting position.
@@ -43,8 +47,37 @@ func _integrate_forces(state):
 		is_being_corrected = true
 	
 	# Determine if this body should be sleeping.
-	if not is_being_corrected and (is_limit_passed() or is_on_tick()):
+	if not sleeping and not is_being_corrected and (
+			is_limit_passed() or is_on_tick()):
+		emit_signal("ticked", get_state())
 		sleeping = true
+
+
+# Converts local translation.x into a percentage value between 0 to 100.
+func get_percentage():
+	var adjusted = limit - 1
+	var positivize = translation.x + adjusted
+	return positivize / (adjusted * 2) * 100
+
+
+# Convert local translation.x into a usable state integer starting from 0.
+func get_state():
+	ticks.sort()
+	var states = [-limit] + ticks + [limit]
+	var found = false
+	var current = 0
+	while not found and current < states.size() - 1:
+		var next = states[current] + (states[current + 1] - states[current]) / 2
+		if translation.x > next:
+			current += 1
+		else:
+			found = true
+	return current
+
+
+# Return the total number of possible states.
+func get_state_count():
+	return ticks.size() + 2
 
 
 # Checks if the value limit was passed.
