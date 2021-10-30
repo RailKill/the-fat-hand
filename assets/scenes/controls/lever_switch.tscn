@@ -1,0 +1,114 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/models/railkill/lever/lever_stick.glb" type="PackedScene" id=1]
+[ext_resource path="res://assets/models/kenney/platformer_kit/wood.material" type="Material" id=2]
+[ext_resource path="res://assets/models/kenney/furniture_kit/carpet.material" type="Material" id=3]
+[ext_resource path="res://assets/models/railkill/lever/lever_base.glb" type="PackedScene" id=4]
+[ext_resource path="res://assets/scripts/controls/lever_switch.gd" type="Script" id=5]
+[ext_resource path="res://assets/scripts/controls/lever_body.gd" type="Script" id=6]
+[ext_resource path="res://assets/scripts/props/indicator.gd" type="Script" id=7]
+[ext_resource path="res://assets/models/railkill/lever/arrow.material" type="Material" id=8]
+[ext_resource path="res://assets/sounds/controls/toggle_01.ogg" type="AudioStream" id=9]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 2.22094, 1 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 2.75, 1.38, 1.16 )
+
+[sub_resource type="AudioStreamRandomPitch" id=3]
+audio_stream = ExtResource( 9 )
+
+[node name="LeverSwitch" type="Spatial"]
+script = ExtResource( 5 )
+
+[node name="Knob" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.74641, 0 )
+collision_mask = 0
+script = ExtResource( 6 )
+
+[node name="Stick" parent="Knob" instance=ExtResource( 1 )]
+
+[node name="Head" parent="Knob/Stick" index="0"]
+material/0 = ExtResource( 3 )
+
+[node name="Shaft" parent="Knob/Stick" index="1"]
+material/0 = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Knob"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.26032, 0 )
+shape = SubResource( 1 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06392, 0 )
+collision_layer = 0
+collision_mask = 6
+
+[node name="Base" parent="StaticBody" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0 )
+
+[node name="MidClick" parent="StaticBody/Base" index="1"]
+script = ExtResource( 7 )
+color = Color( 1, 0.65, 0, 1 )
+
+[node name="RightClick" parent="StaticBody/Base" index="2"]
+script = ExtResource( 7 )
+
+[node name="LeftClick" parent="StaticBody/Base" index="3"]
+script = ExtResource( 7 )
+color = Color( 0.701961, 0.129412, 0.129412, 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31, 0 )
+shape = SubResource( 2 )
+
+[node name="HingeJoint" type="HingeJoint" parent="."]
+nodes/node_a = NodePath("../StaticBody")
+nodes/node_b = NodePath("../Knob")
+params/bias = 0.99
+angular_limit/enable = true
+angular_limit/upper = 45.0
+angular_limit/lower = -45.0
+angular_limit/bias = 0.99
+motor/target_velocity = -10.0
+motor/max_impulse = 2.0
+
+[node name="LeftBumper" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.248, 0.228, 0 )
+width = 1.0
+height = 0.5
+material = ExtResource( 8 )
+script = ExtResource( 7 )
+color = Color( 1, 0, 0, 1 )
+
+[node name="Light" type="OmniLight" parent="LeftBumper"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.394687, 0, 0 )
+visible = false
+light_color = Color( 1, 0, 0, 1 )
+light_energy = 12.0
+light_indirect_energy = 6.0
+
+[node name="RightBumper" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.248, 0.228, 0 )
+width = 1.0
+height = 0.5
+material = ExtResource( 8 )
+script = ExtResource( 7 )
+color = Color( 0.678431, 1, 0.180392, 1 )
+
+[node name="Light" type="OmniLight" parent="RightBumper"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.395, 0, 0 )
+visible = false
+light_color = Color( 0.678431, 1, 0.180392, 1 )
+light_energy = 12.0
+light_indirect_energy = 6.0
+
+[node name="AudioLever" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75984, 0 )
+stream = SubResource( 3 )
+unit_db = 12.0
+
+[connection signal="ticked" from="Knob" to="." method="_on_ticked"]
+
+[editable path="Knob/Stick"]
+[editable path="StaticBody/Base"]

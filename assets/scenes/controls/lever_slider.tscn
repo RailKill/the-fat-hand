@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/scripts/controls/lever_slider.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/railkill/lever/lever_stick.glb" type="PackedScene" id=2]
@@ -6,8 +6,7 @@
 [ext_resource path="res://assets/models/kenney/furniture_kit/wood.material" type="Material" id=4]
 [ext_resource path="res://assets/models/kenney/food_kit/red.material" type="Material" id=5]
 [ext_resource path="res://assets/models/kenney/furniture_kit/metalDark.material" type="Material" id=6]
-[ext_resource path="res://assets/scripts/zone_bounds.gd" type="Script" id=7]
-[ext_resource path="res://assets/scripts/props/bounded_body.gd" type="Script" id=8]
+[ext_resource path="res://assets/scripts/controls/lever_body.gd" type="Script" id=7]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 2.26856, 1 )
@@ -15,9 +14,6 @@ extents = Vector3( 1, 2.26856, 1 )
 [sub_resource type="PlaneMesh" id=2]
 material = ExtResource( 6 )
 size = Vector2( 22, 2 )
-
-[sub_resource type="BoxShape" id=3]
-extents = Vector3( 10, 2, 1 )
 
 [node name="LeverSlider" type="Spatial"]
 script = ExtResource( 1 )
@@ -31,8 +27,11 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 linear_damp = 50.0
-script = ExtResource( 8 )
-bounds_path = NodePath("../ControlArea")
+script = ExtResource( 7 )
+limit = 10.5
+max_drift = 11.0
+max_range = 0.0
+ticks = [  ]
 
 [node name="Stick" parent="Knob" instance=ExtResource( 2 )]
 
@@ -69,12 +68,5 @@ material = ExtResource( 6 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27, 2.3166, -7.79 )
 mesh = SubResource( 2 )
 material/0 = null
-
-[node name="ControlArea" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
-script = ExtResource( 7 )
-
-[node name="CollisionShape" type="CollisionShape" parent="ControlArea"]
-shape = SubResource( 3 )
 
 [editable path="Knob/Stick"]

@@ -29,15 +29,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/characters/hand_controller.gd"
 }, {
+"base": "GeometryInstance",
+"class": "Indicator",
+"language": "GDScript",
+"path": "res://assets/scripts/props/indicator.gd"
+}, {
 "base": "Spatial",
 "class": "Level",
 "language": "GDScript",
 "path": "res://assets/scripts/levels/level.gd"
 }, {
+"base": "RigidBody",
+"class": "LeverBody",
+"language": "GDScript",
+"path": "res://assets/scripts/controls/lever_body.gd"
+}, {
 "base": "Spatial",
 "class": "LeverSlider",
 "language": "GDScript",
 "path": "res://assets/scripts/controls/lever_slider.gd"
+}, {
+"base": "Spatial",
+"class": "LeverSwitch",
+"language": "GDScript",
+"path": "res://assets/scripts/controls/lever_switch.gd"
 }, {
 "base": "KinematicBody",
 "class": "Player",
@@ -84,8 +99,11 @@ _global_script_class_icons={
 "GameOver": "",
 "GitAPI": "",
 "HandController": "",
+"Indicator": "",
 "Level": "",
+"LeverBody": "",
 "LeverSlider": "",
+"LeverSwitch": "",
 "Player": "",
 "Utility": "",
 "WAT": "",
@@ -113,6 +131,7 @@ Cache_Tests=true
 config/name="The Fat Hand"
 run/main_scene="res://assets/scenes/levels/00_menu.tscn"
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 

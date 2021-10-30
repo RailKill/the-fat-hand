@@ -2,8 +2,9 @@
 
 [ext_resource path="res://assets/models/kenney/furniture_kit/carpet.material" type="Material" id=1]
 [ext_resource path="res://assets/models/kenney/furniture_kit/metalMedium.material" type="Material" id=2]
-[ext_resource path="res://assets/sounds/ui/switch_01.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/controls/switch_01.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/scripts/controls/button_floor.gd" type="Script" id=4]
+
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.0901961, 0.847059, 0.615686, 1 )
