@@ -1,9 +1,10 @@
+class_name LeverBody
 extends RigidBody
 # Lever knob's physics handler.
 
 
 # Happens when limit is reached or tick is hit, broadcasts state value.
-signal ticked(state)
+signal ticked(state, active)
 
 
 # Local x translation that determines the limit for the lever value.
@@ -23,6 +24,10 @@ onready var front = original.origin.direction_to(to_global(Vector3.FORWARD))
 onready var right = original.origin.direction_to(to_global(Vector3.RIGHT))
 # Global up direction of the lever.
 onready var up = original.origin.direction_to(to_global(Vector3.UP))
+
+
+func _ready():
+	gravity_scale = 0
 
 
 func _integrate_forces(state):
@@ -50,14 +55,11 @@ func _integrate_forces(state):
 	if not sleeping and not is_being_corrected and (
 			is_limit_passed() or is_on_tick()):
 		emit_signal("ticked", get_state())
-		sleeping = true
 
 
 # Converts local translation.x into a percentage value between 0 to 100.
 func get_percentage():
-	var adjusted = limit - 1
-	var positivize = translation.x + adjusted
-	return positivize / (adjusted * 2) * 100
+	return (translation.x + limit) / (limit * 2) * 100
 
 
 # Convert local translation.x into a usable state integer starting from 0.

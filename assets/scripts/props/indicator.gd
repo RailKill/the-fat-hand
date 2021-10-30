@@ -1,3 +1,4 @@
+class_name Indicator
 extends GeometryInstance
 # Just a hacky script to turn a CSGPrimitive or MeshInstance a bright color. 
 # Used as a quick indicator of sorts to notify the player of something.
