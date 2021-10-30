@@ -16,10 +16,12 @@ const CHARACTER_LAYER = 2
 const GRABBABLE_LAYER = 4
 # Bit value of the boundary collision layer.
 const BOUNDARY_LAYER = 8
-# Bus ID for the Music audio channel.
-const MUSIC_BUS = 1
-# Bus ID for the Sound Effects audio channel.
-const SFX_BUS = 2
+# Dictionary of audio bus names and their indices.
+const BUS_DICTIONARY = {
+	0: "master",
+	1: "music",
+	2: "sfx",
+}
 
 # Checks if the game is set to fullscreen option.
 var is_fullscreen = false
@@ -39,6 +41,8 @@ func _ready():
 	var error = options.load(OPTIONS_FILE)
 	if error != OK:
 		set_option("display", "fullscreen", 0)
+		for bus in BUS_DICTIONARY.values():
+			set_option("sound", "%s_volume" % bus, 50)
 	apply_options()
 
 

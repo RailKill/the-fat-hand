@@ -72,6 +72,12 @@ func test_is_on_tick():
 	asserts.is_true(lever_body.is_on_tick())
 
 
+func test_set_percentage():
+	lever_body.limit = 10
+	lever_body.set_percentage(85)
+	asserts.is_equal(lever_body.translation.x, 7)
+
+
 func post():
 	lever_body.queue_free()
 

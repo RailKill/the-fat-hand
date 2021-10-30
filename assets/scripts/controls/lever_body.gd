@@ -93,3 +93,8 @@ func is_on_tick():
 		if round(translation.x) == tick:
 			return true
 	return false
+
+
+# Move to the local x position corresponding to percentage of limit.
+func set_percentage(value):
+	translation.x = value / 100.0 * limit * 2.0 - limit

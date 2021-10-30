@@ -140,6 +140,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.69492, 1.06373, -2.53379 )
 shape = SubResource( 4 )
 
 [connection signal="value_changed" from="MusicSlider" to="." method="adjust_volume" binds= [ 1 ]]
+[connection signal="ready" from="MusicSlider/Knob" to="." method="load_volume" binds= [ 1, "MusicSlider/Knob" ]]
 
 [editable path="MusicSlider"]
 [editable path="MusicSlider/Knob/Stick"]
