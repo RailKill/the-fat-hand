@@ -1,0 +1,149 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://assets/scenes/characters/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/scenes/controls/lever_slider.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/scenes/props/interior/radio_table.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/models/kenney/food_kit/greyLight.material" type="Material" id=4]
+[ext_resource path="res://assets/scenes/controls/button_floor.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/scripts/levels/level.gd" type="Script" id=6]
+[ext_resource path="res://assets/sounds/music/00_menu.ogg" type="AudioStream" id=7]
+[ext_resource path="res://assets/scripts/spawner_pizza.gd" type="Script" id=8]
+[ext_resource path="res://assets/scenes/props/interior/crate.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/scenes/props/interior/crate_big.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/scripts/zone_bounds.gd" type="Script" id=11]
+[ext_resource path="res://assets/scenes/controls/lever_switch.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/scenes/props/interior/television_cabinet.tscn" type="PackedScene" id=13]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+albedo_color = Color( 0.686275, 0.768627, 0.772549, 0.0431373 )
+
+[sub_resource type="ProceduralSky" id=2]
+
+[sub_resource type="Environment" id=3]
+background_mode = 3
+background_sky = SubResource( 2 )
+background_color = Color( 0.529412, 0.505882, 0.505882, 1 )
+ambient_light_color = Color( 0.556863, 0.470588, 0.470588, 1 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 24.4079, 6.78882, 24.701 )
+
+[node name="LevelMenu" type="Spatial"]
+script = ExtResource( 6 )
+level_music = ExtResource( 7 )
+
+[node name="Floor" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.06668, 0, -16.0152 )
+use_collision = true
+width = 52.6364
+depth = 53.2324
+material = ExtResource( 4 )
+
+[node name="Walls" type="CSGCombiner" parent="."]
+use_collision = true
+collision_layer = 0
+collision_mask = 3
+
+[node name="CSGBox" type="CSGBox" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5999, 6.32255, -15.9956 )
+width = 1.31406
+height = 14.6376
+depth = 53.2203
+
+[node name="CSGBox2" type="CSGBox" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.8008, 6.32255, -15.9956 )
+width = 1.31406
+height = 14.6376
+depth = 53.2203
+
+[node name="CSGBox3" type="CSGBox" parent="Walls"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.87729, 6.32255, -42.0774 )
+width = 1.31406
+height = 14.6376
+depth = 53.2203
+
+[node name="CSGBox4" type="CSGBox" parent="Walls"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.87729, 6.32255, 11.2675 )
+width = 1.31406
+height = 14.6376
+depth = 55.3539
+material = SubResource( 1 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="MusicSlider" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66143, 0, -11.157 )
+
+[node name="Knob" parent="MusicSlider" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.94419, 4.092, 0 )
+
+[node name="LeverSwitch" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -12.4943, 7.07629, -41.2177 )
+option_section = "display"
+option_key = "fullscreen"
+
+[node name="Knob" parent="LeverSwitch" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-07, 4.74641, 0 )
+ticks = [  ]
+
+[node name="MidClick" parent="LeverSwitch/StaticBody/Base" index="1"]
+visible = false
+
+[node name="RightClick" parent="LeverSwitch/StaticBody/Base" index="2"]
+visible = false
+
+[node name="LeftClick" parent="LeverSwitch/StaticBody/Base" index="3"]
+visible = false
+
+[node name="HingeJoint" parent="LeverSwitch" index="2"]
+motor/enable = true
+motor/max_impulse = 1.0
+
+[node name="TVCabinet" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.51276, 1.01891, -39.5013 )
+
+[node name="RadioTable" parent="." instance=ExtResource( 3 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.79142, 2.76579, -17.1967 )
+collision_mask = 6
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.828237, -5.44857e-08, -0.560379, 0.463204, 0.562803, 0.684613, 0.315383, -0.826591, 0.466134, 0, 22.5711, -7.43353 )
+light_color = Color( 0.8, 0.752941, 0.666667, 1 )
+shadow_enabled = true
+
+[node name="FloorButton" parent="." instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 26.126, 1.06292, -31.8948 )
+
+[node name="PizzaSpawner" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6559, 6.30707, -0.335064 )
+script = ExtResource( 8 )
+
+[node name="BigCrate" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.67423, 3.0362, -28.0011 )
+bounds_path = NodePath("../PlayArea")
+
+[node name="Crate" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8009, 2.97532, 0.854548 )
+bounds_path = NodePath("../PlayArea")
+
+[node name="PlayArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.732, 7.77782, -13.0455 )
+script = ExtResource( 11 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.69492, 1.06373, -2.53379 )
+shape = SubResource( 4 )
+
+[connection signal="value_changed" from="MusicSlider" to="." method="adjust_volume" binds= [ 1 ]]
+[connection signal="ready" from="MusicSlider/Knob" to="." method="load_volume" binds= [ 1, "MusicSlider/Knob" ]]
+
+[editable path="MusicSlider"]
+[editable path="MusicSlider/Knob/Stick"]
+[editable path="LeverSwitch"]
+[editable path="LeverSwitch/Knob/Stick"]
+[editable path="LeverSwitch/StaticBody/Base"]

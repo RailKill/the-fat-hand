@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/models/kenney/animated_characters/human.glb" type="PackedScene" id=1]
+[ext_resource path="res://assets/scripts/characters/human.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/characters/human_death_01.wav" type="AudioStream" id=3]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 1.4753
+height = 4.67543
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 2, 4.107, 2 )
+
+[node name="Human" type="RigidBody"]
+mass = 7.0
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+linear_damp = 1.0
+angular_damp = 1.0
+script = ExtResource( 2 )
+
+[node name="Model" parent="." instance=ExtResource( 1 )]
+transform = Transform( -2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, -3.6599, 0 )
+
+[node name="AnimationPlayer" parent="Model" index="1"]
+autoplay = "Idle"
+playback_speed = 2.0
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0232368, 0.223302, -1.6974e-07 )
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.343999, 0 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0539317, 0 )
+shape = SubResource( 2 )
+
+[node name="Area" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.397931, 0 )
+shape = SubResource( 2 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 3 )
+unit_size = 3.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_decision"]
+[connection signal="body_entered" from="Area" to="." method="_on_hit"]
+
+[editable path="Model"]

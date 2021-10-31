@@ -1,0 +1,500 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://assets/scenes/characters/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/scenes/props/interior/crate.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/scenes/ui/countdown.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/scenes/props/interior/door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/models/kenney/furniture_kit/glass.material" type="Material" id=5]
+[ext_resource path="res://assets/scripts/zone_victory.gd" type="Script" id=6]
+[ext_resource path="res://assets/scenes/props/interior/crate_big.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/scenes/props/interior/bathroom_sink.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/scenes/props/interior/bathroom_toilet.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/scenes/props/interior/bathroom_mirror.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/scenes/props/interior/lounge_chair.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/scenes/props/interior/potted_plant.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/scenes/props/interior/trashcan.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/scenes/props/interior/lounge_sofa.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/models/kenney/furniture_kit/carpet.material" type="Material" id=15]
+[ext_resource path="res://assets/scenes/characters/human.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/scripts/levels/level.gd" type="Script" id=17]
+[ext_resource path="res://assets/sounds/music/01_toilet.ogg" type="AudioStream" id=18]
+[ext_resource path="res://assets/scripts/cinematic.gd" type="Script" id=19]
+[ext_resource path="res://assets/scripts/zone_bounds.gd" type="Script" id=20]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.87451, 0.862745, 0.843137, 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.203922, 0.270588, 0.380392, 1 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 12, 12, 12 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "Begin"
+length = 5.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Cinematic/Cinemacam:translation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"points": PoolRealArray( -39.3274, -0.25, 0, 0.25, 0, -40.1796, -0.25, 0, 0.25, 0, -40.1796, -0.25, 0, 0.25, 0, -43.4933, -0.25, 0, 0.25, 0, -4.28409, -0.25, 0, 0.25, 0, 90.3328, -0.25, 0, 0.25, 0, 113.844, -0.25, 0, 0.25, 0, 123.998, -0.25, 0, 0.25, 0, 123.998, -0.25, 0, 0.25, 0, 126.657, -0.25, 0, 0.25, 0, 126.589, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 2.8, 3.3, 3.8, 4, 4.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Cinematic/Cinemacam:translation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"points": PoolRealArray( 6.46642, -0.25, 0, 0.25, 0, 6.46642, -0.25, 0, 0.25, 0, 6.46642, -0.25, 0, 0.25, 0, 28.7569, -0.25, 0, 0.25, 0, 25.7192, -0.25, 0, 0.25, 0, 11.035, -0.25, 0, 0.25, 0, 16.71, -0.25, 0, 0.25, 0, 36.9153, -0.25, 0, 0.25, 0, 36.9153, -0.25, 0, 0.25, 0, 8.53637, -0.25, 0, 0.25, 0, 7.55644, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 2.8, 3.3, 3.8, 4, 4.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Cinematic/Cinemacam:translation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/keys = {
+"points": PoolRealArray( 26.4946, -0.25, 0, 0.25, 0, 31.9366, -0.25, 0, 0.25, 0, 31.9366, -0.25, 0, 0.25, 0, -11.4074, -0.25, 0, 0.25, 0, -1.51537, -0.25, 0, 0.25, 0, 3.68486, -0.25, 0, 0.25, 0, 3.68486, -0.25, 0, 0.25, 0, -113.667, -0.25, 0, 0.25, 0, -145.549, -0.25, 0, 0.25, 0, -170.635, -0.25, 0, 0.25, 0, -171.754, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 2.8, 3.3, 3.8, 4, 4.5 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Cinematic/Cinemacam:rotation_degrees:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -38.1507, -0.25, 0, 0.25, 0, -50.3527, -0.25, 0, 0.25, 0, -12.8966, -0.25, 0, 0.25, 0, -27.5309, -0.25, 0, 0.25, 0, -29.1566, -0.25, 0, 0.25, 0, -65.514, -0.25, 0, 0.25, 0, -39.8233, -0.25, 0, 0.25, 0, -39.8233, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 3, 3.3, 3.8, 4, 4.5 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Cinematic/Cinemacam:rotation_degrees:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 158.601, -0.25, 0, 0.25, 0, 136.424, -0.25, 0, 0.25, 0, 136.424, -0.25, 0, 0.25, 0, -157.704, -0.25, 0, 0.25, 0, -116.046, -0.25, 0, 0.25, 0, -94.3225, -0.25, 0, 0.25, 0, -22.8182, -0.25, 0, 0.25, 0, -2.55864, -0.25, 0, 0.25, 0, -3.47026, -0.25, 0, 0.25, 0, 17.9213, -0.25, 0, 0.25, 0, 26.7044, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 3, 3.3, 3.8, 4, 4.5 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Cinematic/Cinemacam:rotation_degrees:z")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0.88669, -0.25, 0, 0.25, 0, 8.53677, -0.25, 0, 0.25, 0, 11.2114, -0.25, 0, 0.25, 0, 2.96124, -0.25, 0, 0.25, 0, -0.596602, -0.25, 0, 0.25, 0, 3.07054, -0.25, 0, 0.25, 0, 0.1717, -0.25, 0, 0.25, 0, 0.1717, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 3, 3.3, 3.8, 4, 4.5 )
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Cinematic/Cinemacam:translation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 2.8, 3.3, 3.8, 4, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -39.27, 6.466, 26.495 ), Vector3( -40.18, 6.466, 31.937 ), Vector3( -40.18, 6.466, 31.937 ), Vector3( -43.493, 28.757, -11.407 ), Vector3( -4.284, 25.719, -1.515 ), Vector3( 90.333, 11.035, 3.685 ), Vector3( 113.844, 16.71, 3.685 ), Vector3( 123.998, 36.915, -113.667 ), Vector3( 123.998, 36.915, -145.549 ), Vector3( 126.657, 8.536, -170.635 ), Vector3( 126.589, 7.556, -171.754 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Cinematic/Cinemacam:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = false
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 1.9, 2.3, 2.6, 2.9, 3.3, 3.8, 4, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 158.601, 0 ), Vector3( 0, 136.424, 0 ), Vector3( 0, 136.424, 0 ), Vector3( -38.151, -157.704, 0.887 ), Vector3( -50.353, -116.046, 8.537 ), Vector3( -12.897, -94.323, 11.211 ), Vector3( -27.5309, -22.8182, 2.96124 ), Vector3( -29.157, -2.559, -0.597 ), Vector3( -65.514, -3.47, 3.071 ), Vector3( -39.823, 17.921, 0.172 ), Vector3( -39.823, 26.704, 0.172 ) ]
+}
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 11.405, 8.80101, 29.7342 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 87.1379, 8.8, 15.0704 )
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 18.8312, 8.8, 65.8237 )
+
+[node name="LevelToilet" type="Spatial"]
+script = ExtResource( 17 )
+level_music = ExtResource( 18 )
+
+[node name="Countdown" parent="." instance=ExtResource( 3 )]
+
+[node name="Floor" type="CSGCombiner" parent="."]
+use_collision = true
+
+[node name="CSGBox" type="CSGBox" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5477, 0, 3.59478 )
+width = 159.358
+depth = 32.4332
+
+[node name="CSGBox2" type="CSGBox" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.3958, 0, 34.5484 )
+width = 25.2684
+depth = 30.4275
+
+[node name="CSGBox3" type="CSGBox" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.134, 0, -60.9523 )
+width = 41.8235
+depth = 161.494
+
+[node name="CSGBox4" type="CSGBox" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.134, 0, -161.284 )
+width = 41.8235
+depth = 38.1427
+material = SubResource( 1 )
+
+[node name="Arrow" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.429, 0, -62.9315 )
+
+[node name="CSGBox" type="CSGBox" parent="Arrow"]
+transform = Transform( 0.498566, 0, -0.372949, 0, 0.622622, 0, 0.372949, 0, 0.498566, -4.10136, 0.660131, 15.0106 )
+width = 4.18665
+depth = 21.6204
+material = ExtResource( 15 )
+
+[node name="CSGBox2" type="CSGBox" parent="Arrow"]
+transform = Transform( 0.490647, 0, 0.383307, 0, 0.622622, 0, -0.383307, 0, 0.490647, 3.24722, 0.660131, 14.9889 )
+width = 4.18665
+depth = 21.6204
+material = ExtResource( 15 )
+
+[node name="CSGBox3" type="CSGBox" parent="Arrow"]
+transform = Transform( 0.498566, 0, -0.372949, 0, 0.622622, 0, 0.372949, 0, 0.498566, -4.10136, 0.660131, 4.06545 )
+width = 4.18665
+depth = 21.6204
+material = ExtResource( 15 )
+
+[node name="CSGBox4" type="CSGBox" parent="Arrow"]
+transform = Transform( 0.490647, 0, 0.383307, 0, 0.622622, 0, -0.383307, 0, 0.490647, 3.24722, 0.660131, 4.04377 )
+width = 4.18665
+depth = 21.6204
+material = ExtResource( 15 )
+
+[node name="Bathroom" type="CSGCombiner" parent="."]
+use_collision = true
+collision_layer = 0
+collision_mask = 3
+
+[node name="CSGBox" type="CSGBox" parent="Bathroom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.257, 9.70463, -160.367 )
+width = 40.4934
+height = 20.0
+depth = 40.0
+material = SubResource( 2 )
+
+[node name="CSGBox2" type="CSGBox" parent="Bathroom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.257, 9.70463, -160.367 )
+operation = 2
+width = 37.204
+height = 24.1123
+depth = 36.3442
+
+[node name="CSGBox3" type="CSGBox" parent="Bathroom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.895, 6.11824, -140.058 )
+operation = 2
+width = 6.02129
+height = 10.3373
+depth = 5.41348
+
+[node name="BathroomMirror" parent="Bathroom" instance=ExtResource( 10 )]
+transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 112.489, 6.55022, -178.149 )
+
+[node name="BathroomSink" parent="Bathroom" instance=ExtResource( 8 )]
+transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 112.097, 0.987676, -174.248 )
+
+[node name="toilet" parent="Bathroom" instance=ExtResource( 9 )]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 123.089, 0.987676, -178.326 )
+
+[node name="Walls" type="CSGCombiner" parent="."]
+use_collision = true
+collision_layer = 0
+collision_mask = 3
+
+[node name="CSGBox" type="CSGBox" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -56.9832, 9.35148, 17.8373 )
+height = 20.0
+depth = 65.4273
+
+[node name="CSGBox4" type="CSGBox" parent="Walls"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 23.0593, 9.35148, -13.7098 )
+height = 20.0
+depth = 158.466
+
+[node name="CSGBox5" type="CSGBox" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 102.11, 9.35148, -96.6641 )
+height = 20.0
+depth = 167.884
+
+[node name="CSGBox6" type="CSGBox" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 144.192, 9.35148, -80.3264 )
+height = 20.0
+depth = 200.651
+
+[node name="CSGBox2" type="CSGBox" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.9013, 9.35148, 35.3204 )
+height = 20.0
+depth = 30.5645
+material = ExtResource( 5 )
+
+[node name="CSGBox3" type="CSGBox" parent="Walls"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -43.4998, 9.35148, 50.1735 )
+height = 20.0
+depth = 28.904
+material = ExtResource( 5 )
+
+[node name="CSGBox7" type="CSGBox" parent="Walls"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57.0146, 9.35148, 20.9936 )
+height = 20.0
+depth = 175.477
+material = ExtResource( 5 )
+
+[node name="BunchOfCrates" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.61, 2.5, 4.09566 )
+
+[node name="Crate" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.997737, 0, -0.0672317, 0, 1, 0, 0.0672317, 0, 0.997737, 0, 0, 0 )
+
+[node name="Crate18" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.526333, 0, -0.850279, 0, 1, 0, 0.850279, 0, 0.526333, -24.7339, 0, -3.42057 )
+
+[node name="Crate19" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.931177, 0, -0.364568, 0, 1, 0, 0.364568, 0, 0.931177, 22.5072, 0, -3.42057 )
+
+[node name="Crate6" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.94014, 0, 0.34079, 0, 1, 0, -0.34079, 0, 0.94014, -0.0554547, 0, 5.46422 )
+
+[node name="Crate7" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.996127, 0, -0.0879207, 0, 1, 0, 0.0879207, 0, 0.996127, -0.189181, 0, -5.82963 )
+
+[node name="Crate8" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0554547, 2.94505, -4.53786 )
+
+[node name="Crate9" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0554547, 2.94505, 4.28194 )
+
+[node name="Crate10" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.996166, 0, 0.0874861, 0, 1, 0, -0.0874861, 0, 0.996166, 0.366915, 5.77737, 2.66595 )
+
+[node name="Crate11" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.994256, 0, -0.107028, 0, 1, 0, 0.107028, 0, 0.994256, -0.0554547, 5.77737, -0.338286 )
+
+[node name="Crate12" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.993097, 0, 0.117295, 0, 1, 0, -0.117295, 0, 0.993097, -0.0554547, 5.77737, -3.55099 )
+
+[node name="Crate13" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.750238, 0, 0.661168, 0, 1, 0, -0.661168, 0, 0.750238, -3.47804, 0.216592, 11.669 )
+
+[node name="Crate14" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.97159, 0, 0.236669, 0, 1, 0, -0.236669, 0, 0.97159, -3.47804, 3.46142, 11.669 )
+
+[node name="Crate16" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.303185, 0, 0.952932, 0, 1, 0, -0.952932, 0, 0.303185, -3.47804, 6.83422, 11.669 )
+
+[node name="Crate15" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.97159, 0, 0.236669, 0, 1, 0, -0.236669, 0, 0.97159, -9.59775, 1.74785, 9.58025 )
+
+[node name="Crate2" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.67915 )
+
+[node name="Crate3" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0248365, 0, -2.85981 )
+
+[node name="Crate4" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.985891, 0, -0.167388, 0, 1, 0, 0.167388, 0, 0.985891, -0.547066, 2.98943, -1.51423 )
+
+[node name="Crate5" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 0.998097, 0, 0.0616583, 0, 1, 0, -0.0616583, 0, 0.998097, -0.453094, 2.98943, 1.39877 )
+
+[node name="Crate17" parent="BunchOfCrates" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -46.3669, 0, 22.1911 )
+
+[node name="BigCrates" type="Spatial" parent="."]
+transform = Transform( 0.738608, 0, 0.674135, 0, 1, 0, -0.674135, 0, 0.738608, -39.5262, 4.123, 3.92182 )
+
+[node name="BigCrate" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0722008, -0.424712, 0.0658989 )
+
+[node name="BigCrate6" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 131.552, -0.424712, 74.0427 )
+
+[node name="BigCrate10" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.422603, 0, 0.906315, 0, 1, 0, -0.906315, 0, 0.422603, 136.301, -0.424712, 78.3776 )
+
+[node name="BigCrate7" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.738126, 0, -0.674664, 0, 1, 0, 0.674664, 0, 0.738126, 148.543, -0.424712, 89.5511 )
+
+[node name="BigCrate11" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.999501, 0, -0.0316028, 0, 1, 0, 0.0316028, 0, 0.999501, 152.6, -0.424712, 93.2538 )
+
+[node name="BigCrate12" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.706972, 0, 0.707243, 0, 1, 0, -0.707243, 0, 0.706972, 156.347, -0.424712, 96.6734 )
+
+[node name="BigCrate8" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.847502, 0, -0.530792, 0, 1, 0, 0.530792, 0, 0.847502, 140.347, -0.424712, 82.0697 )
+
+[node name="BigCrate9" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.274631, 0, 0.96155, 0, 1, 0, -0.96155, 0, 0.274631, 144.743, -0.424712, 86.0828 )
+
+[node name="BigCrate2" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.675551, 0, -0.737312, 0, 1, 0, 0.737312, 0, 0.675551, 3.9508, -0.424712, 15.2014 )
+
+[node name="BigCrate3" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.987745, 0, -0.156072, 0, 1, 0, 0.156072, 0, 0.987745, 39.0609, -0.424712, 21.1493 )
+
+[node name="BigCrate5" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.919024, 0, 0.394198, 0, 1, 0, -0.394198, 0, 0.919024, 34.8717, -0.424712, 14.9542 )
+
+[node name="BigCrate4" parent="BigCrates" instance=ExtResource( 7 )]
+transform = Transform( 0.744008, 0, -0.668169, 0, 1, 0, 0.668169, 0, 0.744008, 39.0609, 4.12372, 21.1493 )
+
+[node name="LoungeStuff" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 73.2956, 0, -12.1724 )
+
+[node name="LoungeChair" parent="LoungeStuff" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3105, 3.77594, 2.3054 )
+
+[node name="LoungeChair2" parent="LoungeStuff" instance=ExtResource( 11 )]
+transform = Transform( 0.274245, 0, 0.96166, 0, 1, 0, -0.96166, 0, 0.274245, 26.3212, 3.77594, 17.0024 )
+
+[node name="LoungeChair3" parent="LoungeStuff" instance=ExtResource( 11 )]
+transform = Transform( -0.377582, 0, 0.925976, 0, 1, 0, -0.925976, 0, -0.377582, 26.3212, 3.77594, 25.5481 )
+
+[node name="LoungeSofa" parent="LoungeStuff" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.95935, 3.05, 2.51667 )
+
+[node name="LoungeSofa2" parent="LoungeStuff" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40831, 3.05, 2.51667 )
+
+[node name="LoungeSofa3" parent="LoungeStuff" instance=ExtResource( 14 )]
+transform = Transform( -0.0130547, 0, -0.999915, 0, 1, 0, 0.999915, 0, -0.0130547, 11.0055, 3.05, 10.5512 )
+
+[node name="PottedPlant" parent="LoungeStuff" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6652, 2.24232, 2.05672 )
+
+[node name="PottedPlant2" parent="LoungeStuff" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.9903, 2.24232, 2.05672 )
+
+[node name="Trashcan" parent="LoungeStuff" instance=ExtResource( 13 )]
+transform = Transform( 0.97886, 0, -0.20453, 0, 1, 0, 0.20453, 0, 0.97886, 8.66344, 2.79887, 2.89875 )
+
+[node name="Door" parent="." instance=ExtResource( 4 )]
+transform = Transform( 12, 0, 0, 0, 10, 0, 0, 0, 10, 123.763, 5.43515, -140.414 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.5408, 2, 36.694 )
+
+[node name="ZoneVictory" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.719, 10.0809, -160.666 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 6 )
+countdown_path = NodePath("../Countdown")
+next_scene = "res://assets/scenes/levels/02_kitchen.tscn"
+
+[node name="CollisionShape" type="CollisionShape" parent="ZoneVictory"]
+shape = SubResource( 3 )
+
+[node name="NPCs" type="Spatial" parent="."]
+
+[node name="Human" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 70.1308, 5.12664, 6.29282 )
+
+[node name="Human4" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 124.584, 5.12664, -166.745 )
+
+[node name="Human2" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 0.0311491, 0, 0.999515, 0, 1, 0, -0.999515, 0, 0.0311491, 79.0568, 5.12664, -2.28276 )
+
+[node name="Human3" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 0.0311491, 0, 0.999515, 0, 1, 0, -0.999515, 0, 0.0311491, 122.992, 5.12664, -2.28276 )
+
+[node name="Human5" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 0.830683, 0, 0.556745, 0, 1, 0, -0.556745, 0, 0.830683, 122.992, 5.12664, -78.6519 )
+
+[node name="Human6" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 0.988639, 0, -0.150312, 0, 1, 0, 0.150312, 0, 0.988639, 128.905, 5.12664, -78.6519 )
+
+[node name="Human7" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 0.0311491, 0, 0.999515, 0, 1, 0, -0.999515, 0, 0.0311491, 135.048, 5.12664, -78.6519 )
+
+[node name="Human8" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( -0.981551, 0, -0.191203, 0, 1, 0, 0.191203, 0, -0.981551, 117.647, 5.12664, -78.6519 )
+
+[node name="Human9" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 0.874213, 0, -0.485542, 0, 1, 0, 0.485542, 0, 0.874213, 111.677, 5.12664, -78.6519 )
+
+[node name="Human10" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( -0.998553, 0, 0.0537825, 0, 1, 0, -0.0537825, 0, -0.998553, 139.227, 5.12664, -78.6519 )
+
+[node name="Human11" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( -0.743717, 0, -0.668495, 0, 1, 0, 0.668495, 0, -0.743717, 106.846, 5.12664, -78.6519 )
+
+[node name="IdleBoys" type="Spatial" parent="NPCs"]
+
+[node name="Human4" parent="NPCs/IdleBoys" instance=ExtResource( 16 )]
+transform = Transform( 0.959981, 0, 0.280064, 0, 1, 0, -0.280064, 0, 0.959981, 126.372, 5.12664, -136.513 )
+always_idle = true
+
+[node name="Human5" parent="NPCs/IdleBoys" instance=ExtResource( 16 )]
+transform = Transform( 0.996323, 0, 0.0856778, 0, 1, 0, -0.0856778, 0, 0.996323, 123.121, 5.12664, -132.493 )
+always_idle = true
+
+[node name="Human6" parent="NPCs/IdleBoys" instance=ExtResource( 16 )]
+transform = Transform( 0.983502, 0, -0.180897, 0, 1, 0, 0.180897, 0, 0.983502, 119.564, 5.12664, -136.061 )
+always_idle = true
+
+[node name="Human7" parent="NPCs/IdleBoys" instance=ExtResource( 16 )]
+transform = Transform( 0.980282, 0, 0.197606, 0, 1, 0, -0.197606, 0, 0.980282, 126.372, 5.12664, -128.093 )
+always_idle = true
+
+[node name="Human8" parent="NPCs/IdleBoys" instance=ExtResource( 16 )]
+transform = Transform( 0.986248, 0, -0.165271, 0, 1, 0, 0.165271, 0, 0.986248, 126.372, 5.12664, -124.407 )
+always_idle = true
+
+[node name="Human9" parent="NPCs/IdleBoys" instance=ExtResource( 16 )]
+transform = Transform( 0.995908, 0, 0.0903719, 0, 1, 0, -0.0903719, 0, 0.995908, 126.372, 5.12664, -120.426 )
+always_idle = true
+
+[node name="Cinematic" type="AnimationPlayer" parent="."]
+anims/Begin = SubResource( 4 )
+script = ExtResource( 19 )
+countdown_path = NodePath("../Countdown")
+player_path = NodePath("../Player")
+play_pain = true
+level_number = 1
+
+[node name="Cinemacam" type="Camera" parent="Cinematic"]
+transform = Transform( 0.947778, -0.205921, 0.243543, 0.00230155, 0.76802, 0.640422, -0.318922, -0.606417, 0.728387, 126.643, 8.34, -170.859 )
+fov = 60.0
+
+[node name="PlayArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.2845, 3.57159 )
+script = ExtResource( 20 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.5206, 0, 14.9186 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="PlayArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54.404, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="PlayArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.196, 0, -80.7459 )
+shape = SubResource( 7 )
+
+[connection signal="expired" from="Countdown" to="Player" method="die"]

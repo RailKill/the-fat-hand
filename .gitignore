@@ -13,9 +13,8 @@ mono_crash.*.json
 .directory
 *~
 
-# Godot Git Plugin
-bin/
+# Local build directory
 build/
 
 # WAT Test Results
-tests/results/
+tests/results.xml

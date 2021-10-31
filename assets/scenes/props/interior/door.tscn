@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/models/kenney/furniture_kit/doorwayFront.glb" type="PackedScene" id=1]
+[ext_resource path="res://assets/scripts/props/heavy_body.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/props/impact_metal_01.ogg" type="AudioStream" id=3]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.24462, 0.504639, 0.0492031 )
+
+[node name="Door" type="RigidBody"]
+collision_layer = 0
+collision_mask = 3
+mode = 1
+linear_damp = 1.0
+script = ExtResource( 2 )
+hit_sound = ExtResource( 3 )
+
+[node name="doorwayFront" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.232029, -0.431489, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0102026, 0.0751244, -0.0438154 )
+shape = SubResource( 1 )

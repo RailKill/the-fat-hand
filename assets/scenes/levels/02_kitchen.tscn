@@ -1,0 +1,340 @@
+[gd_scene load_steps=37 format=2]
+
+[ext_resource path="res://assets/scenes/characters/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/models/kenney/furniture_kit/metalDark.material" type="Material" id=2]
+[ext_resource path="res://assets/models/kenney/food_kit/brownDarkest.material" type="Material" id=3]
+[ext_resource path="res://assets/scenes/props/food/tomato.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/models/kenney/furniture_kit/metal.material" type="Material" id=5]
+[ext_resource path="res://assets/scenes/props/food/cheese.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/scenes/props/food/cabbage.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/scenes/props/food/cupcake.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/scenes/props/food/donut.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/scenes/props/food/fish.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/scenes/props/food/hotdog.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/scenes/props/food/ice_cream.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/scenes/props/food/lemon.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/scenes/props/food/orange.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/scenes/props/food/pear.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/scripts/zone_consume.gd" type="Script" id=16]
+[ext_resource path="res://assets/scenes/ui/countdown.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/sounds/ui/error_01.ogg" type="AudioStream" id=18]
+[ext_resource path="res://assets/sounds/ui/confirmation_01.ogg" type="AudioStream" id=19]
+[ext_resource path="res://assets/scripts/props/indicator.gd" type="Script" id=20]
+[ext_resource path="res://assets/scripts/levels/level.gd" type="Script" id=21]
+[ext_resource path="res://assets/sounds/music/02_kitchen.ogg" type="AudioStream" id=22]
+[ext_resource path="res://assets/images/poster_pizza.png" type="Texture" id=23]
+[ext_resource path="res://assets/scripts/cinematic.gd" type="Script" id=24]
+[ext_resource path="res://assets/scripts/zone_bounds.gd" type="Script" id=25]
+[ext_resource path="res://assets/scripts/props/bounded_body.gd" type="Script" id=26]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+albedo_color = Color( 0.466667, 0.701961, 0.827451, 0.117647 )
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_transparent = true
+albedo_color = Color( 1, 1, 1, 0 )
+
+[sub_resource type="SpatialMaterial" id=4]
+emission_enabled = true
+emission = Color( 0.964706, 0.6, 0.133333, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SphereMesh" id=5]
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.686275, 0.607843, 0.47451, 1 )
+rim_enabled = true
+rim = 0.1
+rim_tint = 0.5
+
+[sub_resource type="SphereShape" id=7]
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 8.79249, 8, 7.73496 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "Begin"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Cinematic/Cinemacam:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.6 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 5.9152, 26.4763 ), Vector3( 0, 18.9394, 26.4763 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Cinematic/Cinemacam:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.6, 5 ),
+"transitions": PoolRealArray( 1, 0.392292, 1 ),
+"update": 0,
+"values": [ 15.0, 12.0, 11.0 ]
+}
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 26, 19, 26 )
+
+[node name="LevelKitchen" type="Spatial"]
+script = ExtResource( 21 )
+level_music = ExtResource( 22 )
+
+[node name="Countdown" parent="." instance=ExtResource( 17 )]
+start_time = 30
+
+[node name="Room" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62472, 0 )
+use_collision = true
+collision_layer = 0
+collision_mask = 3
+
+[node name="CSGBox" type="CSGBox" parent="Room"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.60094 )
+width = 60.0
+height = 20.0
+depth = 57.8367
+
+[node name="Glass" type="CSGBox" parent="Room"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.2842, 0 )
+width = 59.0895
+height = 24.4397
+depth = 56.7589
+material = SubResource( 1 )
+
+[node name="Glass3" type="CSGBox" parent="Room"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.44036, 28.0304 )
+width = 59.0895
+height = 24.4397
+depth = 1.83987
+material = SubResource( 1 )
+
+[node name="Glass2" type="CSGBox" parent="Room"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.9381, 0 )
+operation = 2
+width = 54.6497
+height = 27.0569
+depth = 53.7988
+material = SubResource( 1 )
+
+[node name="CSGBox2" type="CSGBox" parent="Room"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.94438, 0 )
+operation = 2
+width = 55.0
+height = 14.4316
+depth = 55.0
+material = SubResource( 2 )
+
+[node name="CSGBox3" type="CSGBox" parent="Room"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.78, -14.54 )
+width = 24.1998
+height = 13.82
+depth = 22.06
+material = SubResource( 3 )
+
+[node name="Oven" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62472, 0 )
+use_collision = true
+collision_layer = 0
+collision_mask = 3
+
+[node name="CSGBox" type="CSGBox" parent="Oven"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.96, -15.0979 )
+width = 24.0
+height = 24.0
+depth = 24.0
+material = ExtResource( 2 )
+
+[node name="CSGBox2" type="CSGBox" parent="Oven"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.22069, -11.9846 )
+operation = 2
+width = 17.9514
+height = 13.0661
+depth = 19.2787
+material = ExtResource( 2 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="Oven"]
+transform = Transform( 0.749741, 0, 0, 0, -3.27722e-08, -0.749741, 0, 0.749741, -3.27722e-08, 10.4042, 5.7017, -2.40253 )
+radius = 2.0
+height = 2.0
+script = ExtResource( 20 )
+code = 1
+
+[node name="CSGBox3" type="CSGBox" parent="Oven/CSGCylinder"]
+transform = Transform( 0.802122, -2.61027e-08, -0.59716, 2.61027e-08, 1, -8.6495e-09, 0.59716, -8.6495e-09, 0.802122, 0, 1.17937, -0.0496082 )
+width = 0.68
+height = 0.48
+depth = 2.66
+material = ExtResource( 3 )
+
+[node name="CSGCylinder2" type="CSGCylinder" parent="Oven"]
+transform = Transform( 0.749741, 0, 0, 0, -3.27722e-08, -0.749741, 0, 0.749741, -3.27722e-08, 10.451, 2.51009, -2.47328 )
+radius = 2.0
+height = 2.0
+script = ExtResource( 20 )
+code = 2
+
+[node name="CSGBox3" type="CSGBox" parent="Oven/CSGCylinder2"]
+transform = Transform( 0.00352108, 4.37111e-08, 0.999994, -4.37111e-08, 1, -4.35575e-08, -0.999994, -4.35575e-08, 0.00352108, 0, 1.17937, -0.0496101 )
+width = 0.68
+height = 0.48
+depth = 2.66
+material = ExtResource( 3 )
+
+[node name="CSGCylinder3" type="CSGCylinder" parent="Oven"]
+transform = Transform( 0.749741, 0, 0, 0, -3.27722e-08, -0.749741, 0, 0.749741, -3.27722e-08, 10.3926, -0.775455, -2.47328 )
+radius = 2.0
+height = 2.0
+script = ExtResource( 20 )
+code = 3
+
+[node name="CSGBox3" type="CSGBox" parent="Oven/CSGCylinder3"]
+transform = Transform( -0.448528, 3.90679e-08, 0.893769, -3.90679e-08, 1, -6.33172e-08, -0.893769, -6.33172e-08, -0.448528, 4.76837e-07, 1.17937, -0.0496101 )
+width = 0.68
+height = 0.48
+depth = 2.66
+material = ExtResource( 3 )
+
+[node name="CSGBox3" type="CSGBox" parent="Oven"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.70867, -12.1499 )
+width = 14.5191
+height = 1.58648
+depth = 15.2796
+material = SubResource( 4 )
+
+[node name="CSGBox4" type="CSGBox" parent="Oven"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.9751, -14.4043 )
+width = 16.86
+height = 0.600507
+depth = 17.1
+material = ExtResource( 5 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.04, -11.5 )
+light_color = Color( 0.976471, 0.0627451, 0.0627451, 1 )
+light_energy = 5.0
+omni_range = 15.0
+
+[node name="OmniLight2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.04, -11.5 )
+light_color = Color( 0.968627, 0.721569, 0.0705882, 1 )
+omni_range = 30.0
+
+[node name="Food" type="Spatial" parent="."]
+
+[node name="BigCheese" parent="Food" instance=ExtResource( 6 )]
+transform = Transform( 0.999948, -0.00186869, 0.0100551, 0.00165587, 0.999775, 0.0211314, -0.0100923, -0.0211136, 0.999726, 19.5274, 2.46183, -17.5685 )
+gravity_scale = 2.0
+
+[node name="BigTomato" parent="Food" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.764, 1.27002, 16.0634 )
+gravity_scale = 2.0
+
+[node name="Doughball" type="RigidBody" parent="Food" groups=[
+"ingredient",
+"pizza",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00203, 6.83429 )
+mass = 10.0
+gravity_scale = 2.0
+linear_damp = 3.0
+script = ExtResource( 26 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Food/Doughball"]
+transform = Transform( 2.24863, 0, 0, 0, 2.24863, 0, 0, 0, 2.24863, 0, 0, 0 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Food/Doughball"]
+transform = Transform( 2.24863, 0, 0, 0, 2.24863, 0, 0, 0, 2.24863, 0, 0, 0 )
+shape = SubResource( 7 )
+
+[node name="BigCabbage" parent="Food" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0328, 0.658875, 1.62741 )
+
+[node name="BigCupcake" parent="Food" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00675, 1.95094, 0.702247 )
+
+[node name="BigDonut" parent="Food" instance=ExtResource( 9 )]
+transform = Transform( 0.999749, -0.0223906, 0, 0.0223906, 0.999749, 0, 0, 0, 1, -20.1323, 0.65801, -19.2289 )
+
+[node name="HotDog" parent="Food" instance=ExtResource( 11 )]
+transform = Transform( 0.0781459, 0, 0.996942, 0, 1, 0, -0.996942, 0, 0.0781459, 23.3102, 0.286385, 23.5966 )
+mass = 1.2
+linear_damp = 1.0
+
+[node name="IceCream" parent="Food" instance=ExtResource( 12 )]
+transform = Transform( 0.00714059, 0.71026, 0.703903, -0.999949, 0.0100529, 2.79135e-08, -0.00707628, -0.703868, 0.710296, 15.573, 1.22132, 18.5859 )
+linear_damp = 0.7
+
+[node name="BigLemon" parent="Food" instance=ExtResource( 13 )]
+transform = Transform( 0.176761, -0.800028, -0.573333, 0.976451, 0.215741, 0, 0.123691, -0.559832, 0.819322, -7.23034, 1.85154, 14.8666 )
+mass = 3.0
+linear_damp = 0.5
+
+[node name="BigOrange" parent="Food" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.1872, 0.909276, 23.5143 )
+mass = 2.0
+linear_damp = 1.0
+
+[node name="Pear" parent="Food" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3169, 0, -9.97964 )
+
+[node name="BigFish" parent="Food" instance=ExtResource( 10 )]
+transform = Transform( 0.581115, 0, 0.813821, 0, 1, 0, -0.813821, 0, 0.581115, 8.63649, 0.903409, 9.08781 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.116528, 13.5598 )
+
+[node name="ZoneConsume" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.15, 0 )
+script = ExtResource( 16 )
+countdown_path = NodePath("../Countdown")
+consume_sound_bad = ExtResource( 18 )
+consume_sound_good = ExtResource( 19 )
+player_path = NodePath("../Player")
+
+[node name="CollisionShape" type="CollisionShape" parent="ZoneConsume"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.379972, -13.7568 )
+shape = SubResource( 8 )
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1.65, 0, 0, 0, 1.65, 0, 0, 0, 9.735, 0.057872, 18.87, -3.01111 )
+texture = ExtResource( 23 )
+
+[node name="Cinematic" type="AnimationPlayer" parent="."]
+anims/Begin = SubResource( 9 )
+script = ExtResource( 24 )
+countdown_path = NodePath("../Countdown")
+player_path = NodePath("../Player")
+level_number = 2
+
+[node name="Cinemacam" type="Camera" parent="Cinematic"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.9394, 26.4763 )
+projection = 1
+size = 11.0
+
+[node name="PlayArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.6221, 0 )
+script = ExtResource( 25 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayArea"]
+shape = SubResource( 10 )
+
+[connection signal="expired" from="Countdown" to="Player" method="die"]
+[connection signal="consumed_good" from="ZoneConsume" to="Oven/CSGCylinder" method="on"]
+[connection signal="consumed_good" from="ZoneConsume" to="Oven/CSGCylinder2" method="on"]
+[connection signal="consumed_good" from="ZoneConsume" to="Oven/CSGCylinder3" method="on"]
