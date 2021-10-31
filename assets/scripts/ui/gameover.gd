@@ -7,6 +7,10 @@ extends Control
 export(String) var next_level
 
 
+func _ready():
+	find_next_valid_focus().grab_focus()
+
+
 # Return to main menu.
 func exit():
 	# If already in main menu, and is not on web, then quit the game.

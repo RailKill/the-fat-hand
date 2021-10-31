@@ -13,7 +13,7 @@ export var sensitivity = 0.05
 # If false, do not read input events.
 var is_enabled = true
 # Amount of power in the hand right now.
-var power = 0
+var power = 0 setget set_power
 
 # Physics object representing the fat hand punch.
 onready var puncher = $Puncher
@@ -24,24 +24,27 @@ onready var target = $Target
 func _input(event):
 	# Move the hand control based on mouse input with a limited radius.
 	if is_enabled and event is InputEventMouseMotion:
-		var side = translation.x + event.relative.x * sensitivity
-		var straight = translation.z + event.relative.y * sensitivity
-		translation.x = clamp(side, -max_radius, max_radius)
-		translation.z = clamp(straight, -max_radius, max_radius)
-		fix_yaw()
-		
-		# Sets the power of the punch.
-		power = max(power, Vector2(event.relative.x, event.relative.y).length())
-		
-		# The punch KinematicBody already follows the position of this control
-		# so this move is stationary but is still needed to trigger collision.
-		puncher.move_and_slide(Vector3.ZERO, Vector3.UP)
+		var motion = Vector3(event.relative.x, 0, event.relative.y)
+		update_position(motion * sensitivity)
+		set_power(motion)
+
+
+func _process(_delta):
+	# Handle joystick controls.
+	if is_enabled:
+		var motion = InputHandler.get_vector(JOY_AXIS_2, JOY_AXIS_3, false)
+		update_position(motion * sensitivity * 40)
+		set_power(motion * power_decay * 2)
 
 
 func _physics_process(_delta):
 	# Power decay.
 	if power > 0:
 		power = max(0, power - power_decay)
+	fix_yaw()
+	# The punch KinematicBody already follows the position of this control
+	# so this move is stationary but is still needed to trigger collision.
+	puncher.move_and_slide(Vector3.ZERO, Vector3.UP)
 
 
 # Set hand to the given y rotation in radians when gripping on something.
@@ -67,3 +70,15 @@ func fix_yaw():
 	var x  = translation.x * cos(theta) + -translation.z * sin(theta)
 	var z  = translation.x * sin(theta) + translation.z * cos(theta)
 	rotation.x = atan2(x, z)
+
+
+# Sets the power to the given vector's length if greater than current power.
+# Race condition is irrelevant as the highest power is always preferred.
+func set_power(vector):
+	power = max(power, vector.length())
+
+
+# Updates the translation of the hand by adding the given vector.
+func update_position(vector):
+	translation.x = clamp(translation.x + vector.x, -max_radius, max_radius)
+	translation.z = clamp(translation.z + vector.z, -max_radius, max_radius)

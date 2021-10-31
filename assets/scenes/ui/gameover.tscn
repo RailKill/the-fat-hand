@@ -55,9 +55,12 @@ margin_left = -128.0
 margin_top = -128.0
 margin_right = 128.0
 margin_bottom = 128.0
+focus_neighbour_left = NodePath("../../Quit/QuitButton")
+focus_previous = NodePath("../../Quit/QuitButton")
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 3 )
+texture_focused = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -85,9 +88,12 @@ margin_left = -128.0
 margin_top = -128.0
 margin_right = 128.0
 margin_bottom = 128.0
+focus_neighbour_right = NodePath("../../Retry/RetryButton")
+focus_next = NodePath("../../Retry/RetryButton")
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 6 )
 texture_hover = ExtResource( 5 )
+texture_focused = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

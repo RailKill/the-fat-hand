@@ -173,11 +173,8 @@ func jump():
 
 # Move player according to input. Returns true if direction was pressed.
 func move():
-	var motion = Vector3.ZERO
-	# Add velocity depending on directional input.
-	for vector in DIRECTIONS:
-		if Input.is_action_pressed(vector):
-			motion += DIRECTIONS[vector] * (move_speed * inertia)
+	var motion = InputHandler.get_vector(JOY_AXIS_0, JOY_AXIS_1) * \
+			move_speed * inertia
 	var horizontal = velocity * (Vector3.RIGHT + Vector3.BACK)
 	var vertical = velocity * Vector3.UP
 	if (horizontal + motion).length() > move_speed:
