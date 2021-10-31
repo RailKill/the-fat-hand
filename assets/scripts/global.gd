@@ -56,7 +56,9 @@ func _input(event):
 
 # Apply changes to game settings.
 func apply_options():
-	OS.window_fullscreen = bool(options.get_value("display", "fullscreen"))
+	var fullscreen = bool(options.get_value("display", "fullscreen"))
+	if OS.window_fullscreen != fullscreen:
+		OS.window_fullscreen = fullscreen
 
 
 # Records the playing of cinematics for the given level number.

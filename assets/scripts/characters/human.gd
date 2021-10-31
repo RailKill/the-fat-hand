@@ -3,7 +3,7 @@ extends RigidBody
 
 # If true, this human will not roam.
 export(bool) var always_idle = false
-export(int) var walk_speed = 120
+export(int) var walk_speed = 200
 
 var is_hit = false
 var is_walking = false
