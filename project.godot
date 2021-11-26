@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/props/bounded_body.gd"
 }, {
+"base": "RigidBody",
+"class": "ButtonPressure",
+"language": "GDScript",
+"path": "res://assets/scripts/controls/button.gd"
+}, {
 "base": "Control",
 "class": "GameOver",
 "language": "GDScript",
@@ -101,6 +106,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "BoundedBody": "",
+"ButtonPressure": "",
 "GameOver": "",
 "GitAPI": "",
 "HandController": "",
@@ -225,6 +231,8 @@ jump={
 3d_physics/layer_2="character"
 3d_physics/layer_3="grabbable"
 3d_physics/layer_4="boundary"
+3d_physics/layer_5="prop"
+3d_physics/layer_6="puncher"
 
 [physics]
 

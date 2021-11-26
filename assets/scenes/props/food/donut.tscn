@@ -7,10 +7,9 @@
 radius = 2.12358
 height = 1.51408
 
-[node name="BigDonut" type="RigidBody" groups=[
-"ingredient",
-]]
-collision_layer = 5
+[node name="BigDonut" type="RigidBody" groups=["ingredient"]]
+collision_layer = 21
+collision_mask = 17
 script = ExtResource( 2 )
 
 [node name="donutSprinkles" parent="." instance=ExtResource( 1 )]

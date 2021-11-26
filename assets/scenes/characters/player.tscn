@@ -29,7 +29,7 @@ extents = Vector3( 1.2, 0.2, 0.5 )
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 19
 script = ExtResource( 2 )
 
 [node name="HandControl" type="Spatial" parent="."]
@@ -48,10 +48,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.79654 )
 visible = false
 radius = 1.5
 
-[node name="Puncher" type="KinematicBody" parent="HandControl" groups=[
-"attack",
-]]
-collision_layer = 0
+[node name="Puncher" type="KinematicBody" parent="HandControl" groups=["attack"]]
+collision_layer = 32
+collision_mask = 17
 
 [node name="CollisionShape" type="CollisionShape" parent="HandControl/Puncher"]
 shape = SubResource( 1 )
@@ -67,10 +66,10 @@ bones/8/bound_children = [ NodePath("BoneAttachment4") ]
 bones/10/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2"), NodePath("BoneAttachment3") ]
 
 [node name="BoneAttachment" parent="Model/DinoBones/Skeleton" index="0"]
-transform = Transform( 1, -7.76406e-05, -4.61033e-05, -4.60623e-05, 0.000550486, -0.999999, 7.76681e-05, 1, 0.000550553, 0.00559071, 4.27815, 0.0647859 )
+transform = Transform( 1, -2.42654e-05, -1.42989e-05, -1.42953e-05, 0.000172094, -1, 2.42686e-05, 1, 0.000172123, 0.00167435, 4.28307, 0.125166 )
 
 [node name="BoneAttachment2" parent="Model/DinoBones/Skeleton" index="1"]
-transform = Transform( 1, -7.76406e-05, -4.61033e-05, -4.60623e-05, 0.000550486, -0.999999, 7.76681e-05, 1, 0.000550553, 0.00559071, 4.27815, 0.0647859 )
+transform = Transform( 1, -2.42654e-05, -1.42989e-05, -1.42953e-05, 0.000172094, -1, 2.42686e-05, 1, 0.000172123, 0.00167435, 4.28307, 0.125166 )
 
 [node name="EyesPain" parent="Model/DinoBones/Skeleton/BoneAttachment2" index="0"]
 visible = false
@@ -83,7 +82,7 @@ override_tip_basis = false
 target_node = NodePath("../../../../HandControl/Target")
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="Model/DinoBones/Skeleton" index="5"]
-transform = Transform( 1, -7.76406e-05, -4.61033e-05, -4.60623e-05, 0.000550486, -0.999999, 7.76681e-05, 1, 0.000550553, 0.00559071, 4.27815, 0.0647859 )
+transform = Transform( 1, -2.42654e-05, -1.42989e-05, -1.42953e-05, 0.000172094, -1, 2.42686e-05, 1, 0.000172123, 0.00167435, 4.28307, 0.125166 )
 bone_name = "Head"
 
 [node name="Glasses" parent="Model/DinoBones/Skeleton/BoneAttachment3" instance=ExtResource( 4 )]
@@ -95,14 +94,14 @@ mass = 0.005
 sleeping = true
 
 [node name="BoneAttachment4" type="BoneAttachment" parent="Model/DinoBones/Skeleton" index="6"]
-transform = Transform( -1.0403, -0.285697, 1.68409, 1.69246, 0.0942357, 1.06146, -0.230978, 1.97724, 0.192749, -3.09081, 2.27196, 0.597049 )
+transform = Transform( -1.06505, -0.218867, 1.67862, 1.68561, 0.0458985, 1.07546, -0.156215, 1.98746, 0.16002, -3.07724, 2.23051, 0.616832 )
 bone_name = "Hand.R"
 
 [node name="Grabber" type="Area" parent="Model/DinoBones/Skeleton/BoneAttachment4"]
 transform = Transform( 0.206166, 0.455275, 0.0148593, 0.0280423, 0.00359445, -0.4992, -0.454653, 0.20667, -0.0240519, -0.862771, 1.39215, -0.313041 )
-monitorable = false
 collision_layer = 0
 collision_mask = 4
+monitorable = false
 script = ExtResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Model/DinoBones/Skeleton/BoneAttachment4/Grabber"]

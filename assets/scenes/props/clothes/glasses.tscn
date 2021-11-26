@@ -6,6 +6,8 @@
 extents = Vector3( 1.21, 0.32, 0.16 )
 
 [node name="Glasses" type="RigidBody"]
+collision_layer = 17
+collision_mask = 17
 
 [node name="glasses" parent="." instance=ExtResource( 1 )]
 

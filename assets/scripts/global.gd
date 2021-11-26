@@ -7,7 +7,8 @@ signal option_changed(section, key, value)
 
 # File path to store game settings.
 const OPTIONS_FILE = "user://options.cfg"
-
+# Maximum weight of physical bodies for control purposes.
+const MAX_WEIGHT = 500
 # Bit value of the environment collision layer.
 const ENVIRONMENT_LAYER = 1
 # Bit value of the character collision layer.
@@ -16,6 +17,8 @@ const CHARACTER_LAYER = 2
 const GRABBABLE_LAYER = 4
 # Bit value of the boundary collision layer.
 const BOUNDARY_LAYER = 8
+# Bit value of the prop collision layer.
+const PROP_LAYER = 16
 # Dictionary of audio bus names and their indices.
 const BUS_DICTIONARY = {
 	0: "master",
@@ -23,14 +26,14 @@ const BUS_DICTIONARY = {
 	2: "sfx",
 }
 
+# Cinematics played.
+var cinematic_played = {1: false, 2: false}
 # Checks if the game is set to fullscreen option.
 var is_fullscreen = false
 # Number of pizzas to generate in main menu.
 var number_of_wins = 0
 # Game settings.
 var options = ConfigFile.new()
-# Cinematics played.
-var cinematic_played = {1: false, 2: false}
 
 # Global music player.
 onready var music_player = $AudioStreamPlayer

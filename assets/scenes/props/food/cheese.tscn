@@ -7,11 +7,9 @@
 radius = 2.90236
 height = 1.87956
 
-[node name="BigCheese" type="RigidBody" groups=[
-"ingredient",
-"pizza",
-]]
-collision_layer = 5
+[node name="BigCheese" type="RigidBody" groups=["ingredient", "pizza"]]
+collision_layer = 21
+collision_mask = 17
 mass = 1.31579
 linear_damp = 1.0
 script = ExtResource( 2 )

@@ -4,7 +4,6 @@
 [ext_resource path="res://assets/scenes/controls/lever_slider.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/scenes/props/interior/radio_table.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/scenes/levels/dino_apartment.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/scenes/controls/button_floor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/scripts/levels/level.gd" type="Script" id=6]
 [ext_resource path="res://assets/sounds/music/00_menu.ogg" type="AudioStream" id=7]
 [ext_resource path="res://assets/scripts/spawner_pizza.gd" type="Script" id=8]
@@ -13,6 +12,7 @@
 [ext_resource path="res://assets/scripts/zone_bounds.gd" type="Script" id=11]
 [ext_resource path="res://assets/scenes/controls/lever_switch.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/scenes/props/interior/television_cabinet.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/scenes/controls/button_circle.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/scenes/props/interior/door.tscn" type="PackedScene" id=16]
 
 [sub_resource type="ProceduralSky" id=2]
@@ -73,7 +73,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.4027, 1.01891, 0.145087 )
 
 [node name="RadioTable" parent="." instance=ExtResource( 3 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 53.2425, 2.76579, -45.8518 )
-collision_mask = 6
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
@@ -82,9 +81,6 @@ environment = SubResource( 3 )
 transform = Transform( 0.828237, -5.44857e-08, -0.560379, 0.463204, 0.562803, 0.684613, 0.315383, -0.826591, 0.466134, 0, 22.5711, -7.43353 )
 light_color = Color( 0.8, 0.752941, 0.666667, 1 )
 shadow_enabled = true
-
-[node name="FloorButton" parent="." instance=ExtResource( 5 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 30.4355, 1.61549, -38.6719 )
 
 [node name="PizzaSpawner" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6559, 6.30707, -0.335064 )
@@ -110,14 +106,21 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.469, 1.064, 45.399 )
 shape = SubResource( 5 )
 
+[node name="PlayButton" parent="." instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.395, 1.00009, -38.6491 )
+
 [node name="Door" parent="." instance=ExtResource( 16 )]
 transform = Transform( -5.24537e-07, 0, 10, 0, 10, 0, -12, 0, -4.37114e-07, 30.0562, 5.77244, 46.0589 )
+bounds_path = NodePath("")
 
 [connection signal="value_changed" from="MusicSlider" to="." method="adjust_volume" binds= [ 1 ]]
 [connection signal="ready" from="MusicSlider/Knob" to="." method="load_volume" binds= [ 1, "MusicSlider/Knob" ]]
+[connection signal="on" from="PlayButton/RigidBody" to="." method="change_scene" flags=6 binds= [ "res://assets/scenes/levels/01_toilet.tscn" ]]
 
 [editable path="MusicSlider"]
 [editable path="MusicSlider/Knob/Stick"]
 [editable path="LeverSwitch"]
 [editable path="LeverSwitch/Knob/Stick"]
 [editable path="LeverSwitch/StaticBody/Base"]
+[editable path="PlayButton"]
+[editable path="PlayButton/RigidBody/Clicker"]

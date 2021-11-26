@@ -35,6 +35,8 @@ surfaces/1 = {
 }
 
 [node name="Trashcan" type="RigidBody"]
+collision_layer = 17
+collision_mask = 17
 script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

@@ -9,7 +9,7 @@ extents = Vector3( 0.24462, 0.504639, 0.0492031 )
 
 [node name="Door" type="RigidBody"]
 collision_layer = 0
-collision_mask = 3
+collision_mask = 19
 mode = 1
 linear_damp = 1.0
 script = ExtResource( 2 )

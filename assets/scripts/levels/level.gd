@@ -22,6 +22,12 @@ func adjust_volume(value: float, bus_index: int):
 			"%s_volume" % Global.BUS_DICTIONARY[bus_index], value)
 
 
+# Changes to the given scene with a delay in seconds.
+func change_scene(path, delay = 1.0):
+	var tree = get_tree()
+	tree.create_timer(delay).connect("timeout", tree, "change_scene", [path])
+
+
 # Returns the percentage volume for the given audio bus, and if there is a
 # given node_path, find it and call set_percentage() on it.
 func load_volume(bus_index: int, node_path = null):

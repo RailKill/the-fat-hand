@@ -25,11 +25,11 @@ var dead_player = preload("res://assets/scenes/characters/player_dead.tscn")
 # Game over screen to be shown.
 var game_over = preload("res://assets/scenes/ui/gameover.tscn")
 # Direction in which the gravity acts in the game world.
-var gravity_vector: Vector3 = \
-		ProjectSettings.get_setting("physics/3d/default_gravity_vector")
+var gravity_vector = ProjectSettings.get_setting(
+		"physics/3d/default_gravity_vector")
 # Strength of the gravity.
-var gravity_magnitude = \
-		ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity_magnitude = ProjectSettings.get_setting(
+		"physics/3d/default_gravity")
 # Boolean to mark if the player can still be controlled.
 var is_controllable = true
 # Boolean to mark if the player is dead.

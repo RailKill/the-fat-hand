@@ -14,7 +14,8 @@ var hit_player
 
 func _ready():
 	collision_layer = 0
-	collision_mask = Global.ENVIRONMENT_LAYER + Global.CHARACTER_LAYER
+	collision_mask = Global.ENVIRONMENT_LAYER + \
+			Global.CHARACTER_LAYER + Global.PROP_LAYER
 	area = Area.new()
 	area.connect("body_entered", self, "_on_body_entered")
 	area.add_child($CollisionShape.duplicate())
@@ -46,5 +47,5 @@ func take_damage(amount):
 	
 	if is_destroyed():
 		mode = RigidBody.MODE_RIGID
-		collision_layer = Global.ENVIRONMENT_LAYER
+		collision_layer = Global.ENVIRONMENT_LAYER + Global.PROP_LAYER
 		area.queue_free()
