@@ -11,6 +11,13 @@ func pre():
 	hand = HandController.new()
 
 
+# Ensure hand interpolates to xz center by given weight.
+func test_center():
+	hand.translation = Vector3(10, 10, 10)
+	hand.center(0.4)
+	asserts.is_equal(hand.translation, Vector3(6, 10, 6))
+
+
 # Ensure hand is not twisted by matching its y-rotation.
 func test_fix_roll():
 	describe("fix roll (x-rotation) is correct")
