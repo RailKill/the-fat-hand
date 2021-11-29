@@ -33,8 +33,11 @@ func _process(_delta):
 	# Handle joystick controls.
 	if is_enabled:
 		var motion = InputHandler.get_vector(JOY_AXIS_2, JOY_AXIS_3, false)
+		# For joystick motion, interpolate translation back to origin.
+		if motion.length() > 0.2:
+			center()
 		update_position(motion * sensitivity * 40)
-		set_power(motion * power_decay * 2)
+		set_power(motion * power_decay * 4)
 
 
 func _physics_process(_delta):
@@ -55,6 +58,12 @@ func _on_grip_apply(rotation_y):
 # Reset the hand's rotation.
 func _on_grip_reset(_body):
 	target.rotation.y = 0
+
+
+# Interpolates the hand control's translation to xz origin by a given weight.
+func center(weight = 0.1):
+	translation.x = lerp(translation.x, 0, weight)
+	translation.z = lerp(translation.z, 0, weight)
 
 
 # Given the model's y-rotation in radians, fix the hand's IK y-rotation.
