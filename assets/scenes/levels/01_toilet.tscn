@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/scenes/ui/countdown.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/scenes/props/interior/door.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/models/kenney/furniture_kit/glass.material" type="Material" id=5]
-[ext_resource path="res://assets/scripts/zone_victory.gd" type="Script" id=6]
+[ext_resource path="res://assets/scripts/zones/zone_victory.gd" type="Script" id=6]
 [ext_resource path="res://assets/scenes/props/interior/crate_big.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/scenes/props/interior/bathroom_sink.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/scenes/props/interior/bathroom_toilet.tscn" type="PackedScene" id=9]
@@ -19,7 +19,7 @@
 [ext_resource path="res://assets/scripts/levels/level.gd" type="Script" id=17]
 [ext_resource path="res://assets/sounds/music/01_toilet.ogg" type="AudioStream" id=18]
 [ext_resource path="res://assets/scripts/cinematic.gd" type="Script" id=19]
-[ext_resource path="res://assets/scripts/zone_bounds.gd" type="Script" id=20]
+[ext_resource path="res://assets/scripts/zones/zone_bounds.gd" type="Script" id=20]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.87451, 0.862745, 0.843137, 1 )

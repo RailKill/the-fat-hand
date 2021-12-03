@@ -106,7 +106,7 @@ func dampen():
 
 
 # Handle player death and spawn a corpse.
-func die():
+func die(show_gameover = true):
 	if not is_dead:
 		is_dead = true
 		disable()
@@ -116,10 +116,13 @@ func die():
 		corpse.translate(Vector3.UP * 2)
 		throw(corpse, velocity)
 		get_parent().call_deferred("add_child", corpse, true)
-		get_parent().call_deferred("add_child", game_over.instance(), true)
 		$CollisionShape.disabled = true
 		$HandControl/Puncher/CollisionShape.disabled = true
 		visible = false
+		
+		# Show game over UI.
+		if show_gameover:
+			get_parent().call_deferred("add_child", game_over.instance(), true)
 		
 		# TODO: Hard-coded to make glasses loose. In future, when players can
 		# customize what to wear, player.gd should have an Array to store a

@@ -15,7 +15,7 @@
 [ext_resource path="res://assets/scenes/props/food/lemon.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/scenes/props/food/orange.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/scenes/props/food/pear.tscn" type="PackedScene" id=15]
-[ext_resource path="res://assets/scripts/zone_consume.gd" type="Script" id=16]
+[ext_resource path="res://assets/scripts/zones/zone_consume.gd" type="Script" id=16]
 [ext_resource path="res://assets/scenes/ui/countdown.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/sounds/ui/error_01.ogg" type="AudioStream" id=18]
 [ext_resource path="res://assets/sounds/ui/confirmation_01.ogg" type="AudioStream" id=19]
@@ -24,8 +24,9 @@
 [ext_resource path="res://assets/sounds/music/02_kitchen.ogg" type="AudioStream" id=22]
 [ext_resource path="res://assets/images/poster_pizza.png" type="Texture" id=23]
 [ext_resource path="res://assets/scripts/cinematic.gd" type="Script" id=24]
-[ext_resource path="res://assets/scripts/zone_bounds.gd" type="Script" id=25]
+[ext_resource path="res://assets/scripts/zones/zone_bounds.gd" type="Script" id=25]
 [ext_resource path="res://assets/scripts/props/bounded_body.gd" type="Script" id=26]
+
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true

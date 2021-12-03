@@ -25,7 +25,11 @@ func adjust_volume(value: float, bus_index: int):
 # Changes to the given scene with a delay in seconds.
 func change_scene(path, delay = 1.0):
 	var tree = get_tree()
-	tree.create_timer(delay).connect("timeout", tree, "change_scene", [path])
+	if delay > 0:
+		tree.create_timer(delay).connect("timeout", tree,
+				"change_scene", [path])
+	else:
+		tree.change_scene(path)
 
 
 # Returns the percentage volume for the given audio bus, and if there is a
@@ -37,3 +41,12 @@ func load_volume(bus_index: int, node_path = null):
 	if control and control.has_method("set_percentage"):
 		control.set_percentage(volume)
 	return volume
+
+
+# Exits the game after a given delay in seconds.
+func exit(delay = 0.0):
+	var tree = get_tree()
+	if delay > 0:
+		tree.create_timer(delay).connect("timeout", tree, "quit")
+	else:
+		tree.quit()

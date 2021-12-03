@@ -87,22 +87,27 @@ _global_script_classes=[ {
 "base": "Area",
 "class": "ZoneBounds",
 "language": "GDScript",
-"path": "res://assets/scripts/zone_bounds.gd"
+"path": "res://assets/scripts/zones/zone_bounds.gd"
 }, {
 "base": "ZoneVictory",
 "class": "ZoneConsume",
 "language": "GDScript",
-"path": "res://assets/scripts/zone_consume.gd"
+"path": "res://assets/scripts/zones/zone_consume.gd"
 }, {
 "base": "Area",
 "class": "ZoneGrabber",
 "language": "GDScript",
-"path": "res://assets/scripts/zone_grabber.gd"
+"path": "res://assets/scripts/zones/zone_grabber.gd"
+}, {
+"base": "Area",
+"class": "ZoneKill",
+"language": "GDScript",
+"path": "res://assets/scripts/zones/zone_kill.gd"
 }, {
 "base": "Area",
 "class": "ZoneVictory",
 "language": "GDScript",
-"path": "res://assets/scripts/zone_victory.gd"
+"path": "res://assets/scripts/zones/zone_victory.gd"
 } ]
 _global_script_class_icons={
 "BoundedBody": "",
@@ -123,6 +128,7 @@ _global_script_class_icons={
 "ZoneBounds": "",
 "ZoneConsume": "",
 "ZoneGrabber": "",
+"ZoneKill": "",
 "ZoneVictory": ""
 }
 
